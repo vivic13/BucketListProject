@@ -1,0 +1,42 @@
+<%= form_for(@plan) do |f| %> 
+ 	<div>
+		<%= f.label :title, "願望主題" %>
+		<%= f.text_field :title %>
+	</div>
+	<div>
+		<%= f.label :duedate, "預計完成日" %>
+		<%= f.text_field :duedate %>
+	</div>
+	<div>
+		<%= f.label :plan, "Plan計畫" %>
+		<%= f.text_field :plan %>
+	</div>
+	<div>
+		<%= f.label :do_what, "Do執行" %>
+		<%= f.text_field :do_what %>
+	</div>
+	<div>
+		<%= f.label :check, "Check檢視" %>
+		<%= f.text_field :check %>
+	</div>
+	<div>
+		<%= f.label :act, "Action行動" %>
+		<%= f.text_field :act %>
+	</div>
+    <div>
+		<%= f.radio_button :is_public, "true"%><%="公開"%>
+		<%= f.radio_button :is_public, "false"%><%="私人"%>
+	</div>
+
+  <div>
+    <%= f.label :img_location, "上傳圖片" %>
+		<%= f.text_field :img_location %>
+  </div>
+
+	<div>
+	<%= f.submit "建立願望"%>
+	</div>    
+
+<% end %>
+
+<%= link_to 'Back_to_Home', plans_path ,class:"btn btn-primary btn-xs"%>

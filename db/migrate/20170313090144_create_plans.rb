@@ -8,7 +8,10 @@ class CreatePlans < ActiveRecord::Migration[5.0]
     	t.text :check
     	t.text :act
 
+
       t.timestamps
     end
+    add_column :plans, :is_public, :boolean 
+    add_column :plans, :img_location, :string
   end
 end

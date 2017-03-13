@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20170313090144) do
     t.text     "do_what"
     t.text     "check"
     t.text     "act"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "is_public"
+    t.string   "img_location"
   end
 
 end
