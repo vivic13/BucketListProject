@@ -1,0 +1,31 @@
+<div>
+	<h1>User's Bucket Lists</h1>
+</div>
+
+<div>
+	<thead>
+		<tr>
+		<th>主題</th>
+		<th>設定完成日</th>
+		<th>Plan</th>
+		<th>Do</th>
+		<th>Check</th>
+		<th>Action</th>	
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+	<% @plans.each do |p| %>
+
+		<td><%=@plan.title%></td>
+		<td><%=@plan.duedate%></td>
+		<td><%=@plan.plan%></td>
+		<td><%=@plan.do_what%></td>
+		<td><%=@plan.check%></td>
+		<td><%=@plan.act%></td>
+
+	<% end %>
+	</tr>
+	</tbody>
+
+</div>
