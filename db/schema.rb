@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313090144) do
+ActiveRecord::Schema.define(version: 20170314052456) do
 
   create_table "plans", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170313090144) do
     t.datetime "updated_at",   null: false
     t.boolean  "is_public"
     t.string   "img_location"
+    t.string   "progress"
   end
 
 end

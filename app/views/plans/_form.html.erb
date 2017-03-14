@@ -40,14 +40,31 @@
     	<%= f.label :is_public, "公開",:value=>true%>
 		<%= f.radio_button :is_public,false,:value=>false%>		
 		<%= f.label :is_public, "私人",:value=>false%>
-		
-
 	</div>
 
-  <div>
+    <div>
     	<%= f.label :img_location, "上傳圖片" %>
 		<%= f.text_field :img_location %>
-  </div>
+  	</div>
+
+  	 <div>
+    	<%= f.radio_button :progress,"only_title",:value=>"only_title"%>
+    	<%= f.label :progress, "剛決定願望",:value=>"only_title"%>
+		<%= f.radio_button :progress,"start_plan",:value=>"start_plan"%>
+		<%= f.label :progress, "Plan計畫",:value=>"start_plan"%>
+		<%= f.radio_button :progress,"start-do",:value=>"start_do"%>
+		<%= f.label :progress, "Do行動",:value=>"start_do"%>
+		<%= f.radio_button :progress,"start-check",:value=>"start_check"%>
+		<%= f.label :progress, "Check檢視",:value=>"start_check"%>
+		<%= f.radio_button :progress,"start-act",:value=>"start_act"%>
+		<%= f.label :progress, "Action行動",:value=>"start_act"%>
+		<%= f.radio_button :progress,"completion",:value=>"completion"%>
+		<%= f.label :progress, "完成計畫",:value=>"completion"%>
+
+
+
+
+	</div>
 
 	<div>
 	<%= f.submit "送出"%>

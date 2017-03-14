@@ -46,7 +46,7 @@ class PlansController < ApplicationController
 	private
 
 	def permit_plan
-		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :img_location, :is_public)
+		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :img_location, :is_public,:progress)
 	end
 
 	def find_plan
