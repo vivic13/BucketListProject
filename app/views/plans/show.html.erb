@@ -1,0 +1,22 @@
+<h1><%= @plan.title %></h1>
+
+<img><%= @plan.img_location %>
+
+<h3>是否公開：<%= @plan.is_public %> </h3>
+
+<h3>DueDate: <%= @plan.duedate %></h3>
+
+<h4>Plan計畫：<%= @plan.plan %> </h4>
+
+<h4>Do執行：<%= @plan.do_what %> </h4>
+
+<h4>Check檢視：<%= @plan.check %> </h4>
+
+<h4>Action行動：<%= @plan.act %> </h4>
+
+
+
+
+<%= link_to 'edit', edit_plan_path(@plan) %>
+<%= link_to 'destroy', plan_path(@plan),method: :delete, data:{ confirm: "Are you sure?"},class:"btn btn-danger btn-xs" %>
+<%= link_to 'Back_to_Home', plans_path ,class:"btn btn-primary btn-xs"%>

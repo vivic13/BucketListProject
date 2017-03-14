@@ -3,25 +3,31 @@
 </div>
 
 <div>
+
+<%= link_to 'Add?', new_plan_path ,class:"btn btn-primary btn-xs"%>
+
+</div>
+
+<div>
+	<% @plans.each do |p| %>
+
 	<table>
 	<tr>
 	    <th>願望主題</th>
 		<th>預計完成日</th>
 	</tr>
-
 	
-		<% @plans.each do |p| %>
-	<tr>
+			<tr>
 		<td><%= p.title%></td>
 		<td><%= p.duedate%></td>
 	</tr>
-	</table>
-		<%= p.img_location %><hr>
-	 	<%= link_to 'Detail', plan_path(p) %>
+	<tr>
+		<td colspan="2"><%= p.img_location %></td>
+	</tr>
+	<tr>
+		<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
+	</tr>
+	</table>	
+	 	
 	<% end %>
-	
-	
-
-   
-
 </div>

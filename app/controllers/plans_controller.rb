@@ -1,5 +1,6 @@
 class PlansController < ApplicationController
-	
+	before_action :find_plan, only:[:show,:edit, :update, :destroy]
+
 	def index
 		@plans=Plan.all
 	end
@@ -11,12 +12,16 @@ class PlansController < ApplicationController
 
 	def create
 		@plan=Plan.new(permit_plan)
-		@plan.save
-		redirect_to plans_path
+		if @plan.save
+			redirect_to plans_path
+		else 
+			render :new
+		end
 
 	end
 
 	def show
+		@page_title=@plan.title
 
 	end
 
@@ -25,17 +30,27 @@ class PlansController < ApplicationController
 	end
 
 	def update
-
+		if @plan=Plan.update(permit_plan)
+			redirect_to plan_path(@plan)
+		else
+			render :edit
+		end
 	end
 
 	def destroy
+		@plan.destroy
+		redirect_to plans_path
 
 	end
 
 	private
 
 	def permit_plan
-		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :img_location)
+		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :img_location, :is_public)
+	end
+
+	def find_plan
+		@plan=Plan.find(params[:id])
 	end
 
 end

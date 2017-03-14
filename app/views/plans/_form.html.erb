@@ -1,3 +1,15 @@
+<% if @plan.errors.present?%>
+  <ul>
+        <% @plan.errors.each do |error, message|%>
+          <li> <%= "#{error.capitalize}  #{message}" %></li>
+        <% end %>
+  </ul>
+<% end%>
+
+
+
+
+
 <%= form_for(@plan) do |f| %> 
  	<div>
 		<%= f.label :title, "願望主題" %>
@@ -24,17 +36,21 @@
 		<%= f.text_field :act %>
 	</div>
     <div>
-		<%= f.radio_button :is_public, "true"%><%="公開"%>
-		<%= f.radio_button :is_public, "false"%><%="私人"%>
+    	<%= f.radio_button :is_public,true,:value=>true%>
+    	<%= f.label :is_public, "公開",:value=>true%>
+		<%= f.radio_button :is_public,false,:value=>false%>		
+		<%= f.label :is_public, "私人",:value=>false%>
+		
+
 	</div>
 
   <div>
-    <%= f.label :img_location, "上傳圖片" %>
+    	<%= f.label :img_location, "上傳圖片" %>
 		<%= f.text_field :img_location %>
   </div>
 
 	<div>
-	<%= f.submit "建立願望"%>
+	<%= f.submit "送出"%>
 	</div>    
 
 <% end %>
