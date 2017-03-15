@@ -1,3 +1,6 @@
 class Plan < ApplicationRecord
-	validates_presence_of :title, :duedate, :plan, :do_what, :check, :act, :img_location, :is_public, :progress
+	
+	validates_presence_of :title, :duedate, :is_public, :progress
+	belongs_to :user
+	has_many :comments
 end

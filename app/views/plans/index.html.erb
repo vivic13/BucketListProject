@@ -1,5 +1,5 @@
 <div>
-	<h1>User's Bucket Lists</h1>
+	<h1>Bucket Lists</h1>
 </div>
 
 <div>
@@ -22,7 +22,10 @@
 		<td><%= p.duedate%></td>
 	</tr>
 	<tr>
-		<td colspan="2"><%= p.img_location %></td>
+		<td colspan="2"><%= p.file_location %></td>
+	</tr>
+	<tr>
+		<td colspan="2"><%=p.user.nickname %></td>
 	</tr>
 	<tr>
 		<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>

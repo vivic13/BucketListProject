@@ -43,8 +43,8 @@
 	</div>
 
     <div>
-    	<%= f.label :img_location, "上傳圖片" %>
-		<%= f.text_field :img_location %>
+    	<%= f.label :file_location, "上傳圖片" %>
+		<%= f.file_field :file_location %>
   	</div>
 
   	 <div>
@@ -60,9 +60,6 @@
 		<%= f.label :progress, "Action行動",:value=>"start_act"%>
 		<%= f.radio_button :progress,"completion",:value=>"completion"%>
 		<%= f.label :progress, "完成計畫",:value=>"completion"%>
-
-
-
 
 	</div>
 

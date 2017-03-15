@@ -1,8 +1,9 @@
 class PlansController < ApplicationController
+	before_action :authenticate_user!
 	before_action :find_plan, only:[:show,:edit, :update, :destroy]
 
 	def index
-		@plans=Plan.all
+		@plans=current_user.plans
 	end
 
 	def new
@@ -12,6 +13,7 @@ class PlansController < ApplicationController
 
 	def create
 		@plan=Plan.new(permit_plan)
+		@plan.user=current_user
 		if @plan.save
 			redirect_to plans_path
 		else 
@@ -46,7 +48,7 @@ class PlansController < ApplicationController
 	private
 
 	def permit_plan
-		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :img_location, :is_public,:progress)
+		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public,:progress)
 	end
 
 	def find_plan
