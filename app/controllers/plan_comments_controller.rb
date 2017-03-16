@@ -7,6 +7,7 @@ class PlanCommentsController < ApplicationController
 		@comment=@plan.comments.create(comment_params)
 		@comment.commenter=current_user
 		redirect_to plan_path(@plan)
+
 	end
 
 

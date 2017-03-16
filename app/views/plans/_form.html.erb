@@ -11,43 +11,43 @@
 
 
 <%= form_for(@plan) do |f| %> 
- 	<div>
+ 	<div class="form_group">
 		<%= f.label :title, "願望主題" %>
 		<%= f.text_field :title %>
 	</div>
-	<div>
+	<div class="form_group">
 		<%= f.label :duedate, "預計完成日" %>
 		<%= f.text_field :duedate %>
-	</div>
-	<div>
+	</div class="form_group">
+	<div class="form_group">
 		<%= f.label :plan, "Plan計畫" %>
 		<%= f.text_field :plan %>
 	</div>
-	<div>
+	<div class="form_group">
 		<%= f.label :do_what, "Do執行" %>
 		<%= f.text_field :do_what %>
 	</div>
-	<div>
+	<div class="form_group">
 		<%= f.label :check, "Check檢視" %>
 		<%= f.text_field :check %>
-	</div>
-	<div>
+	</div class="form_group">
+	<div class="form_group">
 		<%= f.label :act, "Action行動" %>
 		<%= f.text_field :act %>
 	</div>
-    <div>	
+    <div class="form_group">	
     	<%= f.radio_button :is_public,true,:value => true %>
     	<%= f.label :is_public, "公開"%>
 		<%= f.radio_button :is_public,false,:value => false %>		
 		<%= f.label :is_public, "私人"%>
 	</div>
 
-    <div>
+    <div class="form_group">
     	<%= f.label :file_location, "上傳圖片" %>
 		<%= f.file_field :file_location %>
   	</div>
 
-  	 <div>
+  	 <div class="form_group">
     	<%= f.radio_button :progress,"only_title",:value=>"only_title"%>
     	<%= f.label :progress, "剛決定願望",:value=>"only_title"%>
 		<%= f.radio_button :progress,"start_plan",:value=>"start_plan"%>
@@ -63,10 +63,11 @@
 
 	</div>
 
-	<div>
-	<%= f.submit "送出"%>
+	<div class="form_group">
+		<%= f.submit "送出"%>
 	</div>    
 
 <% end %>
+<hr>
 
-<%= link_to 'Back_to_Home', plans_path ,class:"btn btn-primary btn-xs"%>
+<%= link_to '回到個人頁面', plans_path ,class:"btn btn-primary btn-xs"%>

@@ -40,6 +40,8 @@ gem 'omniauth-facebook'
 
 gem 'carrierwave'
 
+gem 'bootstrap-sass', '~> 3.3.6'
+
 
 
 group :development, :test do

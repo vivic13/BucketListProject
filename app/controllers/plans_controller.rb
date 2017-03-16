@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
-	before_action :authenticate_user!
-	before_action :find_plan, only:[:show,:edit, :update, :destroy]
+	before_action :authenticate_user!, except:[:latest]
+	before_action :find_plan, only:[:show, :edit, :update, :destroy]
 
 	def index
 		@plans=current_user.plans
@@ -32,8 +32,9 @@ class PlansController < ApplicationController
 	end
 
 	def update
-		if @plan=current_user.plans.update(permit_plan)
-			redirect_to plan_path(@plan)
+
+		if @plan=@plan.update(permit_plan)
+			redirect_to plans_path
 		else
 			render :edit
 		end
@@ -46,7 +47,7 @@ class PlansController < ApplicationController
 	end
 
 	def latest
-		@plans=Plan.where(:is_public=>true)
+		@plans=Plan.where(:is_public=>true).order(duedate: :desc)
 	end
 
 	private
