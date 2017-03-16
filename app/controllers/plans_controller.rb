@@ -7,12 +7,12 @@ class PlansController < ApplicationController
 	end
 
 	def new
-		@plan=Plan.new
+		@plan=current_user.plans.new
 
 	end
 
 	def create
-		@plan=Plan.new(permit_plan)
+		@plan=current_user.plans.new(permit_plan)
 		@plan.user=current_user
 		if @plan.save
 			redirect_to plans_path
@@ -32,7 +32,7 @@ class PlansController < ApplicationController
 	end
 
 	def update
-		if @plan=Plan.update(permit_plan)
+		if @plan=current_user.plans.update(permit_plan)
 			redirect_to plan_path(@plan)
 		else
 			render :edit
@@ -43,6 +43,10 @@ class PlansController < ApplicationController
 		@plan.destroy
 		redirect_to plans_path
 
+	end
+
+	def latest
+		@plans=Plan.where(:is_public=>true)
 	end
 
 	private

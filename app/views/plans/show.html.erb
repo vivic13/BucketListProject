@@ -1,12 +1,16 @@
 <h1><%= @plan.title %></h1>
 
-<%= image_tag @plan.file_location %>
+<%= image_tag @plan.file_location.url %>
+
 
 <h3>是否公開：<%= @plan.is_public %> </h3>
 
 <h3>DueDate: <%= @plan.duedate %></h3>
 
+<h3>主辦人：<%= @plan.user.nickname %> </h3>
+
 <h3>目前進度：<%= @plan.progress %></h3>
+
 
 <h4>Plan計畫：<%= @plan.plan %> </h4>
 
@@ -21,6 +25,11 @@
 
 
 
-<%= link_to 'edit', edit_plan_path(@plan) %>
-<%= link_to 'destroy', plan_path(@plan),method: :delete, data:{ confirm: "Are you sure?"},class:"btn btn-danger btn-xs" %>
-<%= link_to 'Back_to_Home', plans_path ,class:"btn btn-primary btn-xs"%>
+<%= render :partial => 'plan_comments/comment' %>
+
+
+<%= render :partial => 'plan_comments/form' %>
+
+<% if current_user.nickname==@plan.user.nickname %>
+<%= render :partial => "only" %>
+<% end %>

@@ -38,6 +38,8 @@ gem 'devise'
 
 gem 'omniauth-facebook'
 
+gem 'carrierwave'
+
 
 
 group :development, :test do

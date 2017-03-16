@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315073246) do
+ActiveRecord::Schema.define(version: 20170316072044) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text    "comment_body"
+    t.integer "plan_id"
+    t.string  "commenter"
+    t.index ["plan_id"], name: "index_comments_on_plan_id"
+  end
 
   create_table "plans", force: :cascade do |t|
     t.string   "title"
@@ -19,9 +26,9 @@ ActiveRecord::Schema.define(version: 20170315073246) do
     t.text     "do_what"
     t.text     "check"
     t.text     "act"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.boolean  "is_public"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "is_public",     default: false
     t.string   "file_location"
     t.string   "progress"
     t.integer  "user_id"

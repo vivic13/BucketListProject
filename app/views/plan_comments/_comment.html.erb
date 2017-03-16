@@ -1,0 +1,19 @@
+<% if @plan.comments.count >0 %>
+  <h2>留言</h2>
+  <% @plan.comments.each do |c| %>
+ 	<p>
+    <strong>Commenter:</strong>
+    <%= c.commenter%>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= c.comment_body %>
+  </p>
+
+  <p>
+
+   <%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+<% end %>

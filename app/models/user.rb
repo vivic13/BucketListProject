@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :plans
 
+
   def self.from_omniauth(auth)
      # Case 1: Find existing user by facebook uid
      user = User.find_by_fb_uid( auth.uid )
