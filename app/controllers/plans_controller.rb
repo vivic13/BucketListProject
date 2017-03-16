@@ -33,7 +33,7 @@ class PlansController < ApplicationController
 
 	def update
 
-		if @plan=@plan.update(permit_plan)
+		if @plan.update(permit_plan)
 			redirect_to plans_path
 		else
 			render :edit

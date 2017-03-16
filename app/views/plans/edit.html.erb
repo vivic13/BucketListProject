@@ -1,3 +1,10 @@
+<% if @plan.user==current_user %>
 <h1>更新進度</h1>
 
 <%= render :partial => "form" %>
+
+<% else %>
+
+<h3>你沒有權限</h3>
+
+<% end %>

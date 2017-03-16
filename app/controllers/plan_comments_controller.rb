@@ -5,7 +5,6 @@ class PlanCommentsController < ApplicationController
 
 	def create
 		@comment=@plan.comments.create(comment_params)
-		@comment.commenter=current_user
 		redirect_to plan_path(@plan)
 
 	end
@@ -13,8 +12,10 @@ class PlanCommentsController < ApplicationController
 
 	def destroy
 		@comment=@plan.comments.find(params[:id])
+		if @comment.commenter==current_user.nickname
 		@comment.destroy
 		redirect_to plan_path(@plan)
+		end
 	end
 
 	private
