@@ -1,14 +1,20 @@
 <hr>
 <% if @plan.comments.count >0 %>
-  <h2>留言</h2>
+  <h3 class="tc">留言</h2>
   <% @plan.comments.each do |c| %>
- 	<p>Commenter:<%= c.commenter%></p>
+ 	<p><%= c.comment_body %> <strong>By:</strong><%= c.commenter%> </p>
  
-  <p>Comment:<%= c.comment_body %></p>
 
 		<% if c.commenter==current_user.nickname %>
-	   	<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: 'Are you sure?' } %>
+	   	<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: '確定要刪除留言?' } %>
 		<% end %>
 	<% end %>
 <% end %>
 <hr>
+
+<style>
+	.tc{
+		text-align: center
+	}
+
+</style>

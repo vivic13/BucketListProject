@@ -3,7 +3,18 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy]
 
 	def index
-		@plans=current_user.plans
+
+			if params[:keyword]
+	    	@plans = current_user.plans.where( [ "title like ?", "%#{params[:keyword]}%" ] )
+	  	else
+	    	@plans = current_user.plans
+	  	end
+
+	  	if params[:order]
+	  		sort_by = (params[:order] == 'title') ? 'title' : 'duedate'
+	  		@plans = current_user.plans.order(sort_by)
+	  	end
+
 	end
 
 	def new
