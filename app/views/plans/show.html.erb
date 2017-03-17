@@ -1,42 +1,53 @@
-<h1 class="tc"><%= @plan.title %></h1>
 
 
+<h2 class="tc"><i class="fa fa-bookmark-o" aria-hidden="true"></i>
+<%= @plan.title %></h1>
+
+<div class="tc" class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<%= image_tag @plan.file_location.url %>
+		</div>
 
 
-<p>是否公開：<%= @plan.is_public %> </p>
+		<div class="col-md-4">
+			
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>
+			是否公開：<%= @plan.is_public %></p>
 
-<p>DueDate: <%= @plan.duedate %></p>
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i> DueDate:<%= @plan.duedate %></p>
 
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>主辦人：<%= @plan.user.nickname %> </p>
 
-<p>主辦人：<%= @plan.user.nickname %> </p>
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前進度：<%= @plan.progress %></p>
+		</div>
+	</div>
 
-<p>目前進度：<%= @plan.progress %></p>
+</div>
+
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<p>Plan計畫：</p>
+			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Plan計畫：</strong></p>
 			<%= @plan.plan %> 
 		</div>
 		<div class="col-md-3">
-			<p>Do執行：</p>
+			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Do執行：</strong></p>
 			<%= @plan.do_what %> 
 		</div>
 		<div class="col-md-3">
-			<p>Check檢視：</p>
+			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Check檢視：</strong></p>
 			<%= @plan.check %> 
 		</div>
 		<div class="col-md-3">
-			<p>Action行動：</p>
+			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Action行動：</strong></p>
 			<%= @plan.act %>
 		</div>
 	</div>
 </div>
 
-<div>
-<p> 相關file</p>
-<%= image_tag @plan.file_location.url %>
-</div>
+
 
 <%= render :partial => 'plan_comments/comment' %>
 
@@ -46,16 +57,40 @@
 <% if current_user.nickname == @plan.user.nickname %>
 	<%= render :partial => "only" %>
 <% else %>
-<hr>
-<%= link_to 'Back_to_Latest', latest_plans_path ,class:"btn btn-primary btn-xs"%>
+	<hr>
+	<%= link_to 'Back_to_Latest', latest_plans_path ,class:"btn"%>
 <% end %>
 
 <style>
 	.tc{
 		text-align: center;
+		padding-bottom: 50px;
 	}
-	.ac{
+	.col-md-3{
+		margin-bottom: 100px;
+		margin-top: 100px;
+		border-style: dashed;
+		border-width: 1px;
+		height: 600px;
+	}
 
+	.col-md-4{
+		text-align: left;
 	}
+
+	.col-md-8{
+		padding-left: 100px;
+		text-align: left;
+	}
+	i{
+		color: rgb(63,178,176);
+		text-align: center;
+	}
+	.btn{
+		background-color:rgba(90,178,176,1);
+		color:white;
+		font-size: 16px;
+	}
+
 
 </style>

@@ -20,20 +20,20 @@
 		<%= f.text_field :duedate %>
 	</div class="form_group">
 	<div class="form_group">
-		<%= f.label :plan, "Plan計畫" %>
-		<%= f.text_field :plan %>
+		<%= f.label :plan, "Plan計畫" %><br>
+		<%= f.text_area :plan %>
 	</div>
 	<div class="form_group">
-		<%= f.label :do_what, "Do執行" %>
-		<%= f.text_field :do_what %>
+		<%= f.label :do_what, "Do執行" %><br>
+		<%= f.text_area :do_what %>
 	</div>
 	<div class="form_group">
-		<%= f.label :check, "Check檢視" %>
-		<%= f.text_field :check %>
+		<%= f.label :check, "Check檢視" %><br>
+		<%= f.text_area :check %>
 	</div class="form_group">
 	<div class="form_group">
-		<%= f.label :act, "Action行動" %>
-		<%= f.text_field :act %>
+		<%= f.label :act, "Action行動" %><br>
+		<%= f.text_area :act %>
 	</div>
     <div class="form_group">	
     	<%= f.radio_button :is_public,true,:value => true %>
@@ -48,18 +48,18 @@
   	</div>
 
   	 <div class="form_group">
-    	<%= f.radio_button :progress,"only_title",:value=>"only_title"%>
-    	<%= f.label :progress, "剛決定願望",:value=>"only_title"%>
-		<%= f.radio_button :progress,"start_plan",:value=>"start_plan"%>
-		<%= f.label :progress, "Plan計畫",:value=>"start_plan"%>
-		<%= f.radio_button :progress,"start-do",:value=>"start_do"%>
-		<%= f.label :progress, "Do行動",:value=>"start_do"%>
-		<%= f.radio_button :progress,"start-check",:value=>"start_check"%>
-		<%= f.label :progress, "Check檢視",:value=>"start_check"%>
-		<%= f.radio_button :progress,"start-act",:value=>"start_act"%>
-		<%= f.label :progress, "Action行動",:value=>"start_act"%>
-		<%= f.radio_button :progress,"completion",:value=>"completion"%>
-		<%= f.label :progress, "完成計畫",:value=>"completion"%>
+    	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
+    	<%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
+		<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
+		<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
+		<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
+		<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
+		<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
+		<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
+		<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
+		<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
+		<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
+		<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
 
 	</div>
 
@@ -70,4 +70,14 @@
 <% end %>
 <hr>
 
-<%= link_to '回到個人頁面', plans_path ,class:"btn btn-primary btn-xs"%>
+<%= link_to '回到個人頁面', plans_path ,class:"btn"%>
+
+
+
+<style>
+.btn{
+		background-color:rgba(90,178,176,1);
+		color:white;
+		font-size: 16px;
+	}
+</style>

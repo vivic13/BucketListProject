@@ -1,16 +1,17 @@
-<h1 class="tc"> Latest Plan </h1>
+<h1 class="tc"> <i class="fa fa-users" aria-hidden="true"></i>
+Latest Lists </h1>
 <div class="bt">
-<%= link_to 'Go_to_HomePage', plans_path ,class:"btn btn-primary btn-xs"%>
+<%= link_to '前往個人頁面', plans_path ,class:"btn"%>
 </div>
 <div class="container">
 	<div class="row">
   
 		<% @plans.each do |p| %>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<table class="table table-bordered">
 					<tr>
-					  	<th class="success">願望主題</th>
-						<th class="success">預計完成日</th>
+					  	<th>願望主題</th>
+						<th>預計完成日</th>
 					</tr>
 					
 					<tr>
@@ -21,7 +22,7 @@
 						<td colspan="2"><%= image_tag p.file_location %></td>
 					</tr>
 					<tr>
-						<td colspan="2"><%=p.user.nickname %></td>
+						<td colspan="2"><p>主辦人:<%=p.user.nickname %></p></td>
 					</tr>
 					<tr>
 						<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
@@ -39,5 +40,29 @@
 	}
 	.bt{
 		padding-bottom: 50px;
+		margin-left: 150px;
+	}
+
+	td,th{
+		text-align: center;
+
+		font-size: 16px;
+	}
+	.col-md-4 :hover{
+		background-color: rgba(245,245,238,1);
+	}
+	i{
+		color: rgb(63,178,176);
+		text-align: center;
+	}
+	.btn{
+		background-color:rgba(90,178,176,1);
+		color:white;
+		font-size: 16px;
+		border-radius: 50px 50px;
+	}
+	a{
+		color:rgba(80,178,176,1);
+		font-weight: 300px;
 	}
 </style>

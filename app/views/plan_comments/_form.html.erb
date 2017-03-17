@@ -1,13 +1,16 @@
+<div class=container>
 <%= form_for ([@plan, @plan.comments.create] )do |f| %>   
-	<p>
-    <%= f.label :commenter, "留言者" %>
+	
+    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+    <p>
     <%= f.text_field :commenter,:value => current_user.nickname,:readonly => true%>
     </p>
     <p>
-    <%= f.label :comment_body,"內容" %>
+    <%= f.label :comment_body,"留言嗎？" %>
     <%= f.text_area :comment_body %>
     </p>
     <p>
     <%= f.submit "留言"%> 
   	</p>
 <% end %>
+</div>

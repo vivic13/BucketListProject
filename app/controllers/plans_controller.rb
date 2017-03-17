@@ -39,21 +39,32 @@ class PlansController < ApplicationController
 	end
 
 	def edit 
+		if @plan.user != current_user
+			flash[:alert]="something went wrong!"
+		end
 
 	end
 
 	def update
 
-		if @plan.update(permit_plan)
-			redirect_to plans_path
-		else
-			render :edit
+		if @plan.user == current_user
+			if @plan.update(permit_plan)
+				redirect_to plans_path
+			else
+				render :edit
+			end
+		else 
+			flash[:alert] = "something went wrong!"	
 		end
 	end
 
 	def destroy
-		@plan.destroy
-		redirect_to plans_path
+		if @plan.user == current_user
+			@plan.destroy
+			redirect_to plans_path
+		else
+			flash[:alert] = "something went wrong!"	
+		end
 
 	end
 
