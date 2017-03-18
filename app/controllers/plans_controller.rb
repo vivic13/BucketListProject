@@ -3,29 +3,30 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy]
 
 	def index
-
+			@current_user_plan=current_user.plans.where(:host => current_user.nickname)
 			if params[:keyword]
-	    	@plans = current_user.plans.where( [ "title like ?", "%#{params[:keyword]}%" ] )
+	    	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	else
-	    	@plans = current_user.plans
+	    	@plans = @current_user_plan
 	  	end
 
 	  	if params[:order]
-	  		sort_by = (params[:order] == 'title') ? 'title' : 'duedate'
-	  		@plans = current_user.plans.order(sort_by)
+	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
+	  		@plans = @current_user_plan.order(sort_by)
 	  	end
 
 	end
 
 	def new
-		@plan=current_user.plans.new
+		@plan=Plan.new
 
 	end
 
 	def create
-		@plan=current_user.plans.new(permit_plan)
-		@plan.user=current_user
+		@plan=Plan.new(permit_plan)
+		@plan.host=current_user.nickname
 		if @plan.save
+			@membership=Membership.create(:user => current_user,:plan => @plan)
 			redirect_to plans_path
 		else 
 			render :new
@@ -39,7 +40,7 @@ class PlansController < ApplicationController
 	end
 
 	def edit 
-		if @plan.user != current_user
+		if @plan.host != current_user.nickname
 			flash[:alert]="something went wrong!"
 		end
 
@@ -47,7 +48,7 @@ class PlansController < ApplicationController
 
 	def update
 
-		if @plan.user == current_user
+		if @plan.host == current_user.nickname
 			if @plan.update(permit_plan)
 				redirect_to plans_path
 			else
@@ -59,7 +60,7 @@ class PlansController < ApplicationController
 	end
 
 	def destroy
-		if @plan.user == current_user
+		if @plan.host == current_user.nickname
 			@plan.destroy
 			redirect_to plans_path
 		else

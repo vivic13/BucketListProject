@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316160730) do
+ActiveRecord::Schema.define(version: 20170318062927) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "comment_body"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20170316160730) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_memberships_on_plan_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string   "title"
     t.date     "duedate"
@@ -39,8 +48,8 @@ ActiveRecord::Schema.define(version: 20170316160730) do
     t.boolean  "is_public",     default: false
     t.string   "file_location"
     t.string   "progress"
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_plans_on_user_id"
+    t.string   "host"
+    t.string   "follower"
   end
 
   create_table "users", force: :cascade do |t|

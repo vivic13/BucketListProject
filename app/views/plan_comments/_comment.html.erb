@@ -4,10 +4,12 @@
 	<hr>
   <h3 class="tc"><i class="fa fa-commenting" aria-hidden="true"></i>留言</h3>
   <% @plan.comments.each do |c| %>
- 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i><p><%= c.comment_body %> <strong>By:</strong><%= c.commenter%> </p>
+  <br>
+ 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+ 	<p><%= c.comment_body %> <strong>By:</strong><%= c.commenter%> </p>
  
 
-		<% if c.commenter==current_user.nickname || @plan.user==current_user %>
+		<% if c.commenter==current_user.nickname || @plan.host ==current_user.nickname %>
 	   	<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: '確定要刪除留言?' } %>
 		<% end %>
 	<% end %>

@@ -22,7 +22,7 @@ Latest Lists </h1>
 						<td colspan="2"><%= image_tag p.file_location %></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p>主辦人:<%=p.user.nickname %></p></td>
+						<td colspan="2"><p>主辦人:<%=p.host%></p></td>
 					</tr>
 					<tr>
 						<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
