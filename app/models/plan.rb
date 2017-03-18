@@ -4,4 +4,5 @@ class Plan < ApplicationRecord
 	has_many :memberships
 	has_many :users, :through => :memberships
 	has_many :comments, dependent: :destroy
+	has_one :donation
 end

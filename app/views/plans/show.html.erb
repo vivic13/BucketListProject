@@ -5,6 +5,7 @@
 <div class="navi">
 	<%if current_user.nickname == @plan.host %>
 		<%= render :partial => "only" %>
+
 	<% else %>
 		<%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
 		<div class="follower">
@@ -63,12 +64,16 @@
 	</div>
 </div>
 
+		
+
+
 
 
 <%= render :partial => 'plan_comments/comment' %>
 
 
 <%= render :partial => 'plan_comments/form' %>
+
 
 
 

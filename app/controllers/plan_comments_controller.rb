@@ -13,12 +13,12 @@ class PlanCommentsController < ApplicationController
 	def destroy
 		
 		@comment=@plan.comments.find(params[:id])
-		#if @comment.commenter==current_user.nickname || @plan.user==current_user
+		if @comment.commenter==current_user.nickname || @plan.host==current_user
 			@comment.destroy
 			redirect_to plan_path(@plan)
-		#else
+		else
 			flash[:alert] = "something went wrong!"	
-		#end
+		end
 
 	end
 

@@ -1,0 +1,46 @@
+<h1>決心計畫</h1>
+
+<% if @donation.errors.present?%>
+  <ul>
+        <% @donation.errors.each do |error, message|%>
+          <li> <%= "#{error.capitalize}  #{message}" %></li>
+        <% end %>
+  </ul>
+<% end%>
+
+<%= form_for ([@plan, @plan.build_donation] ) do |f| %>   
+	
+    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+    <%= current_user.nickname %>
+    <p>
+	    <%= f.label :cc_name,"信用卡姓名:" %>
+	    <%= f.text_field :cc_name %>
+    </p>
+    <p>
+	    <%= f.label :amount,"押金金額:" %>
+	    <%= f.text_field :amount %>
+	  </p>
+    <p>
+		<%= f.label :cc_num,"信用卡卡號:" %>
+	    <%= f.text_field :cc_num %>
+    </p>
+    <p>
+    	<%= f.label :cc_last,"信用卡後三碼:" %>
+	    <%= f.text_field :cc_last %>
+    </p>
+    <p>
+    	<%= f.label :cc_duedate,"信用卡到期日:" %>
+	    <%= f.text_field :cc_duedate %>
+    </p>
+    <p>
+        <%= f.label :npo_id,"押金機構:"%>
+        <% Npo.all.each do |s| %>
+        <%= f.radio_button :npo_id,s.id%><%= s.name%>
+        <%end%>
+    </p>
+    <p>
+    	<%= f.submit "付出押金"%> 
+  	</p>
+<% end %>
+
+<%= link_to '再看看', plan_path(@plan) ,class:"btn"%>

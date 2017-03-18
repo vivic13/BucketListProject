@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318083552) do
+ActiveRecord::Schema.define(version: 20170318105624) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "comment_body"
@@ -20,11 +20,17 @@ ActiveRecord::Schema.define(version: 20170318083552) do
   end
 
   create_table "donations", force: :cascade do |t|
-    t.string   "donator"
-    t.string   "npo_name"
+    t.string   "cc_name"
     t.integer  "amount"
+    t.integer  "cc_num"
+    t.integer  "cc_last"
+    t.date     "cc_duedate"
+    t.integer  "plan_id"
+    t.integer  "npo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["npo_id"], name: "index_donations_on_npo_id"
+    t.index ["plan_id"], name: "index_donations_on_plan_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -34,6 +40,13 @@ ActiveRecord::Schema.define(version: 20170318083552) do
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_memberships_on_plan_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "npos", force: :cascade do |t|
+    t.integer  "npo_code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plans", force: :cascade do |t|

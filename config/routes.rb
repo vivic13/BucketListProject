@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   
 
   resources :plans do 
-  	resources :comments, :controller=>'plan_comments'
+  	resources :comments, :controller => 'plan_comments'
+    resources :donations, :controller => 'plan_donations'
   	collection do
       get :latest
     end
