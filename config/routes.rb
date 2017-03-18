@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :plans do 
   	resources :comments, :controller=>'plan_comments'
   	collection do
-        get :latest
+      get :latest
+    end
+    member do 
+    	post :follow
+    	post :unfollow
     end
   end
 

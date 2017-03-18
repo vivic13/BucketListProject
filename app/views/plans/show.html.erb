@@ -6,7 +6,14 @@
 	<%if current_user.nickname == @plan.host %>
 		<%= render :partial => "only" %>
 	<% else %>
-		<%= link_to 'Back_to_Latest', latest_plans_path ,class:"btn"%>
+		<%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
+		<div class="follower">
+		<% if @plan.users.include?(current_user) %>	
+			<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
+		<%else%>			
+			<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn"%>
+		<% end %>
+		</div>
 		<hr>
 	<% end %>
 </div>
@@ -28,6 +35,7 @@
 			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>主辦人：<%= @plan.host%> </p>
 
 			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前進度：<%= @plan.progress %></p>
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前follow人數：<%= @follower %></p>
 		</div>
 	</div>
 
@@ -96,6 +104,11 @@
 	}
 	.navi{
 		margin: 30px;
+		text-align: right;
+
+	}
+	.follower{
+		margin: 10px;
 		text-align: right;
 
 	}

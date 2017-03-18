@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
 	before_action :authenticate_user!, except:[:latest]
-	before_action :find_plan, only:[:show, :edit, :update, :destroy]
+	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow]
 
 	def index
 			@current_user_plan=current_user.plans.where(:host => current_user.nickname)
@@ -36,6 +36,7 @@ class PlansController < ApplicationController
 
 	def show
 		@page_title=@plan.title
+		@follower=@plan.users.count-1
 
 	end
 
@@ -50,7 +51,7 @@ class PlansController < ApplicationController
 
 		if @plan.host == current_user.nickname
 			if @plan.update(permit_plan)
-				redirect_to plans_path
+				redirect_to plan_url(@plan)
 			else
 				render :edit
 			end
@@ -71,6 +72,22 @@ class PlansController < ApplicationController
 
 	def latest
 		@plans=Plan.where(:is_public=>true).order(duedate: :desc)
+	end
+
+	def follow
+		unless @plan.host == current_user.nickname || @plan.users.include?(current_user)
+			@membership = Membership.create(:user => current_user, :plan => @plan)
+			redirect_to plan_url(@plan)
+		end
+	end
+
+	def unfollow
+		if @plan.users.include?(current_user)
+			@membership = Membership.find_by(:user => current_user, :plan => @plan)
+			@membership.destroy
+			redirect_to plan_url(@plan)
+		end
+
 	end
 
 	private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318062927) do
+ActiveRecord::Schema.define(version: 20170318083552) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "comment_body"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20170318062927) do
     t.string   "file_location"
     t.string   "progress"
     t.string   "host"
-    t.string   "follower"
   end
 
   create_table "users", force: :cascade do |t|
