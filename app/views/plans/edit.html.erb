@@ -1,7 +1,10 @@
-<%# if @plan.user==current_user %>
-<h1>更新進度</h1>
+<% if @plan.host == current_user.nickname %>
 
-<%= render :partial => "form" %>
+	<div class="container">
+		<h1>更新進度</h1>
+		<%= render :partial => "form" %>
+	</div>
+
+<% end %>
 
 
-<%# end %>

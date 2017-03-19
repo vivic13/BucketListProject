@@ -7,34 +7,149 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://use.fontawesome.com/df1bf87ec0.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 
 
 
   </head>
 
   <body>
-  	<p class="notice"><%= notice %></p>
-  	<p> hi! <% if current_user %> 
-  	<%= current_user.nickname %>
-    <%= link_to('登出', destroy_user_session_path, :method => :delete) %> 
-    <%= link_to('更改資料', edit_registration_path(:user)) %>
-  	<% else %>
-    <%= link_to('註冊', new_registration_path(:user)) %> |
-    <%= link_to('登入', new_session_path(:user)) %>
-    <%= link_to "Facebook登入", user_facebook_omniauth_authorize_path %>
-  	<% end %>
-    </p>
+    <div class="header">
+    	<p class="login"> 哈囉! 
+        <% if current_user %> 
+        	<%= current_user.nickname %>
+          <%= link_to('登出', destroy_user_session_path, :method => :delete) %> 
+          <%= link_to('更改資料', edit_registration_path(:user)) %>
+      	<% else %>
+          <%= link_to('註冊', new_registration_path(:user)) %> |
+          <%= link_to('登入', new_session_path(:user)) %>
+          <%= link_to "Facebook登入", user_facebook_omniauth_authorize_path %>
+      	<% end %>
+      </p>
+      <div class="container">
+        <div class="row">
+          <div class="logo">
+            <%= image_tag "bucket.png" %>
+          </div>
+          <div class="name">
+            <h1 class="title">水桶清單 <br>
+              <small class="text-muted">A dream is just a dream. A goal is a dream with a plan and deadline.</small>
+
+            </h1>
+            <div class="subtitle">
+             <%= link_to '首頁', home_path ,class:"btn"%>
+             <%= link_to '關於我們', about_path ,class:"btn"%>
+             <%= link_to '怎麼設立願望清單', how_it_works_path ,class:"btn"%>
+             <%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
+             <%= link_to '前往個人頁面', plans_path ,class:"btn"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <%= yield %>
-    <div class="bottom"></div>
+    <div class="bottom">
+
+      <p> copyright @2017-2019  by vivian  </p>
+    </div>
   </body>
 </html>
 
 
 
 <style>
+  body{
+    position: absolute;
+    width:100%;
+  }
+  .header{
+  margin-top: 0px;
+  background-color: rgba(90,178,176,0.1);
+  position: relative;
+  top:0px;
+  left:0px;
+  width:100%;
+  padding-bottom: 50px;
+  }
+
+  .login{
+    text-align: right;
+    padding-right: 10px;
+    
+  }
+
+ 
+  h1,.title{
+  text-align: left;
+  }
+  
+
+  h1,h2,h3{
+    text-align: center;
+    color:rgba(90,178,176,1);
+    letter-spacing: 3px;
+    font-family: 'Gloria Hallelujah', cursive;　 
+
+  }
+  .logo{
+    text-align: center;
+    width:10%;
+    float:left;
+  }
+  .name{
+    text-align: center;
+    width:90%;
+    float:left;
+
+  }
+  .subtitle{
+    text-align: right;
+    padding-top: 20px;
+  }
+
   .bottom{
     width:100%;
     height:100px;
+    background-color:rgba(90,178,176,0.5);
+    text-align: center;
+    color:rgba(95,178,176,1);
+    letter-spacing: 3px;
+    font-family: 'Gloria Hallelujah', cursive;　 
+    padding-top: 30px;
+    margin-top: 50px;
+  }
+  
+
+  .btn{
+    background-color:rgba(90,178,176,1);
+    color:white;
+    font-size: 16px;
+  }
+
+  a{
+    color:rgba(80,178,176,1);
+    font-weight: 300px;
+  }
+  i{
+    color: rgb(63,178,176);
+    text-align: center;
+  }
+  td,th{
+    text-align: center;
+  }
+  .form-group{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  }
+  .navi{
+    margin: 30px;
+    text-align: right;
 
   }
+  .field{
+    margin-bottom:20px;
+    text-align: center;
+   
+  }
+
 </style>

@@ -2,7 +2,7 @@
 <div class="container">
 <% if @plan.comments.count >0 %>
 	<hr>
-  <h3 class="tc"><i class="fa fa-commenting" aria-hidden="true"></i>留言</h3>
+  <h3>留言<i class="fa fa-commenting" aria-hidden="true"></i></h3>
   <% @plan.comments.each do |c| %>
   <br>
  	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
@@ -17,9 +17,3 @@
 </div>
 <hr>
 
-<style>
-	.tc{
-		text-align: center
-	}
-
-</style>

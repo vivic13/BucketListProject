@@ -1,8 +1,8 @@
-	<% if @plan.donation %>
-				<%= link_to '查看押金', plan_donation_path(@plan),class:"btn"%>
-			<% else %>
-			<%= link_to '設定決心押金', new_plan_donation_path(@plan) ,class:"btn"%>
-			<% end %>
+<% if @plan.donation %>
+	<%= link_to '查看押金', plan_donation_path(@plan),class:"btn"%>
+<% else %>
+	<%= link_to '設定決心押金', new_plan_donation_path(@plan) ,class:"btn"%>
+<% end %>
 
 
 <%= link_to '修改', edit_plan_path(@plan),class:"btn" %>

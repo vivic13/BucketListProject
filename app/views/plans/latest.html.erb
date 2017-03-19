@@ -1,8 +1,6 @@
-<h1 class="tc"> <i class="fa fa-users" aria-hidden="true"></i>
-Latest Lists </h1>
-<div class="bt">
-<%= link_to '前往個人頁面', plans_path ,class:"btn"%>
-</div>
+<h1> <i class="fa fa-users" aria-hidden="true"></i>
+See other's ideas </h1>
+
 <div class="container">
 	<div class="row">
   
@@ -10,16 +8,16 @@ Latest Lists </h1>
 			<div class="col-md-4">
 				<table class="table table-bordered">
 					<tr>
-					  	<th>願望主題</th>
-						<th>預計完成日</th>
+					  <th><%= p.title%></th>
+						
 					</tr>
 					
 					<tr>
-						<td><%= p.title%></td>
-						<td><%= p.duedate%></td>
+						<td>預計完成日: <%= p.duedate%></td>
+						
 					</tr>
 					<tr>
-						<td colspan="2"><%= image_tag p.file_location %></td>
+						<td colspan="2"><%= image_tag p.file_location.url ,class:"resize" %></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p>主辦人:<%=p.host%></p></td>
@@ -35,34 +33,17 @@ Latest Lists </h1>
 </div>
 
 <style>
-	.tc{
-		text-align: center
-	}
-	.bt{
-		padding-bottom: 50px;
-		margin-left: 150px;
-	}
 
-	td,th{
-		text-align: center;
 
-		font-size: 16px;
-	}
 	.col-md-4 :hover{
 		background-color: rgba(245,245,238,1);
 	}
-	i{
-		color: rgb(63,178,176);
-		text-align: center;
+	.resize{
+		resize: 
+		width : auto;
+		width : 300px;
+		height : auto;
+		height : 207px;
 	}
-	.btn{
-		background-color:rgba(90,178,176,1);
-		color:white;
-		font-size: 16px;
-		border-radius: 50px 50px;
-	}
-	a{
-		color:rgba(80,178,176,1);
-		font-weight: 300px;
-	}
+
 </style>

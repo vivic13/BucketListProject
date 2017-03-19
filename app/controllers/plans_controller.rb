@@ -70,10 +70,6 @@ class PlansController < ApplicationController
 
 	end
 
-	def latest
-		@plans=Plan.where(:is_public=>true).order(duedate: :desc)
-	end
-
 	def follow
 		unless @plan.host == current_user.nickname || @plan.users.include?(current_user)
 			@membership = Membership.create(:user => current_user, :plan => @plan)
@@ -90,6 +86,11 @@ class PlansController < ApplicationController
 
 	end
 
+	def latest
+		@plans=Plan.where(:is_public=>true).order(duedate: :desc)
+	end
+
+	
 	private
 
 	def permit_plan

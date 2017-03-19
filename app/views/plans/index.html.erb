@@ -1,6 +1,6 @@
 <div>
 	<h1 class="tc"><i class="fa fa-smile-o" aria-hidden="true"></i>
-Bucket Lists</h1>
+Your Bucket Lists</h1>
 </div>
 
 <div class="container">
@@ -8,8 +8,6 @@ Bucket Lists</h1>
 		<div class="col-md-6" id="left">
 
 		<%= link_to '新增願望?', new_plan_path ,class:"btn"%>
-
-		<%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
 		
 		</div>
 		<div class="col-md-6" id="right">	
@@ -29,16 +27,17 @@ Bucket Lists</h1>
 			<div class="col-md-4">
 				<table class="table table-bordered">
 				<tr>
-				  <th class="table-info">願望主題</th>
-					<th class="table-info">預計完成日</th>
+				  <th class="table-info"><%= p.title%></th>
 				</tr>
 				
-						<tr>
-					<td><%= p.title%></td>
-					<td><%= p.duedate%></td>
+				<tr>
+					<td>預計完成日: <%= p.duedate%></td>
 				</tr>
 				<tr>
-					<td colspan="2"><%= image_tag p.file_location.url %></td>
+					<td colspan="2"><%= image_tag p.file_location.url ,class:"resize"%></td>
+				</tr>
+				<tr>
+					<td colspan="2">是否公開: <%= p.is_public %></td>
 				</tr>
 				<tr>
 					<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
@@ -61,21 +60,13 @@ Bucket Lists</h1>
 	.col-md-4 :hover{
 		background-color: rgba(245,245,238,1);
 	}
-	td,th{
-		text-align: center;
-	}
-	i{
-		color: rgb(63,178,176);
-		text-align: center;
-	}
-	.btn{
-		background-color:rgba(90,178,176,1);
-		color:white;
-		font-size: 16px;
-		border-radius: 50px 50px;
-	}
-	a{
-		color:rgba(80,178,176,1);
-		font-weight: 300px;
+
+	
+	.resize{
+		resize: 
+		width : auto;
+		width : 300px;
+		height : auto;
+		height : 207px;
 	}
 </style>

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get"/home", to:"home#homepage", :controller => 'home'
+  get"/about", to:"home#about", :controller => 'home'
+  get"/how_it_works", to:"home#works", :controller => 'home'
 
-
-  root "plans#latest"
+  root "home#homepage"
 end

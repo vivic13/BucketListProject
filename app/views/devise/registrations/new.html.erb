@@ -1,27 +1,28 @@
-<h2>Sign up</h2>
+<h2>註冊 Sign up</h2>
 
+<div class="container">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email, "電子郵件地址" %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
   
   <div class="field">
-    <%= f.label :nickname %><br />
+    <%= f.label :nickname, "暱稱" %><br />
     <%= f.text_field :nickname%>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name, "姓氏" %><br />
     <%= f.text_field :last_name %>
   </div>
 
 
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password,"密碼" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -29,13 +30,22 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation,"確認密碼" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+  <div class="field">
+    <%= f.submit "註冊" ,class:"btn"%> <br>
+ 
 
-<%= render "devise/shared/links" %>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+
+</div>
+
+
+
+
+
