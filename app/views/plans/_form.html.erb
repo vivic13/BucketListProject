@@ -1,8 +1,8 @@
 <% if @plan.errors.present?%>
   <ul>
-        <% @plan.errors.each do |error, message|%>
-          <li> <%= "#{error.capitalize}  #{message}" %></li>
-        <% end %>
+    <% @plan.errors.each do |error, message|%>
+      <li> <%= "#{error.capitalize}  #{message}" %></li>
+    <% end %>
   </ul>
 <% end%>
 
@@ -17,11 +17,11 @@
  			<div class="row">
  				<div class="col-md-6">
 			 		<div class="form_group">
-			    	<%= f.label :file_location, "上傳圖片" %><br>
-				    	<% if @plan.file_location %>
-				    		<%= image_tag @plan.file_location.url ,class:"resize" %>
-				    	<% end %>
+			 			
+				    	<%= image_tag @plan.file_location ,class:"resize" %>
+	
 						<%= f.file_field :file_location %>
+			
 			  	</div>
 			  </div>
 
@@ -33,8 +33,8 @@
 					<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
 						<%= f.text_field :duedate,:value => @plan.duedate,:readonly => true %>
-					</div class="form_group">
-			 	<% else %>
+					</div>
+	<% else %>
 				 	<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
 						<%= f.text_field :title %>
@@ -42,10 +42,14 @@
 					<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
 						<%= f.text_field :duedate %>
-					</div class="form_group">
+					</div>
+					<div class="form_group">
+						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
+						<%= f.file_field :file_location %>
+					</div>
 
-
-				<% end %>
+		
+	<% end %>
 
 				<div class="form_group">	
 			    	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開" %><br>
@@ -71,14 +75,12 @@
 					<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
 
 				</div>
-				<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
-						<%= f.file_field :file_location %>
+		
+			
 
-				</div>
-			</div>
 		</div>
 	</div>
+</div>
 	
 	<div class="container" >
  		<div class="row">

@@ -1,3 +1,4 @@
+<hr>
 <% if @plan.donation %>
 	<%= link_to '查看押金', plan_donation_path(@plan),class:"btn"%>
 <% else %>
@@ -7,8 +8,7 @@
 
 <%= link_to '修改', edit_plan_path(@plan),class:"btn" %>
 <%= link_to '刪除', plan_path(@plan),method: :delete, data:{ confirm: "Are you sure?"},class:"btn" %>
-<%= link_to '回到個人頁面', plans_path ,class:"btn"%>
-<%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
-<hr>
+<%= link_to '回上ㄧ頁', plans_path ,class:"btn"%>
+
 
 

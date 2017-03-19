@@ -7,7 +7,6 @@
 		<%= render :partial => "only" %>
 
 	<% else %>
-		<%= link_to '前往最新活動', latest_plans_path ,class:"btn"%>
 		<div class="follower">
 		<% if @plan.users.include?(current_user) %>	
 			<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
@@ -21,10 +20,9 @@
 
 <div class="tc" class="container">
 	<div class="row">
-		<div class="col-md-6" id="img_list">
-			<%= image_tag @plan.file_location.url ,class:"resize"%>
+		<div class="col-md-6">
+			<%= image_tag @plan.file_location ,class:"resize"%>	
 		</div>
-
 
 		<div class="col-md-6">
 			
