@@ -9,9 +9,10 @@
  	<p><%= c.comment_body %> <strong>By:</strong><%= c.commenter%> </p>
  
 
-		<% if c.commenter==current_user.nickname || @plan.host ==current_user.nickname %>
-	   	<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: '確定要刪除留言?' } %>
-		<% end %>
+			<% if c.commenter==current_user.nickname || @plan.host ==current_user.nickname %>
+		   	<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete, data: { confirm: '確定要刪除留言?' } %>
+			<% end %>
+
 	<% end %>
 <% end %>
 </div>

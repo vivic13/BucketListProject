@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-	before_action :authenticate_user!, except:[:latest]
+	before_action :authenticate_user!, except:[:latest,:show]
 	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow]
 
 	def index
