@@ -3,7 +3,7 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow]
 
 	def index
-			@current_user_plan=current_user.plans.where(:host => current_user.nickname)
+			@current_user_plan = current_user.plans.where(:host => current_user.nickname)
 			if params[:keyword]
 	    	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	else
@@ -84,6 +84,9 @@ class PlansController < ApplicationController
 			redirect_to plan_url(@plan)
 		end
 
+	end
+	def follow_plan
+		@plans = current_user.plans.where.not(:host => current_user.nickname)
 	end
 
 	def latest

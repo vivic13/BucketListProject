@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :donations, :controller => 'plan_donations'
   	collection do
       get :latest
+      get :follow_plan
     end
     member do 
     	post :follow

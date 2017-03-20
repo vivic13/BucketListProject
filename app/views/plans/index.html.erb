@@ -8,12 +8,13 @@ Your Bucket Lists</h1>
 		<div class="col-md-6" id="left">
 
 		<%= link_to '新增願望?', new_plan_path ,class:"btn"%>
+		<%= link_to '查看你Follow的List', follow_plan_plans_path, class:"btn" %>
 		
 		</div>
 		<div class="col-md-6" id="right">	
 			<%= form_tag plans_path, :method => :get do %>
 			  <%= text_field_tag "keyword" %>
-			  <%= submit_tag "Search" %>
+			  <%= submit_tag "Search" ,class:"btn" %>
 			<% end %>
 			<%= link_to '依預計完成日排序', plans_path( :order => "title") %>
 			<%= link_to '預設排序', plans_path %>
