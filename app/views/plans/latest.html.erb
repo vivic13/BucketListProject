@@ -27,6 +27,13 @@
 						<td><p>主辦人:<%=p.host%></p></td>
 					</tr>
 					<tr>
+					<td>
+						<% p.tag_categories.each do |t| %>
+		   			<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
+						<% end %>
+					</td>
+					</tr>
+					<tr>
 						<td><%= link_to 'Detail', plan_path(p) %> </td>
 					</tr>
 				</table>	
