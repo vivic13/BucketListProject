@@ -1,6 +1,160 @@
 <div class="container">
 	<h1>新增願望</h1>
+	<%= form_for(@plan) do |f| %> 
+	<div class="form_group">
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
+		<%= f.text_field :title %>
+	</div>
+	<div class="form_group">
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
+		<%= f.text_field :duedate %>
+	</div>
+	<div class="form_group">
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
+		<%= f.file_field :file_location %>
+	</div>
+	<div class="form_group">	
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開" %><br>
+		<%= f.radio_button :is_public,true,:value => true %>
+		<%= f.label :is_public, "公開"%>
+		<%= f.radio_button :is_public,false,:value => false %>		
+		<%= f.label :is_public, "私人"%>	    
+	</div>
 
-	<%= render :partial => "form" %>
+	<div class="form_group">
+	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
+	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
+ 	<%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
+	<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
+	<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
+	<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
+	<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
+	<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
+	<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
+	<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
+	<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
+	<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
+	<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
+
+	</div>
+	<div class="container" >
+ 		<div class="row">
+	
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :plan, "Plan計畫" %><br>
+				</div>
+				<div class= "col-md-10">
+					<%= f.text_area :plan %>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="container" >
+ 		<div class="row">
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :do_what, "Do執行" %><br>
+				</div>
+				<div class= "col-md-10">
+					<%= f.text_area :do_what %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" >
+ 		<div class="row">
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :check, "Check檢視" %><br>
+				</div>
+				<div class= "col-md-10">
+					<%= f.text_area :check %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" >
+ 		<div class="row">
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :act, "Action行動" %><br>
+				</div>
+				<div class= "col-md-10">
+					<%= f.text_area :act %>
+				</div>
+			</div>
+		</div>
+	</div>
+			<div class="form_group" id="cc">		
+				<%= f.submit "儲存" ,class:"btn"%>
+				
+				<%= link_to '算了，回個人頁面', plans_path ,class:"btn"%>
+
+			</div>  
+
+
+		</div>
+	</div>  
+	<% if @plan.errors.present?%>
+  <ul>
+    <% @plan.errors.each do |error, message|%>
+      <li> <%= "#{error.capitalize}  #{message}" %></li>
+    <% end %>
+  </ul>
+<% end%>
+
+
+<% end %>
+
+
+
+
+
 </div>
+
+
+<style>
+
+
+textarea{
+		max-width:83%;
+		max-height:300px;
+		margin-top: 10px;
+		width:935px;
+		height:300px;
+		border-style: dashed;
+		border-width: 1px;
+		resize:none;
+
+ 	}
+
+.col-md-2{
+		margin-top: 10px;
+		text-align: center;
+
+	}
+
+.col-md-6{
+		text-align: left;
+
+
+}
+#cc{
+	text-align: center;
+}
+
+.resize{
+		resize: 
+		width : auto;
+		width : 400px;
+		height : auto;
+		height : 267px;
+	}
+
+
+
+</style>
 

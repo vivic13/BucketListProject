@@ -1,24 +1,12 @@
-<% if @plan.errors.present?%>
-  <ul>
-    <% @plan.errors.each do |error, message|%>
-      <li> <%= "#{error.capitalize}  #{message}" %></li>
-    <% end %>
-  </ul>
-<% end%>
-
-
-
-
-
 
 <%= form_for(@plan) do |f| %> 
- 	<% if @plan.title %>
+ 
  		<div class="container" >
  			<div class="row">
  				<div class="col-md-6">
 			 		<div class="form_group">
 			 			
-				    	<%= image_tag @plan.file_location ,class:"resize" %>
+				    <%= image_tag @plan.file_location.url ,class:"resize" %>
 	
 						<%= f.file_field :file_location %>
 			
@@ -34,53 +22,37 @@
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
 						<%= f.text_field :duedate,:value => @plan.duedate,:readonly => true %>
 					</div>
-	<% else %>
-				 	<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
-						<%= f.text_field :title %>
+
+
+					<div class="form_group">	
+				    	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開" %><br>
+				    	<%= f.radio_button :is_public,true,:value => true %>
+				    	<%= f.label :is_public, "公開"%>
+							<%= f.radio_button :is_public,false,:value => false %>		
+							<%= f.label :is_public, "私人"%>
 					</div>
+
 					<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
-						<%= f.text_field :duedate %>
+				  	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
+				   	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
+				    <%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
+						<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
+						<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
+						<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
+						<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
+						<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
+						<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
+						<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
+						<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
+						<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
+						<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
+
 					</div>
-					<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
-						<%= f.file_field :file_location %>
-					</div>
-
-		
-	<% end %>
-
-				<div class="form_group">	
-			    	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開" %><br>
-			    	<%= f.radio_button :is_public,true,:value => true %>
-			    	<%= f.label :is_public, "公開"%>
-						<%= f.radio_button :is_public,false,:value => false %>		
-						<%= f.label :is_public, "私人"%>
-				</div>
-
-				<div class="form_group">
-			  	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
-			   	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
-			    <%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
-					<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
-					<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
-					<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
-					<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
-					<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
-					<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
-					<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
-					<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
-					<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
-					<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
-
-				</div>
-		
 			
-
+			
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
 	
 	<div class="container" >
  		<div class="row">
@@ -135,16 +107,22 @@
 	</div>
 			<div class="form_group" id="cc">		
 				<%= f.submit "儲存" ,class:"btn"%>
-				<% if @plan.title %>
-					<%= link_to '算了，回上ㄧ頁', plan_path(@plan) ,class:"btn"%>
-				<%else%>
-					<%= link_to '算了，回上ㄧ頁', plans_path ,class:"btn"%>
-				<% end %>
+				
+				<%= link_to '算了，回上ㄧ頁', plan_path(@plan) ,class:"btn"%>
+
 			</div>  
 
 
 		</div>
 	</div>  
+	<% if @plan.errors.present?%>
+  <ul>
+    <% @plan.errors.each do |error, message|%>
+      <li> <%= "#{error.capitalize}  #{message}" %></li>
+    <% end %>
+  </ul>
+<% end%>
+
 
 <% end %>
 
@@ -178,6 +156,7 @@ textarea{
 
 .col-md-6{
 		text-align: left;
+		padding:40px;
 
 
 }

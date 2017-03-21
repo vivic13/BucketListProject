@@ -1,0 +1,2 @@
+module Listadmin::PlansHelper
+end

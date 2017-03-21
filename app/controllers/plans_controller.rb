@@ -4,11 +4,12 @@ class PlansController < ApplicationController
 
 	def index
 			@current_user_plan = current_user.plans.where(:host => current_user.nickname)
-			if params[:keyword]
-	    	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
-	  	else
-	    	@plans = @current_user_plan
-	  	end
+			#if params[:keyword]
+	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
+	  	#else
+	  	
+	    @plans = @current_user_plan
+	  	#end
 
 	  	if params[:order]
 	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
@@ -90,14 +91,14 @@ class PlansController < ApplicationController
 	end
 
 	def latest
-		@plans=Plan.where(:is_public=>true).order(duedate: :desc)
+		@plans=Plan.where(:is_public=>true).order(updated_at: :desc)
 	end
 
 	
 	private
 
 	def permit_plan
-		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public,:progress)
+		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public, :progress)
 	end
 
 	def find_plan

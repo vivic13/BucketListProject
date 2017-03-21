@@ -18,10 +18,10 @@
 	<% end %>
 </div>
 
-<div class="tc" class="container">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<%= image_tag @plan.file_location ,class:"resize"%>	
+			<%= image_tag @plan.file_location.url ,class:"resize"%>	
 		</div>
 
 		<div class="col-md-6">
@@ -126,7 +126,7 @@
 
 	.col-md-6{
 		text-align: left;
-		padding-left: 100px;
+		padding:40px;
 	}
 
 

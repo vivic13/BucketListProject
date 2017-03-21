@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     	post :unfollow
     end
   end
+  namespace :listadmin do
+    resources :plans
+  end
+
 
   get"/home", to:"home#homepage", :controller => 'home'
   get"/about", to:"home#about", :controller => 'home'

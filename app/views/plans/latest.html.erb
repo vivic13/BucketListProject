@@ -1,5 +1,4 @@
-<h1> <i class="fa fa-users" aria-hidden="true"></i>
-See other's ideas </h1>
+<h1>See other's ideas </h1>
 
 <div class="container">
 	<div class="row">
@@ -17,13 +16,18 @@ See other's ideas </h1>
 						
 					</tr>
 					<tr>
-						<td colspan="2"><%= image_tag p.file_location ,class:"resize" %></td>
+						<td>最近更新: <%= p.updated_at%></td>
+						
+					</tr>
+
+					<tr>
+						<td><%= image_tag p.file_location ,class:"resize" %></td>
 					</tr>
 					<tr>
-						<td colspan="2"><p>主辦人:<%=p.host%></p></td>
+						<td><p>主辦人:<%=p.host%></p></td>
 					</tr>
 					<tr>
-						<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
+						<td><%= link_to 'Detail', plan_path(p) %> </td>
 					</tr>
 				</table>	
 			</div>
@@ -33,7 +37,7 @@ See other's ideas </h1>
 </div>
 
 <style>
-
+	
 
 	.col-md-4 :hover{
 		background-color: rgba(245,245,238,1);
@@ -45,5 +49,6 @@ See other's ideas </h1>
 		height : auto;
 		height : 207px;
 	}
+
 
 </style>
