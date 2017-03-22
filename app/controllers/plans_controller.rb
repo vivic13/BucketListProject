@@ -24,15 +24,15 @@ class PlansController < ApplicationController
 	end
 
 	def new
-		@plan=Plan.new
+		@plan = Plan.new
 
 	end
 
 	def create
-		@plan=Plan.new(permit_plan)
-		@plan.host=current_user.nickname
+		@plan = Plan.new(permit_plan)
+		@plan.host = current_user.nickname
 		if @plan.save
-			@membership=Membership.create(:user => current_user,:plan => @plan)
+			@membership = Membership.create(:user => current_user,:plan => @plan)
 			redirect_to plans_path
 		else 
 			render :new
@@ -97,7 +97,8 @@ class PlansController < ApplicationController
 	end
 
 	def latest
-		@plans=Plan.where(:is_public=>true).order(updated_at: :desc)
+		@plans = Plan.where(:is_public => true).order(updated_at: :desc)
+		
 	end
 
 	
@@ -108,7 +109,7 @@ class PlansController < ApplicationController
 	end
 
 	def find_plan
-		@plan=Plan.find(params[:id])
+		@plan = Plan.find(params[:id])
 	end
 
 end

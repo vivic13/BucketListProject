@@ -1,0 +1,38 @@
+<h2> <%= @user.nickname %> 的Profile </h2>
+
+<div class="container">
+	<%= @user.introduction%>
+</div>
+<div class="container">
+	<div class="row">
+		<% @plans.each do |p| %>
+			<div class="col-md-4">
+				<table class="table table-bordered">
+				<tr>
+				  <th class="table-info"><%= p.title%></th>
+				</tr>
+				
+				<tr>
+					<td>預計完成日: <%= p.duedate%></td>
+				</tr>
+				<tr>
+					<td colspan="2"><%= image_tag p.file_location ,class:"resize"%></td>
+				</tr>
+				<tr>
+					<td colspan="2">是否公開: <%= p.is_public %></td>
+				</tr>
+				<tr>
+					<td>
+						<% p.tag_categories.each do |t| %>
+		   			<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
+				</tr>
+				</table>
+			</div>			 	
+		<% end %>
+	</div>
+</div>

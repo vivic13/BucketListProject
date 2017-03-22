@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321115839) do
+ActiveRecord::Schema.define(version: 20170322074501) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "comment_body"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170321115839) do
     t.string   "file_location"
     t.string   "progress"
     t.string   "host"
+    t.text     "why"
   end
 
   create_table "tag_categories", force: :cascade do |t|
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20170321115839) do
     t.string   "fb_uid"
     t.string   "fb_token"
     t.string   "role"
+    t.text     "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fb_uid"], name: "index_users_on_fb_uid"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

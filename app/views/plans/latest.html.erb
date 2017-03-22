@@ -33,7 +33,10 @@
 						<td><%= image_tag p.file_location ,class:"resize" %></td>
 					</tr>
 					<tr>
-						<td><p>主辦人:<%=p.host%></p></td>
+						
+						<% @user= User.where(:nickname => p.host) %>
+						<% @user.ids %>
+						<td><p>主辦人:<%= link_to p.host, user_path(@user.ids) %></p></td>
 					</tr>
 					<tr>
 					<td>

@@ -1,7 +1,18 @@
 
 
 <h2><i class="fa fa-bookmark-o" aria-hidden="true"></i>
-<%= @plan.title %> </h1>
+<%= @plan.title %> 
+<div class= "follow">
+<% unless @plan.host == current_user.nickname %>
+	<% if @plan.users.include?(current_user) %>	
+		<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
+	<%else%>			
+		<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn"%>
+	<% end %>
+<% end %>	
+
+</div>
+</h2>
 <div class="tag">
 	<% @plan.tag_categories.each do |t| %>
 		<i class="fa fa-tag fa-2x" aria-hidden="true"><%= t.name %></i>
@@ -12,14 +23,14 @@
 		<%= render :partial => "only" %>
 
 	<% else %>
-		<div class="follower">
-		<% if @plan.users.include?(current_user) %>	
-			<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
-		<%else%>			
-			<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn"%>
-		<% end %>
-		</div>
+		
+
 		<hr>
+		<%= link_to '個人頁面', plans_path ,class:"btn"%>
+		<%= link_to '最新活動', latest_plans_path ,class:"btn"%>		
+		
+
+		
 	<% end %>
 </div>
 
@@ -155,5 +166,11 @@
 		text-align: right;
 		padding-right: 20px;
 	}
+
+	.follow{
+	 display: inline-block;
+
+	}
+
 
 </style>
