@@ -52,7 +52,7 @@ class Listadmin::PlansController < ApplicationController
     end
 
     def permit_plan
-			params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public,:progress)
+			params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public,:progress,:tag_category_ids => [])
 		end
 
 		def find_plan

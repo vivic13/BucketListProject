@@ -53,6 +53,11 @@
 					<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
 
 				</div>
+				<div class="form_group">
+					<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類:" %><strong>(限制選取3項)</strong><br>
+					<%= f.collection_check_boxes(:tag_category_ids, TagCategory.all, :id, :name) %>
+
+				</div>
 		
 			
 
@@ -125,3 +130,11 @@
 	</div>  
 
 <% end %>
+
+<script type="text/javascript">
+	$("input:checkbox").click(function(){
+    if ($("input:checkbox:checked").length > 3){
+      return false;
+   }
+});
+</script>

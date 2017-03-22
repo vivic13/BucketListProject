@@ -20,7 +20,14 @@
 	</div>
 </div>
 
-
+<div>
+	<%= form_tag plans_path, :method => :get do %>
+		<% TagCategory.all do |t| %>
+		   		<%= t.name %>
+						
+			<% end %>
+	<% end %>
+</div>
 
 <div class="container">
 	<div class="row">

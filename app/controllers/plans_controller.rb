@@ -16,7 +16,10 @@ class PlansController < ApplicationController
 	  		@plans = @current_user_plan.order(sort_by)
 	  	end
 
-	  
+	  	if params[:tag]
+	  		@tag=TagCategory.where(:name => params[:tag])
+	  		@plans=@tag.plans.where(:host => current_user.nickname)
+	  	end
 
 	end
 
@@ -38,8 +41,9 @@ class PlansController < ApplicationController
 	end
 
 	def show
-		@page_title=@plan.title
-		@follower=@plan.users.count-1
+		@page_title = @plan.title
+		@follower = @plan.users.count-1
+		@comment_no = @plan.comments.count
 
 	end
 
