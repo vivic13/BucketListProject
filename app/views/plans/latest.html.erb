@@ -1,6 +1,15 @@
 <h1>See other's ideas </h1>
 
 <div class="container">
+
+		<% TagCategory.all.each do |t| %>
+
+		   	<i class="fa fa-tag " aria-hidden="true"><%= link_to t.name, tag_category_path(t.id)%>&nbsp;&nbsp;</i>
+						
+		<% end %>
+</div>
+
+<div class="container">
 	<div class="row">
   
 		<% @plans.each do |p| %>

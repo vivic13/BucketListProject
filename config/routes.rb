@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     	post :unfollow
     end
   end
+
+  resources :tag_categories, only:[:show], :controller => 'tag_categories'
+
+
   namespace :listadmin do
     resources :plans
   end
