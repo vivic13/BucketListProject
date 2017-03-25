@@ -48,7 +48,7 @@ class PlansController < ApplicationController
 	end
 
 	def edit 
-		if @plan.host != current_user.nickname
+		if @plan.host != current_user.nickname || current_user.role != "admin"
 			flash[:alert]="something went wrong!"
 		end
 
@@ -56,7 +56,7 @@ class PlansController < ApplicationController
 
 	def update
 
-		if @plan.host == current_user.nickname
+		if @plan.host == current_user.nickname || current_user.role == "admin"
 			if @plan.update(permit_plan)
 				redirect_to plan_url(@plan)
 			else
@@ -68,7 +68,7 @@ class PlansController < ApplicationController
 	end
 
 	def destroy
-		if @plan.host == current_user.nickname
+		if @plan.host == current_user.nickname || current_user.role == "admin"
 			@plan.destroy
 			redirect_to plans_path
 		else
@@ -105,7 +105,7 @@ class PlansController < ApplicationController
 	private
 
 	def permit_plan
-		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public, :progress, :tag_category_ids => [])
+		params.require(:plan).permit(:title, :duedate, :plan, :do_what, :check, :act, :file_location, :is_public, :progress,:why, :tag_category_ids => [])
 	end
 
 	def find_plan

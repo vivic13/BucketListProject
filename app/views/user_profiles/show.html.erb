@@ -1,8 +1,19 @@
-<h2> <%= @user.nickname %> 的Profile </h2>
-
 <div class="container">
-	<%= @user.introduction%>
+	<h2 class="tc"> <%= @user.nickname %> 的公開Profile </h2>
 </div>
+<div class="container">
+	<div class="profile">
+		<p><i class="fa fa-files-o" aria-hidden="true">公開願望數:</i></p>
+		<p><%= @user.plans.count %>個</p>
+		<p><i class="fa fa-user-o" aria-hidden="true">個人簡介:</i></p>
+		<%= @user.introduction%>
+
+	</div>
+	<%= link_to "回上ㄧ頁", "javascript:history.go(-1);",class:"btn" %>
+</div>
+
+
+
 <div class="container">
 	<div class="row">
 		<% @plans.each do |p| %>
@@ -36,3 +47,27 @@
 		<% end %>
 	</div>
 </div>
+
+
+
+
+<style> 
+	.tc{
+		text-align: center;
+		padding-bottom: 50px;
+
+	}
+	.btn{
+	 float: right;
+	}
+
+	.profile{
+		border-width:0.5px;
+		border-style: dashed;
+		width:70%;
+		margin:0 auto;
+		min-height: 200px;
+
+
+	}
+</style>

@@ -4,8 +4,12 @@ class PlanCommentsController < ApplicationController
 
 
 	def create
-		@comment=@plan.comments.create(comment_params)
-		redirect_to plan_path(@plan)
+		@comment=@plan.comments.new(comment_params)
+		if @comment.save
+			redirect_to plan_path(@plan)
+		else
+			flash[:alert] = "請至少輸入ㄧ個字!"	
+		end
 
 	end
 

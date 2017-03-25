@@ -1,13 +1,13 @@
 <div class=container>
-<%= form_for ([@plan, @plan.comments.create] )do |f| %>   
-	
+<%= form_for ([@plan, @plan.comments.new] )do |f| %> 
+
     <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
     <p>
     <%= f.text_field :commenter,:value => current_user.nickname,:readonly => true%>
     </p>
     <p>
-    <%= f.label :comment_body,"留言嗎？" %>
-    <%= f.text_area :comment_body %>
+    <%= f.label :comment_body,"留言嗎？" %><br>
+    <%= f.text_area :comment_body ,:required => 'required'%>
     </p>
     <p>
     <%= f.submit "留言",class:"btn"%> 
@@ -16,13 +16,23 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
 <style>
 
 textarea{
-        max-width:20%;
+        max-width:50%;
         max-height:100px;
         margin-top: 10px;
-        width:300px;
+        width:500px;
         height:100px;
         border-style: dashed;
         border-width: 1px;

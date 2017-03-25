@@ -1,0 +1,30 @@
+<div class="container">
+	<h1> 詳細資訊</h1>
+
+	<h3> ID : <%= @user.id %>  </h3>
+
+	<h3> nickname : <%= @user.nickname %></h3>
+
+	<h3> lastname : <%= @user.last_name%></h3>
+
+	<h3> role:  <%= @user.role %></h3>
+
+	<h4> email : <%= @user.email %></h4>
+
+	<p> created_at: <%= @user.created_at %> </p>
+
+	<p>updated_at: <%= @user.updated_at %></p>
+
+
+	<p>fb_uid: <%= @user.fb_uid %> </p>
+
+	<p>fb_token: <%= @user.fb_token %> </p>
+
+	<p>introduction: <%= @user.introduction %></p>
+
+
+	<%= link_to '回後台首頁',  listadmin_users_path, class:"btn btn-default" %>
+
+	<%= link_to '編輯', edit_listadmin_user_path, class:"btn btn-default" %>
+
+</div>

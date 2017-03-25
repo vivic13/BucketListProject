@@ -48,7 +48,7 @@
 
 
 
-    <div class="rails">
+    <div class="body-info">
       <%= yield %>
     </div>
 
@@ -61,7 +61,11 @@
 
 
 <style>
-  body{ padding-top: 200px; }
+  body{ 
+    padding-top: 200px; 
+    box-sizing: border-box;
+
+  }
 
   #head-banner{
   margin-top: 0px;
@@ -90,6 +94,11 @@
   
   }
 
+  h4{
+    color:rgba(90,178,176,1);
+
+  }
+
   .nav li{
     font-size: 20px;
     padding-top: 20px;
@@ -110,7 +119,7 @@
     line-height: 200px;
     margin-top: 50px;
   }
-  .rails{
+  .body-info{
     min-height: 900px;
   }
 
@@ -153,3 +162,29 @@
   }
 
 </style>
+<script>
+ var editor = new MediumEditor('.editable', {
+    toolbar: {
+        allowMultiParagraphSelection: true,
+        buttons: ['bold', 'italic', 'h4','orderedlist','unorderedlist'],
+        diffLeft: 0,
+        diffTop: -10,
+        firstButtonClass: 'medium-editor-button-first',
+        lastButtonClass: 'medium-editor-button-last',
+        relativeContainer: null,
+        standardizeSelectionStart: false,
+        static: true,
+        align: 'center',
+        sticky: false,
+        updateOnEmptySelection: false
+    },
+    placeholder: {
+        /* This example includes the default options for placeholder,
+           if nothing is passed this is what it used */
+        text: '輸入內容，選取文字範圍即可編輯',
+        hideOnClick: true
+    }
+   
+});
+
+</script>

@@ -17,10 +17,22 @@
 			 		<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
 						<%= f.text_field :title,:value => @plan.title,:readonly => true%>
+						
+						<% if @plan.errors.present? %>
+							<% if @plan.errors.messages[:title] %>
+							<%= @plan.errors.messages[:title].to_sentence %>
+							<% end %>
+	 					<% end %>
 					</div>
 					<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
 						<%= f.text_field :duedate,:value => @plan.duedate,:readonly => true %>
+						
+						<% if @plan.errors.present? %>
+							<% if @plan.errors.messages[:duedate] %>
+							<%= @plan.errors.messages[:duedate].to_sentence %>
+							<% end %>
+	 					<% end %>
 					</div>
 
 
@@ -58,7 +70,20 @@
 				</div>
 			</div>
 		</div>
+	<div class="container" >
+ 		<div class="row">
 	
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-lightbulb-o fa-3x" aria-hidden="true"></i><i class="fa fa-question fa-3x" aria-hidden="true"></i><%= f.label :why, "動機" %><br>
+				</div>
+				<div class= "col-md-10">
+					<%= f.text_area :why ,class:"editable" %>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<div class="container" >
  		<div class="row">
 	
@@ -67,7 +92,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :plan, "Plan計畫" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :plan %>
+					<%= f.text_area :plan,class:"editable" %>
 				</div>
 			</div>
 
@@ -81,7 +106,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :do_what, "Do執行" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :do_what %>
+					<%= f.text_area :do_what,class:"editable" %>
 				</div>
 			</div>
 		</div>
@@ -93,7 +118,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :check, "Check檢視" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :check %>
+					<%= f.text_area :check ,class:"editable"%>
 				</div>
 			</div>
 		</div>
@@ -105,14 +130,14 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :act, "Action行動" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :act %>
+					<%= f.text_area :act ,class:"editable" %>
 				</div>
 			</div>
 		</div>
 	</div>
 			<div class="form_group" id="cc">		
 				<%= f.submit "儲存" ,class:"btn"%>
-				
+<%end%>				
 				<%= link_to '算了，回上ㄧ頁', plan_path(@plan) ,class:"btn"%>
 
 			</div>  
@@ -120,20 +145,7 @@
 
 		</div>
 	</div>  
-	<% if @plan.errors.present?%>
-  <ul>
-    <% @plan.errors.each do |error, message|%>
-      <li> <%= "#{error.capitalize}  #{message}" %></li>
-    <% end %>
-  </ul>
-<% end%>
-
-
-<% end %>
-
-
-
-
+	
 
 
 
@@ -141,17 +153,10 @@
 <style>
 
 
-textarea{
-		max-width:83%;
-		max-height:300px;
-		margin-top: 10px;
-		width:935px;
-		height:300px;
-		border-style: dashed;
-		border-width: 1px;
-		resize:none;
-
- 	}
+.editable{
+	border: 1px dashed;
+	height:200px;
+}
 
 .col-md-2{
 		margin-top: 10px;
@@ -165,6 +170,7 @@ textarea{
 
 
 }
+
 #cc{
 	text-align: center;
 }
@@ -176,6 +182,7 @@ textarea{
 		height : auto;
 		height : 267px;
 	}
+
 
 </style>
 <script type="text/javascript">

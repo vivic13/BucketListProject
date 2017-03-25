@@ -1,20 +1,34 @@
 <div class="container">
 	<h1>新增願望</h1>
+	
+
 	<%= form_for(@plan) do |f| %> 
 	<div class="form_group">
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
-		<%= f.text_field :title %>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題(必填)" %><br>
+		<%= f.text_field :title%>
+		<% if @plan.errors.present? %>
+			<% if @plan.errors.messages[:title] %>
+			<p class="error"><%= @plan.errors.messages[:title].to_sentence  %></p>
+			<% end %>
+	 	<% end %>
+   
 	</div>
 	<div class="form_group">
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
-		<%= f.text_field :duedate %>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日(必填)" %><br>
+		<%= f.date_select :duedate %>
+		<% if @plan.errors.present? %>
+			<% if @plan.errors.messages[:duedate] %>
+			<p class="error"><%= @plan.errors.messages[:duedate].to_sentence  %></p>
+			<% end %>
+	 	<% end %>
+		
 	</div>
 	<div class="form_group">
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
 		<%= f.file_field :file_location %>
 	</div>
 	<div class="form_group">	
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開" %><br>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開(必填)" %><br>
 		<%= f.radio_button :is_public,true,:value => true %>
 		<%= f.label :is_public, "公開"%>
 		<%= f.radio_button :is_public,false,:value => false %>		
@@ -22,7 +36,7 @@
 	</div>
 
 	<div class="form_group">
-	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
+	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度(必填)" %><br>
 	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
  	<%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
 	<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
@@ -38,9 +52,25 @@
 
 	</div>
 	<div class="form_group">
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類:" %><strong>(限制選取3項)</strong><br>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類(必填):" %><strong>(限制選取3項)</strong><br>
 		<%= f.collection_check_boxes(:tag_category_ids, TagCategory.all, :id, :name) %>
 
+	</div>
+	<div class="container" >
+ 		<div class="row">
+	
+			<div class="form_group">
+				<div class= "col-md-2">
+					<i class="fa fa-lightbulb-o fa-3x" aria-hidden="true"></i><i class="fa fa-question fa-3x" aria-hidden="true"></i><%= f.label :why, "動機" %><br>
+				</div>
+				<div class= "col-md-10">
+					
+					<%= f.text_area :why ,class:"editable"%>
+			
+				</div>
+			</div>
+
+		</div>
 	</div>
 	<div class="container" >
  		<div class="row">
@@ -50,7 +80,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :plan, "Plan計畫" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :plan %>
+					<%= f.text_area :plan ,class:"editable"%>
 				</div>
 			</div>
 
@@ -64,7 +94,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :do_what, "Do執行" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :do_what %>
+					<%= f.text_area :do_what ,class:"editable" %>
 				</div>
 			</div>
 		</div>
@@ -76,7 +106,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :check, "Check檢視" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :check %>
+					<%= f.text_area :check ,class:"editable"%>
 				</div>
 			</div>
 		</div>
@@ -88,7 +118,7 @@
 					<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><%= f.label :act, "Action行動" %><br>
 				</div>
 				<div class= "col-md-10">
-					<%= f.text_area :act %>
+					<%= f.text_area :act ,class:"editable"%>
 				</div>
 			</div>
 		</div>
@@ -103,38 +133,27 @@
 
 		</div>
 	</div>  
-	<% if @plan.errors.present?%>
-  <ul>
-    <% @plan.errors.each do |error, message|%>
-      <li> <%= "#{error.capitalize}  #{message}" %></li>
-    <% end %>
-  </ul>
-<% end%>
-
-
-<% end %>
-
-
-
+		<%# if @plan.errors.present?%>
+	  
+	    <%# @plan.errors.each do |error, message|%>
+	    <%#= "#{error.capitalize}  #{message}" %>
+	  <%# end %>
+  
+	<% end %>
 
 
 </div>
 
 
+
+
 <style>
+.editable{
+	border: 1px dashed;
+	height:200px;
+}
 
 
-textarea{
-		max-width:83%;
-		max-height:300px;
-		margin-top: 10px;
-		width:935px;
-		height:300px;
-		border-style: dashed;
-		border-width: 1px;
-		resize:none;
-
- 	}
 
 .col-md-2{
 		margin-top: 10px;
@@ -159,12 +178,21 @@ textarea{
 		height : 267px;
 	}
 
+	.error{
+		color: red;
+	}
+
 </style>
 <script type="text/javascript">
+ $("document").ready(function(){
 	$("input:checkbox").click(function(){
     if ($("input:checkbox:checked").length > 3){
-      return false;
-   }
-});
+      alert('限制選取3項');}
+	});
+	
+
+
+
+	});
 </script>
 

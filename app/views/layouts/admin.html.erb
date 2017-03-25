@@ -17,3 +17,30 @@
   	<%= yield %>
   </body>
 </html>
+
+<script>
+ var editor = new MediumEditor('.editable', {
+    toolbar: {
+        allowMultiParagraphSelection: true,
+        buttons: ['bold', 'italic', 'h4','orderedlist','unorderedlist'],
+        diffLeft: 0,
+        diffTop: -10,
+        firstButtonClass: 'medium-editor-button-first',
+        lastButtonClass: 'medium-editor-button-last',
+        relativeContainer: null,
+        standardizeSelectionStart: false,
+        static: true,
+        align: 'center',
+        sticky: false,
+        updateOnEmptySelection: false
+    },
+    placeholder: {
+        /* This example includes the default options for placeholder,
+           if nothing is passed this is what it used */
+        text: '輸入內容，選取文字範圍即可編輯',
+        hideOnClick: true
+    }
+   
+});
+
+</script>

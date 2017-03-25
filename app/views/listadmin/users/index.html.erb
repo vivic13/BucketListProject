@@ -1,0 +1,28 @@
+<div class="container">
+	<h1 class="text-center">Hi Admin! 這是後台首頁 </h1>
+</div>
+
+<%= link_to '回前台', plans_path, class:"btn btn-default" %>
+
+<div class="container">
+	<% @users.each do |u| %>
+		<div class="col-md-4 text-center">
+			<table class="table table-bordered">		
+				<tr>
+					<th class="table-info text-center">user id : <%= u.id%></th>
+				</tr>
+				<tr>
+					<td>usrer nickname : <%= u.nickname %></td>
+				</tr>
+				<tr>
+				 	<td><%= u.email %></td>
+				</tr>
+				<tr> 
+					<td><%= link_to 'Detail' ,listadmin_user_path(u), class:"btn btn-default" %></td>
+				</tr>
+
+	 		</table>
+		</div>
+	<% end %>
+</div>
+

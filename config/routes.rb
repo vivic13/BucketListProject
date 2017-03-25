@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
 
   namespace :listadmin do
-    resources :plans
+    resources :users
   end
 
 

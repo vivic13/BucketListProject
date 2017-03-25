@@ -17,8 +17,8 @@ class PlanDonationsController < ApplicationController
 	end
 
 	def show 
-		if current_user.nickname == @plan.host
-			@donation=@plan.donation
+		if current_user.nickname == @plan.host || current_user.role == "admin"
+			@donation = @plan.donation
 		end
 
 

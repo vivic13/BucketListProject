@@ -1,4 +1,6 @@
-<h1>See other's ideas </h1>
+<div class="container">
+	<h1>See other's ideas </h1>
+</div>
 
 <div class="container">
 
@@ -36,15 +38,13 @@
 						
 						<% @user= User.where(:nickname => p.host) %>
 						<% @user.ids %>
-						<td><p>主辦人:<%= link_to p.host, user_path(@user.ids) %></p></td>
-					</tr>
-					<tr>
-					<td>
+						<td><%= link_to p.host, user_path(@user.ids) %>
 						<% p.tag_categories.each do |t| %>
 		   			<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 						<% end %>
-					</td>
+						</td>
 					</tr>
+					
 					<tr>
 						<td><%= link_to 'Detail', plan_path(p) %> </td>
 					</tr>

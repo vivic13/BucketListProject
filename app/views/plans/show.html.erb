@@ -3,7 +3,7 @@
 <h2><i class="fa fa-bookmark-o" aria-hidden="true"></i>
 <%= @plan.title %> 
 <div class= "follow">
-<% unless @plan.host == current_user.nickname %>
+<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
 	<% if @plan.users.include?(current_user) %>	
 		<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
 	<%else%>			
@@ -15,23 +15,21 @@
 </h2>
 <div class="tag">
 	<% @plan.tag_categories.each do |t| %>
-		<i class="fa fa-tag fa-2x" aria-hidden="true"><%= t.name %></i>
+		<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 	<% end %>
 </div>
 <div class="navi">
-	<%if current_user && current_user.nickname == @plan.host %>
+	<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
 		<%= render :partial => "only" %>
 
 	<% else %>
 		
-
 		<hr>
-		<%= link_to '個人頁面', plans_path ,class:"btn"%>
-		<%= link_to '最新活動', latest_plans_path ,class:"btn"%>		
-		
-
+		<%= link_to "回上ㄧ頁", "javascript:history.go(-1);",class:"btn" %>
 		
 	<% end %>
+
+	
 </div>
 
 <div class="container">
@@ -45,7 +43,7 @@
 			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>
 			是否公開：<%= @plan.is_public %></p>
 
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i> DueDate:<%= @plan.duedate %></p>
+			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>預計完成日：<%= @plan.duedate %></p>
 
 			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>主辦人：<%= @plan.host%> </p>
 
@@ -60,6 +58,17 @@
 
 </div>
 
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<i class="fa fa-lightbulb-o fa-3x" aria-hidden="true"></i><i class="fa fa-question fa-3x" aria-hidden="true"></i><p><strong>動機</strong></p>
+		</div>
+		<div class="col-md-10">
+			<%= sanitize( @plan.why ) %>
+			<%#= @plan.why %> 
+		</div>
+	</div>
+</div>
 
 <div class="container">
 	<div class="row">
@@ -67,8 +76,8 @@
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Plan計畫</strong></p>
 		</div>
 		<div class="col-md-10">
-			
-			<%= @plan.plan %> 
+			<%= sanitize( @plan.plan) %>
+			<%#= @plan.plan %> 
 		</div>
 	</div>
 </div>
@@ -78,8 +87,9 @@
 		<div class="col-md-2">
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Do執行</strong></p>
 		</div>
-		<div class="col-md-10">		
-			<%= @plan.do_what %> 
+		<div class="col-md-10">
+			<%= sanitize( @plan.do_what ) %>		
+			<%#= @plan.do_what %> 
 		</div>
 	</div>
 </div>
@@ -90,8 +100,9 @@
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Check檢視</strong></p>
 		</div>
 
-		<div class="col-md-10">			
-			<%= @plan.check %> 
+		<div class="col-md-10">	
+			<%= sanitize( @plan.check ) %>		
+			<%#= @plan.check %> 
 		</div>
 	</div>
 </div>
@@ -103,8 +114,9 @@
 		</div>
 
 
-		<div class="col-md-10">			
-			<%= @plan.act %>
+		<div class="col-md-10">		
+			<%= sanitize( @plan.act ) %>	
+			<%#= @plan.act %>
 		</div>
 	</div>
 </div>

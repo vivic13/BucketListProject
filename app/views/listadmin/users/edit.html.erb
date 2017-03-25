@@ -1,0 +1,61 @@
+<div class="container">
+	<h2> 更新用戶資料</h2>
+	<%= form_for([:listadmin, @user])do |f| %> 
+
+		<%= f.label :id, "ID:" %><br>
+		<%= f.text_field :id,:value => @user.id,:readonly => true%><br>
+
+		<%= f.label :nickname, "nickname:" %><br>
+		<%= f.text_field :nickname,:value => @user.nickname,:readonly => true%><br>
+		
+		<%= f.label :last_name, "lastname:" %><br>
+		<%= f.text_field :last_name,:value => @user.last_name %><br>
+
+		<%= f.label :role, "role:" %><br>
+		
+		<%= f.radio_button :role,"user",:value => "user"%>
+		<%= f.label :role, "user",:value => "user"%>
+
+		<%= f.radio_button :role,"admin",:value => "admin"%>
+		<%= f.label :role, "admin",:value => "admin"%><br>
+		
+
+
+		<%= f.label :email, "email:" %><br>
+		<%= f.text_field :email,:value => @user.email %><br>
+
+		<%= f.label :created_at, "created_at:" %><br>
+		<%= f.text_field :created_at,:value => @user.created_at,:readonly => true%><br>
+
+		<%= f.label :updated_at, "updated_at:" %><br>
+		<%= f.text_field :updated_at,:value => @user.updated_at,:readonly => true%><br>
+		
+
+		<%= f.label :fb_uid, "fb_uid:" %><br>
+		<%= f.text_field :fb_uid,:value => @user.fb_uid%><br>
+
+		<%= f.label :fb_token, "fb_token:" %><br>
+		<%= f.text_field :fb_token,:value => @user.fb_token%><br>
+
+		<%= f.label :introduction, "introduction:" %><br>
+		<%= f.text_area :introduction,:value => @user.introduction %><br>
+
+
+		<%= f.submit "儲存" ,class:"btn btn-default"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<% end %>
+
+</div>

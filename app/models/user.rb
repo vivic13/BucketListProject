@@ -2,8 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  validates_presence_of :nickname, :uniqueness => true , :message => "暱稱不能空白"
   has_many :memberships
   has_many :plans, :through => :memberships
+
+  before_validation :set_nickname_default
 
 
   def self.from_omniauth(auth)
@@ -35,7 +38,15 @@ class User < ApplicationRecord
      #user.fb_raw_data = auth
      user.save!
      return user
-end
+    end
+
+    private
+
+    def set_nickname_default
+      self.nickname = self.email.split("@").first
+    end
+
+
 
 
 end
