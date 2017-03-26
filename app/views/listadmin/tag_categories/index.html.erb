@@ -1,0 +1,24 @@
+
+
+
+<div class="container text-center">
+	<%= form_for ([:listadmin,TagCategory.new])  do |f| %> 
+		<%= f.label :name, "Tag名稱" %>
+		 <%= f.text_field :name ,:required => 'required'%>
+
+		<%= f.submit %> 
+	<% end %>
+
+</div>
+<div class="container text-center">
+	<% @tags.each do |t| %>
+
+		   	<i class="fa fa-tag " aria-hidden="true"></i><%= t.name%>
+		   	<%= link_to '刪除', listadmin_tag_category_path(t),method: :delete, data:{ confirm: "Are you sure?"} %><br>
+						
+		<% end %>
+		
+</div>
+
+
+<%= link_to '回後台首頁' , listadmin_users_path, class:"btn btn-default" %>

@@ -1,9 +1,11 @@
 <div class="container">
 	<h1 class="text-center">Hi Admin! 這是後台首頁 </h1>
 </div>
+<div class="container text-center">
+	<%= link_to '回前台', plans_path, class:"btn btn-default" %>
 
-<%= link_to '回前台', plans_path, class:"btn btn-default" %>
-
+	<%= link_to '查看Tags', listadmin_tag_categories_path, class:"btn btn-default" %>
+</div>
 <div class="container">
 	<% @users.each do |u| %>
 		<div class="col-md-4 text-center">

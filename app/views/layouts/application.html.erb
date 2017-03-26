@@ -40,6 +40,9 @@
           <li><%= link_to '怎麼設立願望清單', how_it_works_path %></li>
           <li><%= link_to '前往最新活動', latest_plans_path %></li>
           <li><%= link_to '前往個人頁面', plans_path %></li>
+          <% if current_user.role == "admin" %>
+            <li><%= link_to '前往後台', listadmin_users_path %></li>
+          <% end %>
         </ul>
         </div>
         </div>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   namespace :listadmin do
     resources :users
+    resources :tag_categories
   end
 
 

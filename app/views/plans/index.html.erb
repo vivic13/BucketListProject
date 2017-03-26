@@ -14,9 +14,7 @@
 				<li><%= link_to '預設排序', plans_path %></li>
 				<li><%= link_to '查看你Follow的Lists', follow_plan_plans_path %></li>
 				<li><%= link_to '查看你的公開profile', user_path(@current_user.id) %></li>
-				<% if current_user.role == "admin" %>
-				<li><%= link_to '前往後台', listadmin_users_path %></li>
-				<% end %>
+				
 			</ul>
 		</div>
 </div>
