@@ -2,9 +2,10 @@ class PlanDonationsController < ApplicationController
 	
 	before_action :find_plan, except:[:index]
 
+
+
 	def new
 		@donation=@plan.build_donation
-
 	end
 
 	def create

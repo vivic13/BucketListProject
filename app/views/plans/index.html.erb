@@ -37,7 +37,7 @@
 					<td>預計完成日: <%= p.duedate%></td>
 				</tr>
 				<tr>
-					<td colspan="2"><%= image_tag p.file_location ,class:"resize"%></td>
+					<td colspan="2"><%= image_tag p.file_location ,class:"resize-latest"%></td>
 				</tr>
 				<tr>
 					<td colspan="2">是否公開: <%= p.is_public %></td>
@@ -57,43 +57,3 @@
 		<% end %>
 	</div>
 </div>
-<style>
-	.tc{
-		text-align: center;
-		padding-bottom: 50px;
-
-	}
-	#right{
-		padding-bottom: 50px;
-		text-align: right
-	}
-	.col-md-4 :hover{
-		background-color: rgba(245,245,238,1);
-	}
-
-	
-	.resize{
-		resize: 
-		width : auto;
-		width : 300px;
-		height : auto;
-		height : 207px;
-	}
-
-	.toolbox{	
-		position: relative;
-	}
-
-	.dropdown{
-		position: absolute;
-		top:-50px;
-		right:120px;
-
-
-	}
-	.dropdown-menu{
-		font-size: 20px;
-
-	}
-	
-</style>

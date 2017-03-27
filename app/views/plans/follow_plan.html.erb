@@ -27,7 +27,7 @@
 						
 					</tr>
 					<tr>
-						<td colspan="2"><%= image_tag p.file_location ,class:"resize" %></td>
+						<td colspan="2"><%= image_tag p.file_location ,class:"resize-latest" %></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p>主辦人:<%=p.host%></p></td>
@@ -42,39 +42,3 @@
 	</div>
 </div>
 
-<style>
-	.tc{
-		text-align: center;
-		padding-bottom: 50px;
-
-	}
-
-	.col-md-4 :hover{
-		background-color: rgba(245,245,238,1);
-	}
-	.resize{
-		resize: 
-		width : auto;
-		width : 300px;
-		height : auto;
-		height : 207px;
-	}
-	
-	.toolbox{	
-		position: relative;
-
-	}
-
-	.dropdown{
-		position: absolute;
-		top:-50px;
-		right:120px;
-
-
-	}
-	.dropdown-menu{
-		font-size: 20px;
-
-	}
-
-</style>
