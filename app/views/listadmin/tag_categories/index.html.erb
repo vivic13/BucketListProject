@@ -13,7 +13,7 @@
 <div class="container text-center">
 	<% @tags.each do |t| %>
 
-		   	<i class="fa fa-tag " aria-hidden="true"></i><%= t.name%>
+		   	<i class="fa fa-tag " aria-hidden="true"><%= t.name%>  目前使用次數：<%= t.plans.count %> </i>
 		   	<%= link_to '刪除', listadmin_tag_category_path(t),method: :delete, data:{ confirm: "Are you sure?"} %><br>
 						
 		<% end %>

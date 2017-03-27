@@ -6,7 +6,7 @@
   
   <% @plan.comments.each do |c| %>
   <br>
- 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>&nbsp;<strong>by:</strong><%= c.commenter %>&nbsp;&nbsp;<strong>at:</strong><%= c.created_at%>
+ 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>&nbsp;<strong>by:</strong><%= c.commenter %>&nbsp;&nbsp;<strong>at:</strong><%= time_tag(c.created_at)%>
  	<p><%= c.comment_body %> </p>
 
 

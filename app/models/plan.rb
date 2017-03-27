@@ -1,7 +1,9 @@
 class Plan < ApplicationRecord
 	mount_uploader :file_location, PhotoImageUploader
 	validates_presence_of :title, :message => "願望主題不能空白"
+	validates :title, length: { maximum: 20 ,too_long: "不能超過20字"}
 	validates_presence_of :duedate, :message => "預計完成日不能空白"
+
 
 	has_many :memberships
 	has_many :users, :through => :memberships

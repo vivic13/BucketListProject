@@ -1,14 +1,28 @@
 <div class="container">
 	<h1>See other's ideas </h1>
+
+	
 </div>
 
+
 <div class="container">
+	<p><i class="fa fa-users" aria-hidden="true">目前用戶人數：<%= User.count %></i>
+	<i class="fa fa-tint" aria-hidden="true">目前公開願望數：<%= Plan.where(:is_public => true).count %></i>
+	<i class="fa fa-tint" aria-hidden="true">目前非公開願望數：<%= Plan.where(:is_public => false).count %></i>
+	<i class="fa fa-commenting" aria-hidden="true">目前留言數：<%= Comment.count %></i></p>
+	
+	<p><i class="fa fa-tag " aria-hidden="true">依願望分類搜尋：
 
-		<% TagCategory.all.each do |t| %>
+	<% TagCategory.all.each do |t| %>
 
-		   	<i class="fa fa-tag " aria-hidden="true"><%= link_to t.name, tag_category_path(t.id)%>&nbsp;&nbsp;</i>
+		<i class="fa fa-tag " aria-hidden="true"><%= link_to t.name, tag_category_path(t.id)%>&nbsp;&nbsp;</i>
 						
-		<% end %>
+	<% end %>
+
+	</i></p>
+
+	<br><br>
+	
 </div>
 
 <div class="container">
@@ -18,7 +32,7 @@
 			<div class="col-md-4">
 				<table class="table table-bordered">
 					<tr>
-					  <th><%= p.title%></th>
+					  <th><%=truncate(p.title, length: 20) %></th>
 						
 					</tr>
 					
@@ -27,7 +41,7 @@
 						
 					</tr>
 					<tr>
-						<td>最近更新: <%= p.updated_at%></td>
+						<td>最近更新: <%= time_tag(p.updated_at) %></td>
 						
 					</tr>
 
