@@ -6,7 +6,10 @@ class PlanCommentsController < ApplicationController
 	def create
 		@comment=@plan.comments.new(comment_params)
 		if @comment.save
-			redirect_to plan_path(@plan)
+			respond_to do |format|
+	      format.html { redirect_to plan_path(@plan)}
+	      format.js	 # create.js.erb
+    	end
 		else
 			flash[:alert] = "請至少輸入ㄧ個字!"	
 		end
@@ -17,9 +20,13 @@ class PlanCommentsController < ApplicationController
 	def destroy
 		
 		@comment=@plan.comments.find(params[:id])
-		if @comment.commenter == current_user.nickname || @plan.host == current_user
-			@comment.destroy
-			redirect_to plan_path(@plan)
+		@comment.destroy
+		if @comment.commenter == current_user.nickname || @plan.host == current_user.nickname ||current_user.role == "admin"
+			respond_to do |format|
+	      format.html { redirect_to plan_path(@plan)}
+	      format.js	 # destroy.js.erb
+    	end
+			
 		else
 			flash[:alert] = "something went wrong!"	
 		end

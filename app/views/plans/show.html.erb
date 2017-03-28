@@ -121,13 +121,20 @@
 	</div>
 </div>
 
-		
+<div class="container">		
 
-<% if current_user %>
-
-
-
-	<%= render :partial => 'plan_comments/comment' %>
+	<% if current_user %>
+			<% if @plan.comments.count >0 %>
+			<hr>
+		  <h3>目前:<span id="count"><%= @comment_no %></span> 則留言<i class="fa fa-commenting" aria-hidden="true"></i></h3>
+			<ul id="comment-list">
+				<% @plan.comments.each do |c| %>
+					<%= render :partial => 'plan_comments/comment', :locals => {:c => c }%>
+				<% end %>
+			</ul>
+			<hr>
+	<% end %>
+</div>
 
 
 	<%= render :partial => 'plan_comments/form' %>

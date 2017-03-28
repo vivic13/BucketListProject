@@ -1,17 +1,17 @@
-<div class=container>
-<%= form_for ([@plan, @plan.comments.new] )do |f| %> 
+<div class="container text-center">
+<%= form_for [@plan, @plan.comments.new] , :remote => true  do |f| %> 
 
     <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-    <p>
-    <%= f.text_field :commenter,:value => current_user.nickname,:readonly => true%>
-    </p>
-    <p>
-    <%= f.label :comment_body,"留言嗎？" %><br>
-    <%= f.text_area :comment_body ,:required => 'required'%>
-    </p>
-    <p>
-    <%= f.submit "留言",class:"btn"%> 
-  	</p>
+
+        <%= f.text_field :commenter,:value => current_user.nickname,:readonly => true%>
+    <div>
+        <%= f.label :comment_body,"留言嗎？" %><br>
+        <%= f.text_area :comment_body ,:required => 'required',:id => "comment-text"%><br>
+        <%= f.submit "留言",class:"btn"%> 
+    </div>
+
+        
+
 <% end %>
 </div>
 

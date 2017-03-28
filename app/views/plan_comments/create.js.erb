@@ -1,0 +1,8 @@
+<% if @comment.save  %>
+
+ $("#comment-list").append("<%=j render(:partial => 'plan_comments/comment', :locals => {:c => @comment })%>");
+
+ $("#comment-text").val("");
+
+
+<% end %>

@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
 	def homepage
+		@page_title = "Bucket Lists 首頁"
 	end
 	def about
+		@page_title = "關於Bucket Lists"
 	end
 	def works
-	end
-	def qa
+		@page_title = "How it works?"
 	end
 end

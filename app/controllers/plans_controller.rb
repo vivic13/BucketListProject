@@ -3,6 +3,7 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow]
 
 	def index
+			@page_title = "你的List"
 			@current_user_plan = current_user.plans.where(:host => current_user.nickname)
 			#if params[:keyword]
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
@@ -10,6 +11,11 @@ class PlansController < ApplicationController
 	  	
 	    @plans = @current_user_plan
 	  	#end
+
+	  	respond_to do |format|
+		    format.html # index.html.erb
+		    #format.json { render :json => @plans.to_json }
+ 			 end
 
 	  	if params[:order]
 	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
@@ -24,6 +30,7 @@ class PlansController < ApplicationController
 	end
 
 	def new
+		@page_title = "新增List"
 		@plan = Plan.new
 
 	end
@@ -31,23 +38,35 @@ class PlansController < ApplicationController
 	def create
 		@plan = Plan.new(permit_plan)
 		@plan.host = current_user.nickname
-		if @plan.save
-			@membership = Membership.create(:user => current_user,:plan => @plan)
-			redirect_to plans_path
-		else 
-			render :new
-		end
 
+		
+			if @plan.save
+				@membership = Membership.create(:user => current_user,:plan => @plan)
+				
+				#respond_to do |format|
+				#  format.html { redirect_to plans_path}
+				#  format.js
+				#end		
+				
+			else 
+				render :new
+			end
+		
 	end
 
 	def show
 		@page_title = @plan.title
 		@follower = @plan.users.count-1
 		@comment_no = @plan.comments.count
+		#respond_to do |format|
+		 # format.html { @page_title = @plan.title }
+		 #	format.js
+ 		#end
 
 	end
 
 	def edit 
+		@page_title = "編輯List"
 		if @plan.host != current_user.nickname || current_user.role != "admin"
 			flash[:alert]="something went wrong!"
 		end
@@ -69,8 +88,12 @@ class PlansController < ApplicationController
 
 	def destroy
 		if @plan.host == current_user.nickname || current_user.role == "admin"
+
 			@plan.destroy
-			redirect_to plans_path
+			respond_to do |format|
+				format.html { redirect_to plans_path}
+				format.js
+			end
 		else
 			flash[:alert] = "something went wrong!"	
 		end
@@ -85,6 +108,7 @@ class PlansController < ApplicationController
 	end
 
 	def unfollow
+
 		if @plan.users.include?(current_user)
 			@membership = Membership.find_by(:user => current_user, :plan => @plan)
 			@membership.destroy
@@ -93,10 +117,12 @@ class PlansController < ApplicationController
 
 	end
 	def follow_plan
+		@page_title = "你的Follow Lists"
 		@plans = current_user.plans.where.not(:host => current_user.nickname)
 	end
 
 	def latest
+		@page_title = "大家的Lists"
 		@plans = Plan.where(:is_public => true).order(updated_at: :desc)
 		
 	end
