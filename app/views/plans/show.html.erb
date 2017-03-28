@@ -5,9 +5,9 @@
 <div class= "follow">
 <% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
 	<% if @plan.users.include?(current_user) %>	
-		<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn"%>
+		<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn" , :remote => true %>
 	<%else%>			
-		<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn"%>
+		<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn" , :remote => true %>
 	<% end %>
 <% end %>	
 

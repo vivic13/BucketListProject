@@ -5,8 +5,8 @@ class Plan < ApplicationRecord
 	validates_presence_of :duedate, :message => "預計完成日不能空白"
 
 
-	has_many :memberships
-	has_many :users, :through => :memberships
+	has_many :memberships , dependent: :destroy
+	has_many :users, :through => :memberships 
 	has_many :comments, dependent: :destroy
 	has_many :tag_plan_rp
 	has_many :tag_categories, :through => :tag_plan_rp
