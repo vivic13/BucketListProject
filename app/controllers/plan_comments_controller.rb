@@ -40,7 +40,7 @@ class PlanCommentsController < ApplicationController
 	end
 
 	def comment_params
-		params.require(:comment).permit(:comment_body, :commenter)
+		params.require(:comment).permit(:comment_body, :commenter, :image )
 	end
 
 

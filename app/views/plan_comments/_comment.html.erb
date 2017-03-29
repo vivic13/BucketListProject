@@ -3,10 +3,15 @@
 		  <br>
 		 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>&nbsp;<strong>by:</strong><%= c.commenter %>&nbsp;&nbsp;<strong>at:</strong><%= time_tag(c.created_at)%>
 		 	<p><%= c.comment_body %> </p>
+		 	<div id="image">
+				<% if c.image_file_name%>
+			 		<%= link_to image_tag(c.image.url(:small)), c.image.url %>
+				<% end %>
+			</div>
 				<% if c.commenter == current_user.nickname || @plan.host == current_user.nickname ||current_user.role == "admin" %>
 					<%= link_to 'Destroy Comment', plan_comment_path(@plan,c) ,method: :delete,method: :delete, data:{ confirm: "確定要刪除留言嗎?"},:remote => true %>
 				<% end %>
 		</li>
 	
-
+		
 

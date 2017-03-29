@@ -17,3 +17,4 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require medium-editor
+//= require jquery.remotipart
