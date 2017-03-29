@@ -1,9 +1,9 @@
 class UserProfilesController < ApplicationController
 	
 	def show
-		@user=User.find(params[:id])
+		@user=User.friendly.find(params[:id])
+		@user.to_param
 		@plans=@user.plans.where(:is_public => true)
-
 	end
 
 

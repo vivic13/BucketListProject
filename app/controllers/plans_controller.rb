@@ -43,10 +43,10 @@ class PlansController < ApplicationController
 			if @plan.save
 				@membership = Membership.create(:user => current_user,:plan => @plan)
 				
-				#respond_to do |format|
-				#  format.html { redirect_to plans_path}
-				#  format.js
-				#end		
+				respond_to do |format|
+				  format.html { redirect_to plans_path}
+				  format.js
+				end		
 				
 			else 
 				render :new

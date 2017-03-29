@@ -49,6 +49,8 @@ gem "paperclip", "~> 5.0.0"
 
 gem 'remotipart', '~> 1.2'
 
+gem 'friendly_id', '~> 5.1.0'
+
 
 
 

@@ -50,9 +50,8 @@
 					</tr>
 					<tr>
 						
-						<% @user= User.where(:nickname => p.host) %>
-						<% @user.ids %>
-						<td><%= link_to p.host, user_path(@user.ids) %>
+						<% @user= User.find_by(:nickname => p.host) %>
+						<td><%= link_to p.host, user_path(@user.to_param) %>
 						<% p.tag_categories.each do |t| %>
 		   			<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 						<% end %>
