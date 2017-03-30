@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330045204) do
+ActiveRecord::Schema.define(version: 20170330131223) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -84,13 +84,14 @@ ActiveRecord::Schema.define(version: 20170330045204) do
     t.text     "do_what"
     t.text     "check"
     t.text     "act"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "is_public",     default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "is_public",      default: false
     t.string   "file_location"
-    t.string   "progress",      default: "剛決定願望"
+    t.string   "progress",       default: "剛決定願望"
     t.string   "host"
     t.text     "why"
+    t.integer  "comments_count", default: 0,       null: false
   end
 
   create_table "tag_categories", force: :cascade do |t|

@@ -3,6 +3,5 @@ class Comment < ApplicationRecord
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
 	validates_presence_of :comment_body
- 	belongs_to :plan
-
+ 	belongs_to :plan,	:counter_cache => true
 end

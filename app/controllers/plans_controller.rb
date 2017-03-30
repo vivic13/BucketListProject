@@ -114,13 +114,22 @@ class PlansController < ApplicationController
 
 	def latest
 		@page_title = "大家的Lists"
-		@plans_public = Plan.where(:is_public => true)
+		if params[:order]
+			sort_by = (params[:order] == 'comments_count') ? 'comments_count' : 'comments_count'
+			@plans = Plan.where(:is_public => true).order(sort_by).reverse
+		elsif params[:last]
+			sort_by = (params[:last] == 'last_plan') ? 'updated_at' : 'updated_at'
+			@plans = Plan.where(:is_public => true).order(sort_by).reverse
+
+		else
+			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc')
 		
-			@plans = @plans_public.includes(:comments)
+		end
 		
 		
 	end
 
+	
 	
 	private
 

@@ -1,15 +1,11 @@
 <div class="container">
 	<h1>大家的lists </h1>
-
 	
 </div>
-<%#= link_to '依留言數排序', latest_plans_path( :order ) %>
 
 <div class="container">
-	<p><i class="fa fa-users" aria-hidden="true">目前用戶人數：<%= User.count %></i>
-	<i class="fa fa-tint" aria-hidden="true">目前公開願望數：<%= Plan.where(:is_public => true).count %></i>
-	<i class="fa fa-tint" aria-hidden="true">目前非公開願望數：<%= Plan.where(:is_public => false).count %></i>
-	<i class="fa fa-commenting" aria-hidden="true">目前留言數：<%= Comment.count %></i></p>
+	
+	
 	
 	<p><i class="fa fa-tag " aria-hidden="true">依願望分類搜尋：
 
@@ -20,8 +16,8 @@
 	<% end %>
 
 	</i></p>
+	<p><i class="fa fa-sort" aria-hidden="true"><%= link_to '依最多留言排序', latest_plans_path( :order => "comments_count") %></i>&nbsp;&nbsp;<i class="fa fa-sort" aria-hidden="true"><%= link_to '依最後更新排序', latest_plans_path( :last =>"plan_update") %></i>&nbsp;&nbsp;<i class="fa fa-sort" aria-hidden="true"><%= link_to '依最後回覆排序', latest_plans_path %></i></p>
 
-	<br><br>
 	
 </div>
 
