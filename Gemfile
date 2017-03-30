@@ -51,6 +51,8 @@ gem 'remotipart', '~> 1.2'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'shareable'
+
 
 
 

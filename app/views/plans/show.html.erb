@@ -1,27 +1,38 @@
 
 
-<h2><i class="fa fa-bookmark-o" aria-hidden="true"></i>
+<h2>
 <%= @plan.title %> 
+
 <div class= "follow">
 <% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
-	<% if @plan.users.include?(current_user) %>	
-		<%= button_to 'Unfollow', unfollow_plan_path(@plan) ,class:"btn" , :remote => true %>
+	<% if @plan.users.include?(current_user) %>			
+		<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
+			<i class="fa fa-bookmark" aria-hidden="true"></i>
+		<% end %>
 	<%else%>			
-		<%= button_to 'Follow', follow_plan_path(@plan) ,class:"btn" , :remote => true %>
+		<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
+			<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+		<% end %>
 	<% end %>
 <% end %>	
 
 </div>
+
+
 </h2>
+
+
+
 <div class="tag">
 	<% @plan.tag_categories.each do |t| %>
 		<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 	<% end %>
+
 </div>
 <div class="navi">
 	<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
 		<%= render :partial => "only" %>
-
+		
 	<% else %>
 		
 		<hr>
@@ -133,6 +144,11 @@
 			<%#= @plan.act %>
 		</div>
 	</div>
+
+</div>
+<div class="container text-center">
+	<i class="fa fa-facebook-official facebook " aria-hidden="true">分享<%= render_shareable :buttons=> ['facebook'] ,:static_link => true %></i>
+	 <i class="fa fa-google-plus-square google" aria-hidden="true">分享<%= render_shareable :buttons=> ['google_plus'] ,:static_link => true %></i>
 </div>
 
 <div class="container">		
@@ -160,51 +176,11 @@
  <% end %>
 
 
-
-
 <style>
-	.col-md-2{
-		margin-top: 10px;
-		text-align: center;
-
-	}
-
-	.col-md-10{
-		margin-top: 10px;
-		border-style: dashed;
-		border-width: 1px;
-		min-height: 300px;
-		word-wrap:break-word;
-	}
-
-
-	.col-md-6{
-
-		padding:40px;
-	}
-
-
-	.follower{
-		margin: 10px;
-		text-align: right;
-
-	}
-	.resize{
-		resize: 
-		width : auto;
-		width : 400px;
-		height : auto;
-		height : 267px;
-	}
-	.tag{
-		text-align: right;
-		padding-right: 20px;
-	}
-
-	.follow{
-	 display: inline-block;
-
-	}
-
-
+ button{
+ 	background-color: rgba(0,0,0,0);
+ 	border:0px;
+ }
 </style>
+
+
