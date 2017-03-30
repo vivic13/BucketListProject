@@ -11,4 +11,8 @@ class Plan < ApplicationRecord
 	has_many :tag_plan_rp
 	has_many :tag_categories, :through => :tag_plan_rp
 	has_one :donation
+	has_many :photos , dependent: :destroy
+
+
+	
 end

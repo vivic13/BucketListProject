@@ -58,6 +58,20 @@
 
 </div>
 
+<div class="container" id="photo-list">
+	<% @plan.photos.each do |p| %>
+		<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>
+					
+<% end %>
+<div class="container">
+	<% if current_user.role == "admin" ||	@plan.host == current_user.nickname %>
+		<div class="col-md-2">
+		<%= render :partial => 'plan_photos/newphoto' %>
+		</div>
+	<% end %>
+</div>
+</div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-2">
@@ -124,7 +138,7 @@
 <div class="container">		
 
 	<% if current_user %>
-			<% if @plan.comments.count >0 %>
+	
 			<hr>
 		  <h3>目前:<span id="count"><%= @comment_no %></span> 則留言<i class="fa fa-commenting" aria-hidden="true"></i></h3>
 			<ul id="comment-list">
@@ -133,8 +147,8 @@
 					
 				<% end %>
 			</ul>
-			<hr>
-	<% end %>
+
+
 </div>
 
 

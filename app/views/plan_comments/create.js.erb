@@ -1,9 +1,9 @@
 <% if @comment.save  %>
 
- $("#comment-list").append("<%=j render(:partial => 'plan_comments/comment', :locals => {:c => @comment })%>");
-$("#count").text('<%= Comment.count %>');
+	$("#comment-list").append("<%=j render(:partial => 'plan_comments/comment', :locals => {:c => @comment })%>");
+	$("#count").text('<%= @plan.comments.count %>');
 
- $("#comment-text").val("");
+	$("#comment-text").val("");
 
 
 <% end %>

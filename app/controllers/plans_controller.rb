@@ -9,8 +9,8 @@ class PlansController < ApplicationController
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
 	  	
-	    @plans = @current_user_plan
-	  	#end
+	  	@plans = @current_user_plan
+	   
 
 	  	respond_to do |format|
 		    format.html # index.html.erb
@@ -22,11 +22,7 @@ class PlansController < ApplicationController
 	  		@plans = @current_user_plan.order(sort_by)
 	  	end
 
-	  	if params[:tag]
-	  		@tag=TagCategory.where(:name => params[:tag])
-	  		@plans=@tag.plans.where(:host => current_user.nickname)
-	  	end
-
+	  	
 	end
 
 	def new
@@ -40,17 +36,15 @@ class PlansController < ApplicationController
 		@plan.host = current_user.nickname
 
 		
-			if @plan.save
-				@membership = Membership.create(:user => current_user,:plan => @plan)
-				
-				respond_to do |format|
+		if @plan.save
+			@membership = Membership.create(:user => current_user,:plan => @plan)
+			respond_to do |format|
 				  format.html { redirect_to plans_path}
 				  format.js
 				end		
-				
-			else 
-				render :new
-			end
+		else 
+			render :new
+		end
 		
 	end
 
@@ -58,10 +52,7 @@ class PlansController < ApplicationController
 		@page_title = @plan.title
 		@follower = @plan.users.count-1
 		@comment_no = @plan.comments.count
-		#respond_to do |format|
-		 # format.html { @page_title = @plan.title }
-		 #	format.js
- 		#end
+		
 
 	end
 
@@ -123,7 +114,10 @@ class PlansController < ApplicationController
 
 	def latest
 		@page_title = "大家的Lists"
-		@plans = Plan.where(:is_public => true).order(updated_at: :desc)
+		@plans_public = Plan.where(:is_public => true)
+		
+			@plans = @plans_public.includes(:comments)
+		
 		
 	end
 

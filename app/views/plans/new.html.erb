@@ -1,8 +1,8 @@
 <div class="container">
 	<h1>新增願望</h1>
 	
-
-	<%= form_for(@plan) do |f| %> 
+ 
+	<%= form_for @plan,	html: { multipart: true }	do |f| %> 
 	<div class="form_group">
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題(必填)" %><br>
 		<%= f.text_field :title%>
@@ -24,9 +24,12 @@
 		
 	</div>
 	<div class="form_group">
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳圖片" %><br>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳封面圖片" %><br>
 		<%= f.file_field :file_location %>
 	</div>
+	
+
+
 	<div class="form_group">	
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :is_public,"是否要公開(必填)" %><br>
 		<%= f.radio_button :is_public,true,:value => true %>

@@ -1,0 +1,10 @@
+<% if p.image_file_name%>
+	
+		<div class="col-md-2" id="photo-<%= p.id %>">
+		<%= link_to image_tag(p.image.url(:med)), p.image.url %><br>
+		<% if @plan.host == current_user.nickname || current_user.role == "admin" %>
+			<%= link_to 'Destroy Photo', plan_photo_path(@plan,p) ,method: :delete,method: :delete, data:{ confirm: "確定要刪除留言嗎?"}, :remote => true %>
+		<% end %>
+		</div>
+<% end %>
+
