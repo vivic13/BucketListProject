@@ -3,20 +3,36 @@
 <h2>
 <%= @plan.title %> 
 
-<div class= "follow">
-<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
-	<% if @plan.users.include?(current_user) %>			
-		<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
-			<i class="fa fa-bookmark" aria-hidden="true"></i>
+<div class= "follow & like">
+	<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
+		<% if @plan.already_followed(current_user) %>			
+			<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
+				<i class="fa fa-bookmark" aria-hidden="true"></i>
+				<%= @follow_count %>
+			<% end %>
+		<%else%>			
+			<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
+				<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+				<%= @follow_count %>
+			<% end %>
 		<% end %>
-	<%else%>			
-		<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
-			<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+	
+		<% if @plan.already_liked(current_user) %>			
+			<%= button_to unlike_plan_path(@plan) , {:remote => true} do %>
+				<i class="fa fa-heart" aria-hidden="true"></i>
+				<%= @like_count %>
+			<% end %>
+		<%else%>			
+			<%= button_to like_plan_path(@plan) ,{:remote => true} do %>
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<%= @like_count %>
+			<% end %>
 		<% end %>
-	<% end %>
-<% end %>	
+
+	<% end %>	
 
 </div>
+
 
 
 </h2>
@@ -32,11 +48,6 @@
 <div class="navi">
 	<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
 		<%= render :partial => "only" %>
-		
-	<% else %>
-		
-		<hr>
-		<%= link_to "回上ㄧ頁", "javascript:history.go(-1);",class:"btn" %>
 		
 	<% end %>
 
@@ -60,15 +71,40 @@
 
 			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前進度：<%= @plan.progress %></p>
 			
-				
-
-		
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前follow人數：<%= @follower %></p>
+			<div class="see-follow">
+				<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前follow人數：<%= @follow_count %></p>
+				<div class="who-follow">
+				  <% if @follow_count < 1 %>
+				   <p>目前還沒有人收藏</p>
+				  <% else %>
+						<ol>
+						<% @plan.memberships.each do |f| %>
+							<li><%= f.user.nickname %>&nbsp;</li>
+						<% end %>
+						</ol>
+					<% end %>
+				</div>
+			</div> 
+			<div class="see-like">
+				<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前like人數：<%= @like_count %> </p>
+				<div class="who-like">
+					<% if @like_count < 1 %>
+				   	<p>目前還沒有人like</p>
+				  <% else %>
+						<ol>
+						<% @plan.likes.each do |f| %>
+							<li><%= f.user.nickname %>&nbsp;</li>
+						<% end %>
+						</ol>
+					<% end %>
+				</div>
+			</div>
+			
 		</div>
 	</div>
+	
 
 </div>
-
 <div class="container" id="photo-list">
 	<% @plan.photos.each do |p| %>
 		<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>
@@ -180,7 +216,46 @@
  button{
  	background-color: rgba(0,0,0,0);
  	border:0px;
+ 	float: left;
+ 	width:auto;
+
  }
+
+ .see-follow{
+ 	position: relative;
+ }
+
+ .who-follow{
+	position: absolute;
+	display: none;
+ 	background-color:rgba(119,178,178,1);
+ 	border-radius: 5px;
+ 	width:30%;
+ }
+
+.see-follow:hover .who-follow{
+	display: block;
+	z-index: 1;
+}
+
+.see-like{
+	position: relative;
+}
+
+ .who-like{
+	position: absolute;
+	display: none;
+ 	background-color:rgba(119,178,178,1);
+ 	border-radius: 5px;
+ 	width: 30%;
+ }
+ .see-like:hover .who-like{
+	display: block;
+	z-index: 1;
+}
+
+
+
 </style>
 
 

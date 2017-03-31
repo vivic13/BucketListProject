@@ -1,10 +1,10 @@
 class PlansController < ApplicationController
 	before_action :authenticate_user!, except:[:latest,:show]
-	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow]
+	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
 	def index
 			@page_title = "你的List"
-			@current_user_plan = current_user.plans.where(:host => current_user.nickname)
+			@current_user_plan = Plan.where(:host => current_user.nickname)
 			#if params[:keyword]
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
@@ -50,10 +50,10 @@ class PlansController < ApplicationController
 
 	def show
 		@page_title = @plan.title
-		@follower = @plan.users.count-1
+		#@follower = @plan.users.count-1
 		@comment_no = @plan.comments.count
-		
-
+		@follow_count = @plan.memberships.count
+		@like_count = @plan.likes.count
 	end
 
 	def edit 
@@ -92,7 +92,8 @@ class PlansController < ApplicationController
 	end
 
 	def follow
-		unless @plan.host == current_user.nickname || @plan.users.include?(current_user)
+		#unless @plan.host == current_user.nickname || @plan.users.include?(current_user)
+		unless @plan.host == current_user.nickname || @plan.already_followed(current_user)
 			@membership = Membership.create(:user => current_user, :plan => @plan)
 			redirect_to plan_url(@plan)
 		end
@@ -100,13 +101,33 @@ class PlansController < ApplicationController
 
 	def unfollow
 
-		if @plan.users.include?(current_user)
-			@membership = Membership.find_by(:user => current_user, :plan => @plan)
+		#if @plan.users.include?(current_user)
+		if @plan.already_followed(current_user)
+			@membership = @plan.find_follow(current_user)
 			@membership.destroy
 			redirect_to plan_url(@plan)
 		end
 
 	end
+
+	def like 
+		unless @plan.host == current_user.nickname || @plan.already_liked(current_user)
+			@like = Like.create(:user => current_user, :plan => @plan)
+			redirect_to plan_url(@plan)
+		end
+
+	end
+
+	def unlike
+		if @plan.already_liked(current_user)
+			@like = @plan.find_like(current_user)
+			@like.destroy
+			redirect_to plan_url(@plan)
+		end
+
+	end
+
+
 	def follow_plan
 		@page_title = "你的Follow Lists"
 		@plans = current_user.plans.where.not(:host => current_user.nickname)

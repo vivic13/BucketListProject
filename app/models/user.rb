@@ -3,9 +3,11 @@ class User < ApplicationRecord
   friendly_id :nickname, use: :slugged
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
-  #validates_presence_of :nickname, :uniqueness => true , :message => "暱稱不能空白" #已經用truncate擷取前20字了
   has_many :memberships
   has_many :plans, :through => :memberships
+
+  has_many :likes
+  has_many :plans, :through => :likes
 
   before_validation :set_nickname_default
   

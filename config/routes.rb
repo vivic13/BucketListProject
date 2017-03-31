@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     member do 
     	post :follow
     	post :unfollow
+      post :like
+      post :unlike
     end
   end
 
