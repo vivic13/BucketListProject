@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="tc">你的Lists</h1>
+	<h1 class="tc">你的plans</h1>
 	
 </div>
  
@@ -14,7 +14,8 @@
 					<%#= submit_tag "Search" ,class:"btn" %>	
 				<li><%= link_to '依預計完成日排序', plans_path( :order => "duedate") %></li>
 				<li><%= link_to '預設排序', plans_path %></li>
-				<li><%= link_to '查看你Follow的Lists', follow_plan_plans_path %></li>
+				<li><%= link_to '查看你Follow的plans', follow_plan_plans_path %></li>
+				<li><%= link_to '查看你like的plans', like_plan_plans_path %></li>
 				<li><%= link_to '查看你的公開profile', user_path(@current_user.id) %></li>
 				<% unless current_user.role == "user" %>
      			<li><%= link_to '前往後台', listadmin_users_path ,class:"btn btn default"%></li>

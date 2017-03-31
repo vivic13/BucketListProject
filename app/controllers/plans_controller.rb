@@ -3,7 +3,7 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
 
 	def index
-			@page_title = "你的List"
+			@page_title = "你的plans"
 			@current_user_plan = Plan.where(:host => current_user.nickname)
 			#if params[:keyword]
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
@@ -53,6 +53,9 @@ class PlansController < ApplicationController
 		@comment_no = @plan.comments.count
 		@follow_count = @plan.memberships.count
 		@like_count = @plan.likes.count
+		@plan.page_view ||= 0
+		@plan.page_view +=1
+		@plan.save
 	end
 
 	def edit 
@@ -127,22 +130,32 @@ class PlansController < ApplicationController
 
 
 	def follow_plan
-		@page_title = "你的Follow Lists"
+		@page_title = "你Follow的plan"
 	
 	end
 
+
+	def like_plan
+		@page_title = "你like的plan"
+	end
+
 	def latest
-		@page_title = "大家的Lists"
+		@page_title = "大家的plans"
 		if params[:order]
 			sort_by = (params[:order] == 'comments_count') ? 'comments_count' : 'comments_count'
 			@plans = Plan.where(:is_public => true).order(sort_by).reverse
-		elsif params[:last]
-			sort_by = (params[:last] == 'last_plan') ? 'updated_at' : 'updated_at'
-			@plans = Plan.where(:is_public => true).order(sort_by).reverse
+		
+		elsif params[:comment_last] == 'comment_last'
 
-		else
 			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc')
 		
+		elsif params[:page]== 'view'
+			
+			@plans = Plan.where(:is_public => true).order('page_view desc')
+		else
+			
+			@plans = Plan.where(:is_public => true).order('created_at desc')
+
 		end
 		
 		

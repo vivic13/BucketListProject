@@ -38,5 +38,4 @@ class Plan < ApplicationRecord
 		find_like(user).present?
 	end
 
-
 end

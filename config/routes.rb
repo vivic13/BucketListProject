@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   	collection do
       get :latest
       get :follow_plan
+      get :like_plan
     end
     member do 
     	post :follow
