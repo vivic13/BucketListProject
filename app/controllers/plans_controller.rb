@@ -37,7 +37,7 @@ class PlansController < ApplicationController
 
 		
 		if @plan.save
-			@membership = Membership.create(:user => current_user,:plan => @plan)
+			
 			respond_to do |format|
 				  format.html { redirect_to plans_path}
 				  format.js
@@ -50,7 +50,6 @@ class PlansController < ApplicationController
 
 	def show
 		@page_title = @plan.title
-		#@follower = @plan.users.count-1
 		@comment_no = @plan.comments.count
 		@follow_count = @plan.memberships.count
 		@like_count = @plan.likes.count
@@ -92,7 +91,7 @@ class PlansController < ApplicationController
 	end
 
 	def follow
-		#unless @plan.host == current_user.nickname || @plan.users.include?(current_user)
+		
 		unless @plan.host == current_user.nickname || @plan.already_followed(current_user)
 			@membership = Membership.create(:user => current_user, :plan => @plan)
 			redirect_to plan_url(@plan)
@@ -101,7 +100,6 @@ class PlansController < ApplicationController
 
 	def unfollow
 
-		#if @plan.users.include?(current_user)
 		if @plan.already_followed(current_user)
 			@membership = @plan.find_follow(current_user)
 			@membership.destroy
@@ -130,7 +128,7 @@ class PlansController < ApplicationController
 
 	def follow_plan
 		@page_title = "你的Follow Lists"
-		@plans = current_user.plans.where.not(:host => current_user.nickname)
+	
 	end
 
 	def latest
