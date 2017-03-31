@@ -14,7 +14,7 @@
 <div class="container">
 	<div class="row">
   
-		<% current_user.likes.each do |p| %>
+		<% @plans.each do |p| %>
 			<div class="col-md-4">
 				<table class="table table-bordered">
 					<tr>
@@ -40,5 +40,8 @@
 		<% end %>
 	 
 	</div>
+</div>
+<div class="container text-center">
+	<%= paginate @plans %>
 </div>
 

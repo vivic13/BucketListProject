@@ -9,7 +9,7 @@ class PlansController < ApplicationController
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
 	  	
-	  	@plans = @current_user_plan
+	  	@plans = @current_user_plan.page(params[:page]).per(9) 
 	   
 
 	  	respond_to do |format|
@@ -19,7 +19,8 @@ class PlansController < ApplicationController
 
 	  	if params[:order]
 	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
-	  		@plans = @current_user_plan.order(sort_by)
+	  		@plans = @current_user_plan.order(sort_by).page(params[:page]).per(9) 
+	   
 	  	end
 
 	  	
@@ -131,30 +132,35 @@ class PlansController < ApplicationController
 
 	def follow_plan
 		@page_title = "你Follow的plan"
-	
+		@plans = current_user.memberships.page(params[:page]).per(9) 
+	   
 	end
 
 
 	def like_plan
 		@page_title = "你like的plan"
+		@plans = current_user.likes.page(params[:page]).per(9) 
 	end
 
 	def latest
 		@page_title = "大家的plans"
-		if params[:order]
-			sort_by = (params[:order] == 'comments_count') ? 'comments_count' : 'comments_count'
-			@plans = Plan.where(:is_public => true).order(sort_by).reverse
+		if params[:order]== 'comments_count'
+			@plans = Plan.where(:is_public => true).order('comments_count desc').page(params[:page]).per(9)
+	   
 		
 		elsif params[:comment_last] == 'comment_last'
 
-			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc')
+			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').page(params[:page]).per(9) 
+	   
 		
 		elsif params[:page]== 'view'
 			
-			@plans = Plan.where(:is_public => true).order('page_view desc')
+			@plans = Plan.where(:is_public => true).order('page_view desc').page(params[:page]).per(9) 
+	   
 		else
 			
-			@plans = Plan.where(:is_public => true).order('created_at desc')
+			@plans = Plan.where(:is_public => true).order('created_at desc').page(params[:page]).per(9) 
+	   
 
 		end
 		
