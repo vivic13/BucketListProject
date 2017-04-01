@@ -1,0 +1,3 @@
+<% @comments.each do |c| %>
+  <%= render :partial => "plan_comments/comment", :locals => { :c => c} %>
+<% end %>

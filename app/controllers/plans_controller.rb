@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
 	before_action :authenticate_user!, except:[:latest,:show]
-	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike]
+	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike, :morecomments]
 
 	def index
 			@page_title = "你的plans"
@@ -9,8 +9,7 @@ class PlansController < ApplicationController
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
 	  	
-	  	@plans = @current_user_plan.page(params[:page]).per(9) 
-	   
+	  	@plans = @current_user_plan.paginate(:page => params[:page], :per_page => 9)
 
 	  	respond_to do |format|
 		    format.html # index.html.erb
@@ -19,7 +18,7 @@ class PlansController < ApplicationController
 
 	  	if params[:order]
 	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
-	  		@plans = @current_user_plan.order(sort_by).page(params[:page]).per(9) 
+	  		@plans = @current_user_plan.order(sort_by).paginate(:page => params[:page], :per_page => 9)
 	   
 	  	end
 
@@ -42,7 +41,7 @@ class PlansController < ApplicationController
 			respond_to do |format|
 				  format.html { redirect_to plans_path}
 				  format.js
-				end		
+			end		
 		else 
 			render :new
 		end
@@ -51,14 +50,32 @@ class PlansController < ApplicationController
 
 	def show
 		@page_title = @plan.title
-		@comment_no = @plan.comments.count
+		
+		@comment_no = @plan.comments_count
 		@follow_count = @plan.memberships.count
 		@like_count = @plan.likes.count
 		@plan.page_view ||= 0
 		@plan.page_view +=1
 		@plan.save
+
+		@comments = @plan.comments.order('created_at desc').paginate(:page => params[:page], :per_page => 5)
+		if @comments.total_pages == @comments.current_page
+      @next_page = nil
+    else
+      @next_page = @comments.next_page
+    end
+
+		respond_to do |format|
+			format.html {@page_title = @plan.title }
+			format.js
+		end		
+
+
+
 	end
 
+
+	
 	def edit 
 		@page_title = "編輯List"
 		if @plan.host != current_user.nickname || current_user.role != "admin"
@@ -132,34 +149,36 @@ class PlansController < ApplicationController
 
 	def follow_plan
 		@page_title = "你Follow的plan"
-		@plans = current_user.memberships.page(params[:page]).per(9) 
+		@plans = current_user.memberships.paginate(:page => params[:page], :per_page => 9)
 	   
 	end
 
 
 	def like_plan
 		@page_title = "你like的plan"
-		@plans = current_user.likes.page(params[:page]).per(9) 
+		@plans = current_user.likes.paginate(:page => params[:page], :per_page => 9)
 	end
 
 	def latest
 		@page_title = "大家的plans"
+		
+
 		if params[:order]== 'comments_count'
-			@plans = Plan.where(:is_public => true).order('comments_count desc').page(params[:page]).per(9)
+			@plans = Plan.where(:is_public => true).order('comments_count desc').paginate(:page => params[:page], :per_page => 9)
 	   
 		
 		elsif params[:comment_last] == 'comment_last'
 
-			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').page(params[:page]).per(9) 
+			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').paginate(:page => params[:page], :per_page => 9)
 	   
 		
 		elsif params[:page]== 'view'
 			
-			@plans = Plan.where(:is_public => true).order('page_view desc').page(params[:page]).per(9) 
+			@plans = Plan.where(:is_public => true).order('page_view desc').paginate(:page => params[:page], :per_page => 9)
 	   
 		else
 			
-			@plans = Plan.where(:is_public => true).order('created_at desc').page(params[:page]).per(9) 
+			@plans = Plan.where(:is_public => true).order('created_at desc').paginate(:page => params[:page], :per_page => 9)
 	   
 
 		end

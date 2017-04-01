@@ -7,7 +7,7 @@
 	
 	
 	
-	<p><i class="fa fa-tag " aria-hidden="true">依願望分類搜尋:
+	<p><i>依願望分類搜尋:</i>&nbsp;&nbsp;&nbsp;
 
 	<% TagCategory.all.each do |t| %>
 
@@ -16,7 +16,7 @@
 	<% end %>
 
 	</i></p>
-		<p><i class="fa fa-sort" aria-hidden="true">排序:</i>
+		<p><i>排序:</i>&nbsp;&nbsp;&nbsp;
 		<i class="fa fa-sort" aria-hidden="true"><%= link_to '最多留言', latest_plans_path( :order => "comments_count") %></i>&nbsp;&nbsp;
 		<i class="fa fa-sort" aria-hidden="true"><%= link_to '最後回覆', latest_plans_path( :comment_last =>"comment_last") %></i>&nbsp;&nbsp;
 		
@@ -39,11 +39,13 @@
 					</tr>
 					
 					<tr>
-						<td><i class="fa fa-eye" aria-hidden="true">&nbsp;<%= p.page_view %></i></td>
+						<td><i class="fa fa-eye" aria-hidden="true">&nbsp;<%= p.page_view %></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-bookmark" aria-hidden="true">	&nbsp;<%= p.memberships.count %></i>&nbsp;&nbsp;<i class="fa fa-heart" aria-hidden="true">&nbsp;<%= p.likes.count %></i>&nbsp;&nbsp;<i class="fa fa-commenting" aria-hidden="true">&nbsp;<%= p.comments_count%></i>
+				
+						</td>
 						
 					</tr>
 					<tr>
-						<td>最近更新: <%= time_tag(p.updated_at) %></td>
+						<td>最近更新: <%= time_ago_in_words(p.updated_at) %></td>
 						
 					</tr>
 
@@ -70,7 +72,7 @@
 	</div>
 </div>
 <div class="container text-center">
-	<%= paginate @plans %>
+	<%= will_paginate @plans, renderer: BootstrapPagination::Rails %>
 </div>
 
 

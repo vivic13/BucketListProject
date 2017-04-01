@@ -43,7 +43,7 @@
 </div>
 
 <div class="container text-center">
-	<%= paginate @plans %>
+	<%= will_paginate @plans, renderer: BootstrapPagination::Rails %>
 </div>
 
 
