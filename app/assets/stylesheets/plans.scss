@@ -90,4 +90,63 @@
 	 display: inline-block;
 
 	}
+button,.share{
+ 	background-color: rgba(0,0,0,0);
+ 	border:0px;
+ 	width:auto;
+ 	display: inline-block;
+ 	float:left;
+ 	margin-left: 10px;
+ 	margin-right: 10px;
+ 
 
+ }
+.follow_like{
+ 	position: fixed;
+ 	bottom: 0px;
+ 	width: 100%;
+ 	background: rgba(225,254,254,1);
+ 	height: auto;
+ 	z-index: 1;
+ 	padding-top: 5px;
+}
+ .see-follow{
+ 	position: relative;
+ }
+
+ .who-follow{
+	position: absolute;
+	display: none;
+	bottom:100px;
+ 	background-color:rgba(119,178,178,1);
+ 	border-radius: 5px;
+ 	width: 100%;
+ 	bottom:50px;
+ }
+
+.see-follow:hover .who-follow{
+	display: block;
+	z-index: 1;
+}
+
+.see-like{
+	position: relative;
+}
+
+ .who-like{
+	position: absolute;
+	display: none;
+ 	background-color:rgba(119,178,178,1);
+ 	border-radius: 5px;
+ 	width: 100%;
+ 	bottom:50px;
+ }
+ .see-like:hover .who-like{
+	display: block;
+	z-index: 1;
+}
+
+.show{
+	border: 1px dashed;
+	height:200px;
+}

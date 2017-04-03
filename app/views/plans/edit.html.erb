@@ -1,9 +1,9 @@
 <% if @plan.host == current_user.nickname || current_user.role == "admin" %>
 
-	<div class="container">
-		<h1>更新進度</h1>
+
+		
 		<%= render :partial => "form" %>
-	</div>
+
 
 <% end %>
 

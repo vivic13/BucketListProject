@@ -1,7 +1,7 @@
 
 	  <div id="comment-<%= c.id %>">
 		  <br>
-		 	<i class="fa fa-user-o fa-2x" aria-hidden="true"></i>&nbsp;<strong>by:</strong><%= c.commenter %>&nbsp;&nbsp;<strong>at:</strong><%= time_ago_in_words(c.created_at)%>
+		 <i class="fa fa-user-o" aria-hidden="true">&nbsp;<%= c.commenter %></i>&nbsp;&nbsp;<%= time_ago_in_words(c.created_at)%><strong>前</strong>
 		 	<p><%= c.comment_body %> </p>
 		 	<div id="image">
 				<% if c.image_file_name%>

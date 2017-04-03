@@ -11,10 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+
 //= require jquery_ujs
+
+//= require jquery.remotipart
 //= require turbolinks
 //= require_tree .
-//= require jquery
 //= require bootstrap-sprockets
 //= require medium-editor
-//= require jquery.remotipart
+
+
+

@@ -8,3 +8,94 @@
 @import "plans";
 @import "plan_photos";
 
+@import "dropzone/basic";
+@import "dropzone/dropzone";
+
+body{ 
+    padding-top: 200px; 
+    box-sizing: border-box;
+
+  }
+
+  #head-banner{
+  margin-top: 0px;
+  background-color: rgba(90,178,176,0.1);
+  width:100%;
+  box-sizing: border-box;
+  }
+  .logo-banner{
+    padding-left: 30px;
+  }
+  .login{
+    text-align: right;
+    padding-right: 10px;
+    
+  }
+ 
+  h1,.title{
+    text-align: left;
+  }
+  
+  h1,h2,h3{
+    text-align: center;
+    color:rgba(90,178,176,1);
+    letter-spacing: 5px;
+   
+  }
+
+  h4{
+    color:rgba(90,178,176,1);
+
+  }
+
+  .nav li{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+
+  }
+
+
+  .body-info{
+    min-height: 900px;
+    margin-bottom: 150px;
+  }
+
+
+  .btn{
+    background-color:rgba(90,178,176,1);
+    color:white;
+    font-size: 16px;
+    margin:3px;
+    box-sizing: border-box;
+  }
+
+  a{
+    color:rgba(80,178,176,1);
+    font-weight: 300px;
+  }
+  i{
+    color: rgb(63,178,176);
+    text-align: center;
+  }
+  td,th{
+    text-align: center;
+  }
+  .form-group{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  }
+  .navi{
+    margin: 30px;
+    text-align: right;
+
+  }
+  .field{
+    margin-bottom:20px;
+    text-align: center;
+   
+  }
+  .container{
+    margin-top: 50px;
+  }
+

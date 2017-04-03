@@ -2,7 +2,7 @@
 	<h1>新增願望</h1>
 	
  
-	<%= form_for @plan,	html: { multipart: true }	do |f| %> 
+	<%= form_for @plan,	html: { multipart: true}	do |f| %> 
 	<div class="form_group">
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題(必填)" %><br>
 		<%= f.text_field :title%>
@@ -23,9 +23,18 @@
 	 	<% end %>
 		
 	</div>
-	<div class="form_group">
+		
+	<div class="form_group" >
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳封面圖片" %><br>
-		<%= f.file_field :file_location %>
+
+		<%= f.file_field :file_location ,class:"file"  %>
+		
+		<div class="upload-preview">
+			
+		<%= image_tag @plan.file_location.url,class:"resize" %>
+		</div>
+
+		
 	</div>
 	
 
@@ -39,23 +48,23 @@
 	</div>
 
 	<div class="form_group">
-	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度(必填)" %><br>
-	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
- 	<%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
-	<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
-	<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
-	<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
-	<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
-	<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
-	<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
-	<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
-	<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
-	<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
-	<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度(必填)" %><br>
+			<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
+		 	<%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
+			<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
+			<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
+			<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
+			<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
+			<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
+			<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
+			<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
+			<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
+			<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
+			<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
 
 	</div>
 	<div class="form_group">
-		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類(必填):" %><strong>(限制選取3項)</strong><br>
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類:" %><strong>(限制選取3項)</strong><br>
 		<%= f.collection_check_boxes(:tag_category_ids, TagCategory.all, :id, :name) %>
 
 	</div>
@@ -142,6 +151,7 @@
   
 	<% end %>
 
+	
 
 </div>
 
@@ -156,6 +166,18 @@
 	});
 	
 
+	var preview = $(".upload-preview img");
+
+    $(".file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
 
 
 	});

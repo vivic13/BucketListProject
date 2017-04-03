@@ -1,117 +1,100 @@
-
+<div class="container text-center">
 
 <h2>
 <%= @plan.title %> <br>
 
 </h2>
 
-<div class= "follow_like">
+<h4> 預計完成日: <%= @plan.duedate %> 作者: <%=@plan.host%> </h4>
 
-	<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
-		<% if @plan.already_followed(current_user) %>			
-			<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
-				<i class="fa fa-bookmark fa-2x" aria-hidden="true">
-				<%= @follow_count %></i>
-			<% end %>
-		<%else%>			
-			<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
-				<i class="fa fa-bookmark-o fa-2x" aria-hidden="true">
-				<%= @follow_count %></i>
-			<% end %>
-		<% end %>
-	
-		<% if @plan.already_liked(current_user) %>			
-			<%= button_to unlike_plan_path(@plan) , {:remote => true} do %>
-				<i class="fa fa-heart fa-2x" aria-hidden="true">
-				<%= @like_count %></i>
-			<% end %>
-		<%else%>			
-			<%= button_to like_plan_path(@plan) ,{:remote => true} do %>
-				<i class="fa fa-heart-o fa-2x" aria-hidden="true">
-				<%= @like_count %></i>
-			<% end %>
-		<% end %>
-
-	<% end %>	
-	
-	<%= render_shareable :buttons => ['google_plus'] %>
-	<%= render_shareable :buttons => ['facebook'] %>
-	<i class="fa fa-eye" aria-hidden="true">&nbsp;<%= @plan.page_view %></i>&nbsp;&nbsp;&nbsp;
-</div>
-
-
-
-
-<div class="tag">
 	<% @plan.tag_categories.each do |t| %>
 		<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 	<% end %>
 
 </div>
+
+<div class= "follow_like">
+	<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
+		<div class="col-md-2 see-follow">
+			<% if @plan.already_followed(current_user) %>	
+				<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
+					<i class="fa fa-bookmark fa-2x" aria-hidden="true"><%= @follow_count %></i>
+				<% end %>
+			<%else%>			
+				<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
+					<i class="fa fa-bookmark-o fa-2x" aria-hidden="true"><%= @follow_count %></i>
+				<% end %>
+			<% end %>
+			<div class="who-follow">
+				<% if @follow_count < 1 %>
+				  <p>目前還沒有人收藏</p>
+				<% else %>
+					<p>See who follow</p>
+						<% @plan.memberships.each do |f| %>
+							<%= f.user.nickname %>&nbsp;
+						<% end %>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-2 see-like">
+			<% if @plan.already_liked(current_user) %>			
+				<%= button_to unlike_plan_path(@plan) , {:remote => true} do %>
+					<i class="fa fa-heart fa-2x" aria-hidden="true"><%= @like_count %></i>
+				<% end %>
+			<%else%>			
+				<%= button_to like_plan_path(@plan) ,{:remote => true} do %>
+					<i class="fa fa-heart-o fa-2x" aria-hidden="true"><%= @like_count %></i>
+				<% end %>
+			<% end %>
+			<div class="who-like">
+				<% if @like_count < 1 %>
+				  <p>目前還沒有人like</p>
+				<% else %>
+					<p>See who like</p>
+						<% @plan.likes.each do |f| %>
+							<%= f.user.nickname %>&nbsp;
+						<% end %>
+					</ol>
+				<% end %>
+			</div>
+		</div>
+	<% end %>	
+	<div class="col-md-2">
+		<%= render_shareable :buttons => ['google_plus'] %>
+	</div>
+	<div class="col-md-2">
+		<%= render_shareable :buttons => ['facebook'] %>
+	</div>
+	<div class="col-md-2">
+		<i class="fa fa-eye" aria-hidden="true">&nbsp;<%= @plan.page_view %></i>&nbsp;&nbsp;&nbsp;
+	</div>
+</div>
+
+
 <div class="navi">
 	<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
 		<%= render :partial => "only" %>
 		
 	<% end %>
-
 	
 </div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<%= image_tag @plan.file_location.url ,class:"resize"%>	
-		</div>
+<div class="container text-center">
 
-		<div class="col-md-6">
-			
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>
-			是否公開：<%= @plan.is_public %></p>
+			<%= image_tag @plan.file_location.url ,class:"resize"%>	<br><br>
+			<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
+				<h4><i class="fa fa-lock" aria-hidden="true">是否公開：</i>
+				<%=  @plan.is_public %><br></h4>
+			<% end %>
+		
 
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>預計完成日：<%= @plan.duedate %></p>
-
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>主辦人：<%= @plan.host%> </p>
-
-			<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前進度：<%= @plan.progress %></p>
-			
-			<div class="see-follow">
-				<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前follow人數：<%= @follow_count %></p>
-				<div class="who-follow">
-				  <% if @follow_count < 1 %>
-				   <p>目前還沒有人收藏</p>
-				  <% else %>
-						<ol>
-						<% @plan.memberships.each do |f| %>
-							<li><%= f.user.nickname %>&nbsp;</li>
-						<% end %>
-						</ol>
-					<% end %>
-				</div>
-			</div> 
-			<div class="see-like">
-				<p><i class="fa fa-cog fa-3x" aria-hidden="true"></i>目前like人數：<%= @like_count %> </p>
-				<div class="who-like">
-					<% if @like_count < 1 %>
-				   	<p>目前還沒有人like</p>
-				  <% else %>
-						<ol>
-						<% @plan.likes.each do |f| %>
-							<li><%= f.user.nickname %>&nbsp;</li>
-						<% end %>
-						</ol>
-					<% end %>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	
-
+			<h4><i class="fa fa-tasks" aria-hidden="true">目前進度：</i><%= @plan.progress %>
 </div>
+
+
 <div class="container" id="photo-list">
 	<% @plan.photos.each do |p| %>
-		<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>
-					
+		<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>					
 <% end %>
 <div class="container">
 	<% if current_user.role == "admin" ||	@plan.host == current_user.nickname %>
@@ -127,9 +110,10 @@
 		<div class="col-md-2">
 			<i class="fa fa-lightbulb-o fa-3x" aria-hidden="true"></i><i class="fa fa-question fa-3x" aria-hidden="true"></i><p><strong>動機</strong></p>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 show">
+			
 			<%= sanitize( @plan.why ) %>
-			<%#= @plan.why %> 
+			
 		</div>
 	</div>
 </div>
@@ -139,7 +123,7 @@
 		<div class="col-md-2">
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Plan計畫</strong></p>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 show">
 			<%= sanitize( @plan.plan) %>
 			<%#= @plan.plan %> 
 		</div>
@@ -151,7 +135,7 @@
 		<div class="col-md-2">
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Do執行</strong></p>
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-10 show">
 			<%= sanitize( @plan.do_what ) %>		
 			<%#= @plan.do_what %> 
 		</div>
@@ -164,7 +148,7 @@
 			<i class="fa fa-calendar-plus-o fa-3x" aria-hidden="true"></i><p><strong>Check檢視</strong></p>
 		</div>
 
-		<div class="col-md-10">	
+		<div class="col-md-10 show">	
 			<%= sanitize( @plan.check ) %>		
 			<%#= @plan.check %> 
 		</div>
@@ -178,7 +162,7 @@
 		</div>
 
 
-		<div class="col-md-10">		
+		<div class="col-md-10 show">		
 			<%= sanitize( @plan.act ) %>	
 			<%#= @plan.act %>
 		</div>
@@ -194,10 +178,11 @@
 
 	<% if current_user %>
 	<hr>
+		<div class="container">
 		  <h3>目前:<span id="count"><%= @comment_no %></span> 則留言<i class="fa fa-commenting" aria-hidden="true"></i></h3>
-		  <div class="container">
+		  
 			<%= render :partial => 'plan_comments/form' %>
-			</div>
+		</div>
 			<div class="container" id="comment-list">
 				<% @comments.each do |c| %>
 					<%= render :partial => 'plan_comments/comment', :locals => {:c => c }%>
@@ -223,63 +208,6 @@
 
 
 
-<style>
- button,.share{
- 	background-color: rgba(0,0,0,0);
- 	border:0px;
- 	width:auto;
- 	display: inline-block;
- 	float:left;
- 	margin-left: 10px;
- 	margin-right: 10px;
- 
-
- }
-.follow_like{
- 	position: fixed;
- 	bottom: 0px;
- 	width: 100%;
- 	background: rgba(119,178,178,0.5);
- 	height: auto;
- 	z-index: 1;
-}
- .see-follow{
- 	position: relative;
- }
-
- .who-follow{
-	position: absolute;
-	display: none;
- 	background-color:rgba(119,178,178,1);
- 	border-radius: 5px;
- 	width:30%;
- }
-
-.see-follow:hover .who-follow{
-	display: block;
-	z-index: 1;
-}
-
-.see-like{
-	position: relative;
-}
-
- .who-like{
-	position: absolute;
-	display: none;
- 	background-color:rgba(119,178,178,1);
- 	border-radius: 5px;
- 	width: 30%;
- }
- .see-like:hover .who-like{
-	display: block;
-	z-index: 1;
-}
-
-
-
-</style>
-
 <script>
 	$(window).scroll(function(){
     if ( $(window).scrollTop() > $(document).height() - $(window).height() - 50 ) {
@@ -295,5 +223,6 @@
       }
     }
   })
+ 
 
 </script>

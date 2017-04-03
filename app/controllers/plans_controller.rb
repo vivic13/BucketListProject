@@ -26,7 +26,7 @@ class PlansController < ApplicationController
 	end
 
 	def new
-		@page_title = "新增List"
+		@page_title = "新增願望"
 		@plan = Plan.new
 
 	end
@@ -77,8 +77,9 @@ class PlansController < ApplicationController
 
 	
 	def edit 
-		@page_title = "編輯List"
-		if @plan.host != current_user.nickname || current_user.role != "admin"
+		@page_title = "編輯願望"
+		unless @plan.host == current_user.nickname || current_user.role == "admin"
+			render :latest
 			flash[:alert]="something went wrong!"
 		end
 
@@ -88,11 +89,12 @@ class PlansController < ApplicationController
 
 		if @plan.host == current_user.nickname || current_user.role == "admin"
 			if @plan.update(permit_plan)
-				redirect_to plan_url(@plan)
+				redirect_to plan_path(@plan)
 			else
 				render :edit
 			end
 		else 
+			render :latest
 			flash[:alert] = "something went wrong!"	
 		end
 	end
@@ -101,10 +103,10 @@ class PlansController < ApplicationController
 		if @plan.host == current_user.nickname || current_user.role == "admin"
 
 			@plan.destroy
-			respond_to do |format|
-				format.html { redirect_to plans_path}
-				format.js
-			end
+
+			redirect_to plans_path
+
+			
 		else
 			flash[:alert] = "something went wrong!"	
 		end
@@ -172,7 +174,7 @@ class PlansController < ApplicationController
 			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').paginate(:page => params[:page], :per_page => 9)
 	   
 		
-		elsif params[:page]== 'view'
+		elsif params[:view]== 'view'
 			
 			@plans = Plan.where(:is_public => true).order('page_view desc').paginate(:page => params[:page], :per_page => 9)
 	   

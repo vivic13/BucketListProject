@@ -1,5 +1,11 @@
 
-<%= form_for(@plan) do |f| %> 
+<%= form_for(@plan) do |f| %>
+<div class="container text-center">
+
+	<h1><%= @plan.title%> </h1>
+	<h4> 預計完成日: <%=  @plan.duedate %></h4>
+	<h4>更新進度</h4>
+</div>
  
  		<div class="container" >
  			<div class="row">
@@ -14,26 +20,6 @@
 			  </div>
 
 				<div class="col-md-6">
-			 		<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :title, "願望主題" %><br>
-						<%= f.text_field :title,:value => @plan.title,:readonly => true%>
-						
-						<% if @plan.errors.present? %>
-							<% if @plan.errors.messages[:title] %>
-							<%= @plan.errors.messages[:title].to_sentence %>
-							<% end %>
-	 					<% end %>
-					</div>
-					<div class="form_group">
-						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :duedate, "預計完成日" %><br>
-						<%= f.text_field :duedate,:value => @plan.duedate,:readonly => true %>
-						
-						<% if @plan.errors.present? %>
-							<% if @plan.errors.messages[:duedate] %>
-							<%= @plan.errors.messages[:duedate].to_sentence %>
-							<% end %>
-	 					<% end %>
-					</div>
 
 
 					<div class="form_group">	
@@ -135,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-			<div class="form_group" id="cc">		
+			<div class="form_group text-center">		
 				<%= f.submit "儲存" ,class:"btn"%>
 <%end%>				
 				<%= link_to '算了，回上ㄧ頁', plan_path(@plan) ,class:"btn"%>
