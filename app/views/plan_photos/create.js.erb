@@ -1,4 +1,5 @@
 <% if @photo.save  %>
-	$("#photo-list").append("<%=j render(:partial => 'plan_photos/photo', :locals => {:p => @photo })%>");
+	$("#photo-list").prepend("<%=j render(:partial => 'plan_photos/photo', :locals => {:p => @photo })%>");
 	$("#photo-text").val("");
+	 $(".upload-preview img").attr("src","/assets/upload_more_image.png");
 <% end %>

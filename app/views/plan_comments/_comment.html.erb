@@ -4,7 +4,7 @@
 		 <i class="fa fa-user-o" aria-hidden="true">&nbsp;<%= c.commenter %></i>&nbsp;&nbsp;<%= time_ago_in_words(c.created_at)%><strong>前</strong>
 		 	<p><%= c.comment_body %> </p>
 		 	<div id="image">
-				<% if c.image_file_name%>
+				<% if c.image_file_name %>
 			 		<%= link_to image_tag(c.image.url(:small)), c.image.url %>
 				<% end %>
 			</div>

@@ -92,13 +92,17 @@
 
 
 <div class="container" id="photo-list">
-	<% @plan.photos.each do |p| %>
-		<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>					
-<% end %>
+	<div class="row">
+		<% @plan.photos.each do |p| %>
+			<%= render :partial => 'plan_photos/photo', :locals => {:p => p }%>					
+		<% end %>
+	</div>
 <div class="container">
 	<% if current_user.role == "admin" ||	@plan.host == current_user.nickname %>
-		<div class="col-md-2">
-		<%= render :partial => 'plan_photos/newphoto' %>
+		<div class="row">
+			<div class="col-md-2">
+				<%= render :partial => 'plan_photos/newphoto' %>
+			</div>
 		</div>
 	<% end %>
 </div>
@@ -213,7 +217,7 @@
 <script type="text/javascript">
 $("document").ready(function(){
 	$(window).scroll(function(){
-    if ( $(window).scrollTop() > $(document).height() - $(window).height() - 1 ) {
+    if ( $(window).scrollTop() > $(document).height() - $(window).height()  ) {
       var url = $("#load-more").attr("href");
       if (url) {
         $.ajax({

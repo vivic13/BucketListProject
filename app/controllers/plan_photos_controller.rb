@@ -8,7 +8,7 @@ class PlanPhotosController < ApplicationController
 
 			respond_to do |format|
 		      format.html { redirect_to plan_path(@plan)}
-		      format.js	 # create.js.erb
+		      format.js	 
 	    	end
 			else
 				flash[:alert] = "請至少上傳ㄧ張圖片!"	
@@ -23,7 +23,7 @@ class PlanPhotosController < ApplicationController
 		if @plan.host == current_user.nickname ||current_user.role == "admin"
 			respond_to do |format|
 	      format.html { redirect_to plan_path(@plan)}
-	      format.js	 # destroy.js.erb
+	      format.js	 
     	end
 			
 		else
