@@ -10,13 +10,18 @@
  		<div class="container" >
  			<div class="row">
  				<div class="col-md-6">
-			 		<div class="form_group">
-			 			
-				    <%= image_tag @plan.file_location.url ,class:"resize" %>
-	
-						<%= f.file_field :file_location %>
+			 		<div class="form_group" >
+		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳封面圖片" %><br>
+
+		<%= f.file_field :file_location ,class:"file"  %>
+		
+		<div class="upload-preview">
 			
-			  	</div>
+			<%= image_tag @plan.file_location.url,class:"resize" %>
+		</div>
+
+		
+	</div>
 			  </div>
 
 				<div class="col-md-6">
@@ -138,9 +143,26 @@
 
 
 <script type="text/javascript">
+ $("document").ready(function(){
 	$("input:checkbox").click(function(){
     if ($("input:checkbox:checked").length > 3){
-      return false;
-   }
-});
+      alert('限制選取3項');}
+	});
+	
+
+	var preview = $(".upload-preview img");
+
+    $(".file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+
+
+	});
 </script>

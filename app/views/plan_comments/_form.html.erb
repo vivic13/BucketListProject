@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container preview">
 <%= form_for [@plan, @plan.comments.new] , html: { multipart: true } ,:remote => true  do |f| %> 
 
     <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
@@ -7,17 +7,46 @@
     <div>
         <%= f.label :comment_body,"留言嗎？" %><br>
         <%= f.text_area :comment_body ,:required => 'required',:id => "comment-text"%><br>
-       	<%= f.file_field :image %>
-        <%= f.submit "留言",class:"btn"%> 
+        <%= f.file_field :image ,:id => "image-text" ,class:"file" %>
+        <div class="upload-preview">
+         	<% if @plan.comments.new.image.url %>		
+       			<%= image_tag @plan.comments.new.image.url  %>
+       		<% end %>
+				</div>
+
+       	
+        <%= f.submit "留言",class:"btn", id:"btn"%> 
     </div>
 
         
 
 <% end %>
+		
+				
+
 </div>
 
+<script type="text/javascript">
+ $("document").ready(function(){
+	
+	
 
+	var preview = $(".upload-preview img");
 
+    $(".file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+    
+
+	});
+</script>
 
 
 

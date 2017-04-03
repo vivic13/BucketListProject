@@ -2,7 +2,6 @@
 
 <h2>
 <%= @plan.title %> <br>
-
 </h2>
 
 <h4> 預計完成日: <%= @plan.duedate %> 作者: <%=@plan.host%> </h4>
@@ -180,6 +179,7 @@
 	<hr>
 		<div class="container">
 		  <h3>目前:<span id="count"><%= @comment_no %></span> 則留言<i class="fa fa-commenting" aria-hidden="true"></i></h3>
+
 		  
 			<%= render :partial => 'plan_comments/form' %>
 		</div>
@@ -189,9 +189,11 @@
 					
 				<% end %>
 
-
-
 			</div>
+
+			<% paginate @comments %>
+
+			
 			<% if @next_page %>
 				<%= link_to '更多留言',plan_path(@plan, :page => @next_page) ,:id => 'load-more',:remote => true %>
 			<% end %>
@@ -208,9 +210,10 @@
 
 
 
-<script>
+<script type="text/javascript">
+$("document").ready(function(){
 	$(window).scroll(function(){
-    if ( $(window).scrollTop() > $(document).height() - $(window).height() - 50 ) {
+    if ( $(window).scrollTop() > $(document).height() - $(window).height() - 1 ) {
       var url = $("#load-more").attr("href");
       if (url) {
         $.ajax({
@@ -224,5 +227,5 @@
     }
   })
  
-
+});
 </script>

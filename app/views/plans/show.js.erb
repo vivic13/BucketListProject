@@ -1,8 +1,10 @@
 
 var html = "<%= j( render :partial => "list" ) %>";
-$("#comment-list").prepend(html);
+$("#comment-list").append(html);
+
+
 <% if @next_page %>
- $("#load-more").attr("href", "<%= plan_path(@plan, :page => @next_page) %>")
+ $("#load-more").attr("href", "<%= plan_path(@plan,:page => @next_page) %>")
 <% else %>
-  $("#load-more").remove();
+ $("#load-more").remove();
 <% end %>

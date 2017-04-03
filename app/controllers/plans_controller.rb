@@ -9,7 +9,7 @@ class PlansController < ApplicationController
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
 	  	
-	  	@plans = @current_user_plan.paginate(:page => params[:page], :per_page => 9)
+	  	@plans = @current_user_plan.page(params[:page]).per(9)
 
 	  	respond_to do |format|
 		    format.html # index.html.erb
@@ -18,7 +18,7 @@ class PlansController < ApplicationController
 
 	  	if params[:order]
 	  		sort_by = (params[:order] == 'duedate') ? 'duedate' : 'duedate'
-	  		@plans = @current_user_plan.order(sort_by).paginate(:page => params[:page], :per_page => 9)
+	  		@plans = @current_user_plan.order(sort_by).page(params[:page]).per(9)
 	   
 	  	end
 
@@ -49,7 +49,6 @@ class PlansController < ApplicationController
 	end
 
 	def show
-		@page_title = @plan.title
 		
 		@comment_no = @plan.comments_count
 		@follow_count = @plan.memberships.count
@@ -58,8 +57,9 @@ class PlansController < ApplicationController
 		@plan.page_view +=1
 		@plan.save
 
-		@comments = @plan.comments.order('created_at desc').paginate(:page => params[:page], :per_page => 5)
-		if @comments.total_pages == @comments.current_page
+		@comments = @plan.comments.page(params[:page]).per(5)
+		
+		if @comments.last_page?
       @next_page = nil
     else
       @next_page = @comments.next_page
@@ -151,14 +151,14 @@ class PlansController < ApplicationController
 
 	def follow_plan
 		@page_title = "你Follow的plan"
-		@plans = current_user.memberships.paginate(:page => params[:page], :per_page => 9)
+		@plans = current_user.memberships.page(params[:page]).per(9)
 	   
 	end
 
 
 	def like_plan
 		@page_title = "你like的plan"
-		@plans = current_user.likes.paginate(:page => params[:page], :per_page => 9)
+		@plans = current_user.likes.page(params[:page]).per(9)
 	end
 
 	def latest
@@ -166,21 +166,20 @@ class PlansController < ApplicationController
 		
 
 		if params[:order]== 'comments_count'
-			@plans = Plan.where(:is_public => true).order('comments_count desc').paginate(:page => params[:page], :per_page => 9)
+			@plans = Plan.where(:is_public => true).order('comments_count desc').page(params[:page]).per(9)
 	   
 		
 		elsif params[:comment_last] == 'comment_last'
 
-			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').paginate(:page => params[:page], :per_page => 9)
+			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').page(params[:page]).per(9)
 	   
 		
 		elsif params[:view]== 'view'
 			
-			@plans = Plan.where(:is_public => true).order('page_view desc').paginate(:page => params[:page], :per_page => 9)
-	   
+			@plans = Plan.where(:is_public => true).order('page_view desc').page(params[:page]).per(9)
 		else
 			
-			@plans = Plan.where(:is_public => true).order('created_at desc').paginate(:page => params[:page], :per_page => 9)
+			@plans = Plan.where(:is_public => true).order('created_at desc').page(params[:page]).per(9)
 	   
 
 		end
