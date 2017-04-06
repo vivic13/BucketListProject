@@ -25,7 +25,7 @@
       	<% end %>
       </p>
       <div class="logo-banner">
-            <h1 class="title"><%= image_tag "brand_logo.png" %> Bucket Lists </h1>        
+            <h1 class="title"><%= image_tag "brand_logo.png" %> Bucket Lists 願望清單 </h1>        
       </div>
       <nav class="nav navbar-default">
         <div class="container-fluid">
@@ -38,8 +38,8 @@
           <ul class="nav navbar-nav navbar-right">
           <li> <%= link_to '首頁', home_path%></li>
           <li> <%= link_to '關於我們', about_path %></li>
-          <li><%= link_to '怎麼設立願望清單', how_it_works_path %></li>
-          <li><%= link_to '大家的願望清單', latest_plans_path %></li>
+          <li><%= link_to 'Q&A', how_it_works_path %></li>
+          <li><%= link_to '看大家的清單', latest_plans_path %></li>
           <li><%= link_to '前往個人頁面', plans_path %></li>
          
         </ul>
@@ -52,11 +52,18 @@
 
 
     <div class="body-info">
-         <p><%= flash[:alert] %></p>
+        
       <%= yield %>
     </div>
 
+    <div class="footer text-center">
+      <h6>Copyright:2017-2020 VC</h6>
+      <h6>使用本網站即視為同意本站隱私條款</h6>
+
+    </div>
+
   </body>
+
 </html>
 
 

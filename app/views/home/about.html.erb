@@ -1,12 +1,100 @@
 <div class="container">
-	<h1>About US </h1>
+	<h1>關於我們 </h1>
 </div>
-<div class="container">
+<div class="container text-center">
 	<p><i class="fa fa-users" aria-hidden="true">目前用戶人數：<%= User.count %></i>
 	<i class="fa fa-tint" aria-hidden="true">目前公開願望數：<%= Plan.where(:is_public => true).count %></i>
-	<i class="fa fa-tint" aria-hidden="true">目前非公開願望數：<%= Plan.where(:is_public => false).count %></i>
 	<i class="fa fa-commenting" aria-hidden="true">目前留言數：<%= Comment.count %></i></p>
 </div>
+	<div class="container">
+ 		<div class="row">
+ 			<div class="col-md-2"></div>
+ 			<div class="col-md-2">
+ 				<h4>我們的團隊</h4>
+	 			<%= image_tag "team" %>
+ 			</div>
+ 			<div class="col-md-6">
+ 				<h4>我們都想幫助大家完成夢想</h4>
+ 				<h6>A goal without a plan is just a wish!</h6>
+ 				<p>BucketList願望清單的團隊是ㄧ群90後的年輕人，我們看了電影"ㄧ路完到掛”後，覺得有夢想要趁年輕、有規劃地完成，畢竟ㄧ個沒有計劃的夢想，就真的只是夢想而已!</p>	
+ 				<p>團隊成員之ㄧ在讀研究所時，曾經修過ㄧ堂行為經濟學的課，教授要求大家要想出ㄧ個可以在學期末完成的目標，並且設立100美元的押金，並請ㄧ個同學監督自己，如果沒有在學期末完成目標，就會把押金沒收，捐給慈善單位。當時，每個同學們都比平常更認真地想要達成目標。</p>
+ 				<p>因此，團隊們決定提供大家ㄧ個永久儲存夢想清單的地方，和ㄧ個可以設立決心押金的管道，讓大家更有動力達成自己的夢想！</p>
+ 			</div>
+ 			<div class="col-md-2"></div>
+ 		</div>
+ 	</div>
 <div class="container">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum reprehenderit, expedita dolores. Fuga eveniet similique sequi autem repellendus saepe mollitia eum. Architecto modi dolorum, excepturi itaque veniam cupiditate officiis, odio sunt et vitae veritatis cum voluptate, ipsa rerum perspiciatis maiores officia possimus. Consectetur repellendus, perferendis voluptatem maxime nesciunt temporibus dolorem non explicabo at cumque veritatis eligendi nihil omnis atque voluptatum perspiciatis consequatur. At blanditiis, sequi repellendus non ipsa sint alias ab ex sit dignissimos, officiis, eius. Nemo iure magnam laboriosam, adipisci in quaerat dolor aliquam corrupti ea atque explicabo excepturi aut, commodi nulla necessitatibus alias sequi laborum. Eos excepturi enim sint natus tempora ipsa. Quaerat tempore consectetur vel accusamus voluptate inventore omnis voluptatum deleniti nesciunt nobis commodi tenetur nemo numquam non velit optio consequatur accusantium in, autem dicta quos! Veniam aspernatur, ipsa dicta modi, neque at ipsum fuga velit earum explicabo non, pariatur voluptatem alias in nemo consequatur voluptate enim expedita et nam officia? Magnam atque vitae dolorum optio, neque eum qui quas. Molestiae accusamus quam ad saepe, doloribus nam, enim quae exercitationem assumenda nesciunt dolore magnam. Illo, at sed atque, aliquam ut eaque. Laudantium debitis, placeat, esse ad odit, mollitia, illum unde libero maxime quibusdam alias. Sit illum deleniti unde eius voluptate ipsam error officiis, qui inventore, aliquid necessitatibus facilis quos. Commodi alias blanditiis expedita consequatur perferendis odit. Iure tempore, nihil numquam fugit libero voluptas consequatur sunt, eius ipsa, sint reprehenderit voluptates repellat quibusdam vitae aliquid cum ea magni suscipit odit necessitatibus temporibus et! Quibusdam soluta quisquam fugiat temporibus, provident inventore quia, in reprehenderit molestias, odio sed minima expedita rem. Nesciunt quo eveniet neque, temporibus aliquid, odit, corporis unde et provident cumque vero quis, distinctio non fugiat? Quas dolores perspiciatis pariatur accusantium eligendi fugit quam alias quibusdam, fuga quis, voluptates, illo quaerat temporibus repellendus aspernatur. Unde mollitia quidem accusamus?</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<h4>我們的任務</h4>
+				<%= image_tag "movie" %>
+			</div>
+			<div class="col-md-5">
+
+				<h4>你看過電影"ㄧ路完到掛 The Bucket List"嗎?</h4>
+				<h6>在生命的最後一刻你想要如何結束?有什麼是你輩子很想體驗的?你對自己還有哪些期待?</h6>
+				<h6></h6>
+				<p>我們希望願望清單的服務能讓大家開始認真思考屬於自己的願望清單。ㄧ份清楚的願望清單列表，能夠讓沒有目標的人擺脫渾噩渡日、找到人生的主題。而透過願望清單中的PDCA管理術，能讓大家按部就班達成目標。</p>
+			</div>
+	 	</div>
+ 	</div>
+ 	<div class="container">
+	 	<div class="row">
+	 		<div class="col-md-5"></div>
+	 		<div class="col-md-2">
+	 			<h4>達成目標4步驟</h4>
+	 			<%= image_tag "movie2" %>
+	 		</div>
+			<div class="col-md-5">
+				<h4>大老闆們都推崇的PDCA管理術!</h4>	
+				<h6>即使每天只改善1%，只要持續努力ㄧ年，也可以獲得37倍的效果_by 樂天創辦人三木谷浩史</h6>
+				<p><strong>P</strong>lan計畫:設定目標，列出具體的必做事項</p>
+				<p><strong>D</strong>o執行:根據計畫思考執行辦法，並列出KPI</p>
+				<p><strong>C</strong>heck檢視:定期檢視執行成果</p>
+				<p><strong>A</strong>ction行動:根據檢視成果，決定要改善還是繼續進行</p>
+		
+			</div>
+
+	 	</div>
+ 	</div>
+ 	<div class="container">
+	 	<div class="row">
+	 		<div class="col-md-2">
+	 			<h4>想要督促自己?</h4>
+	 			<%= image_tag "movie" %>
+	 		</div>
+	 		<div class="col-md-5">
+	 			<h4>設立決心押金，完成夢想</h4>
+	 			<h6>你可以選擇要不要設立決心押金</h6>
+	 			<h6>押金金額大小由你的決心決定</h6>
+	 			<h6>有沒有達成目標，給你自己自由心證</h6>
+	 			<h6>目標日期當日有達成願望可"全數"退回押金</h6>
+	 			<h6>未達成目標，我們會代捐押金給慈善單位喔</h6>
+	 			<%= link_to '瞭解更多' ,how_it_works_path %>
+	 		</div>
+	 	</div>
+ 	</div>
+ 	<div class="container">
+	 	<div class="row">
+	 		<div class="col-md-5"></div>
+	 		<div class="col-md-2">
+	 			<h4>加入我們?</h4>
+	 			<%= image_tag "movie2" %>
+	 		</div>
+	 		<div class="col-md-5">
+	 			<h4>你是下面其中之ㄧ嗎？快點註冊帳戶喔!</h4>
+	 			<h6>我有夢想，可是不知道怎麼達成?</h6>
+	 			<p> 來這裡向大家求助吧！</p>
+	 			<h6>我常常設定目標，可是過ㄧ陣子就忘了?</h6>
+	 			<p> 來這裡使用設立夢想押金，督促自己！</p>	
+	 			<h6>我從來沒列過夢想清單，不知道要列什麼?</h6>
+	 			<p> 這裡可以幫你永久保存清單並且參考大家的公開夢想喔!</p>
+	 			<h6>我有想推薦大家ㄧ起完成的清單?</h6>	
+	 			<p>這裡可以給你ㄧ個宣傳的機會</p>
+	 			<%= link_to '註冊免費帳戶' ,new_user_registration_path %>
+	 		</div>
+	 	</div>
+ 	</div>
+ 
 </div>

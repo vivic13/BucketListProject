@@ -10,7 +10,7 @@
         <%= f.file_field :image ,:id => "image-text" ,class:"file" %>
         <div class="upload-preview">
          	<% if @plan.comments.new.image.url %>		
-       			<%= image_tag @plan.comments.new.image.url  %>
+       			<%= image_tag @plan.comments.new.image.url ,class:"resize-small" %>
        		<% end %>
 				</div>
 

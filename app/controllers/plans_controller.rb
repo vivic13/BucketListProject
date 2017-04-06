@@ -3,14 +3,15 @@ class PlansController < ApplicationController
 	before_action :find_plan, only:[:show, :edit, :update, :destroy, :follow, :unfollow, :like, :unlike, :morecomments]
 
 	def index
-			@page_title = "你的plans"
+			@page_title = "你的願望清單"
 			@current_user_plan = Plan.where(:host => current_user.nickname)
 			#if params[:keyword]
 	    #	@plans = @current_user_plan.where( [ "title like ?", "%#{params[:keyword]}%" ] )
 	  	#else
 	  	
-	  	@plans = @current_user_plan.page(params[:page]).per(9)
-
+	  	@plans = @current_user_plan.page(params[:page]).per(21)
+	  	@num = @plans.count
+	  	@success = @plans.where(:progress => "完成計畫").count
 	  	respond_to do |format|
 		    format.html # index.html.erb
 		    #format.json { render :json => @plans.to_json }
@@ -162,24 +163,24 @@ class PlansController < ApplicationController
 	end
 
 	def latest
-		@page_title = "大家的plans"
+		@page_title = "大家的願望清單"
 		
 
 		if params[:order]== 'comments_count'
-			@plans = Plan.where(:is_public => true).order('comments_count desc').page(params[:page]).per(9)
+			@plans = Plan.where(:is_public => true).order('comments_count desc').page(params[:page]).per(30)
 	   
 		
 		elsif params[:comment_last] == 'comment_last'
 
-			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').page(params[:page]).per(9)
+			@plans = Plan.where(:is_public => true).includes(:comments).order('comments.created_at desc').page(params[:page]).per(30)
 	   
 		
 		elsif params[:view]== 'view'
 			
-			@plans = Plan.where(:is_public => true).order('page_view desc').page(params[:page]).per(9)
+			@plans = Plan.where(:is_public => true).order('page_view desc').page(params[:page]).per(30)
 		else
 			
-			@plans = Plan.where(:is_public => true).order('created_at desc').page(params[:page]).per(9)
+			@plans = Plan.where(:is_public => true).order('created_at desc').page(params[:page]).per(30)
 	   
 
 		end

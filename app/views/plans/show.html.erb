@@ -13,51 +13,53 @@
 </div>
 
 <div class= "follow_like">
-	<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
-		<div class="col-md-2 see-follow">
-			<% if @plan.already_followed(current_user) %>	
-				<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
-					<i class="fa fa-bookmark fa-2x" aria-hidden="true"><%= @follow_count %></i>
+	<% if current_user %>
+		<% unless @plan.host == current_user.nickname || current_user.role == "admin" %>
+			<div class="col-md-2 see-follow">
+				<% if @plan.already_followed(current_user) %>	
+					<%= button_to unfollow_plan_path(@plan) , {:remote => true} do %>
+						<i class="fa fa-bookmark fa-2x" aria-hidden="true"><%= @follow_count %></i>
+					<% end %>
+				<%else%>			
+					<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
+						<i class="fa fa-bookmark-o fa-2x" aria-hidden="true"><%= @follow_count %></i>
+					<% end %>
 				<% end %>
-			<%else%>			
-				<%= button_to follow_plan_path(@plan) ,{:remote => true} do %>
-					<i class="fa fa-bookmark-o fa-2x" aria-hidden="true"><%= @follow_count %></i>
-				<% end %>
-			<% end %>
-			<div class="who-follow">
-				<% if @follow_count < 1 %>
-				  <p>目前還沒有人收藏</p>
-				<% else %>
-					<p>See who follow</p>
-						<% @plan.memberships.each do |f| %>
-							<%= f.user.nickname %>&nbsp;
-						<% end %>
-				<% end %>
+				<div class="who-follow">
+					<% if @follow_count < 1 %>
+					  <p>目前還沒有人收藏</p>
+					<% else %>
+						<p>See who follow</p>
+							<% @plan.memberships.each do |f| %>
+								<%= f.user.nickname %>&nbsp;
+							<% end %>
+					<% end %>
+				</div>
 			</div>
-		</div>
-		<div class="col-md-2 see-like">
-			<% if @plan.already_liked(current_user) %>			
-				<%= button_to unlike_plan_path(@plan) , {:remote => true} do %>
-					<i class="fa fa-heart fa-2x" aria-hidden="true"><%= @like_count %></i>
+			<div class="col-md-2 see-like">
+				<% if @plan.already_liked(current_user) %>			
+					<%= button_to unlike_plan_path(@plan) , {:remote => true} do %>
+						<i class="fa fa-heart fa-2x" aria-hidden="true"><%= @like_count %></i>
+					<% end %>
+				<%else%>			
+					<%= button_to like_plan_path(@plan) ,{:remote => true} do %>
+						<i class="fa fa-heart-o fa-2x" aria-hidden="true"><%= @like_count %></i>
+					<% end %>
 				<% end %>
-			<%else%>			
-				<%= button_to like_plan_path(@plan) ,{:remote => true} do %>
-					<i class="fa fa-heart-o fa-2x" aria-hidden="true"><%= @like_count %></i>
-				<% end %>
-			<% end %>
-			<div class="who-like">
-				<% if @like_count < 1 %>
-				  <p>目前還沒有人like</p>
-				<% else %>
-					<p>See who like</p>
-						<% @plan.likes.each do |f| %>
-							<%= f.user.nickname %>&nbsp;
-						<% end %>
-					</ol>
-				<% end %>
+				<div class="who-like">
+					<% if @like_count < 1 %>
+					  <p>目前還沒有人like</p>
+					<% else %>
+						<p>See who like</p>
+							<% @plan.likes.each do |f| %>
+								<%= f.user.nickname %>&nbsp;
+							<% end %>
+						</ol>
+					<% end %>
+				</div>
 			</div>
-		</div>
-	<% end %>	
+		<% end %>	
+	<% end %>
 	<div class="col-md-2">
 		<%= render_shareable :buttons => ['google_plus'] %>
 	</div>
@@ -71,21 +73,23 @@
 
 
 <div class="navi">
+<% if current_user %>
 	<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
 		<%= render :partial => "only" %>
 		
 	<% end %>
-	
+<% end %>	
 </div>
 
 <div class="container text-center">
 
 			<%= image_tag @plan.file_location.url ,class:"resize"%>	<br><br>
-			<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
-				<h4><i class="fa fa-lock" aria-hidden="true">是否公開：</i>
-				<%=  @plan.is_public %><br></h4>
+			<% if current_user %>
+				<%if current_user && current_user.nickname == @plan.host || current_user.role == "admin" %>
+					<h4><i class="fa fa-lock" aria-hidden="true">是否公開：</i>
+					<%=  @plan.is_public %><br></h4>
+				<% end %>
 			<% end %>
-		
 
 			<h4><i class="fa fa-tasks" aria-hidden="true">目前進度：</i><%= @plan.progress %>
 </div>
@@ -98,12 +102,14 @@
 		<% end %>
 	</div>
 <div class="container">
-	<% if current_user.role == "admin" ||	@plan.host == current_user.nickname %>
-		<div class="row">
-			<div class="col-md-2">
-				<%= render :partial => 'plan_photos/newphoto' %>
+	<% if current_user %>
+		<% if current_user.role == "admin" ||	@plan.host == current_user.nickname %>
+			<div class="row">
+				<div class="col-md-2">
+					<%= render :partial => 'plan_photos/newphoto' %>
+				</div>
 			</div>
-		</div>
+		<% end %>
 	<% end %>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <%= form_for [@plan, @plan.photos.new] , html: { multipart: true } , :remote => true   do |f| %> 
 	<div class="upload-preview">
     <% if @plan.photos.new.image.url %>		
-      <%= image_tag @plan.photos.new.image.url %>
+      <%= image_tag @plan.photos.new.image.url ,class:"resize-small" %>
     <% end %>
 	</div>
 	<%= f.file_field :image ,:id =>"photo-text" ,class:"file" %>

@@ -4,10 +4,11 @@
 
 
 .banner{
-	width: 80%;
+	width: 100%;
 	margin:0 auto;
 	position: relative;
 }
+
  .resize{
 
 		width: 100%;
@@ -27,6 +28,10 @@
 		padding-top: 20px;
 	}
 
+h6{
+	font-size:16px;
+	
+}
 
 
 
@@ -36,28 +41,7 @@
 
 
 	
-	.soccer{
-		position: absolute;
-		top:250px;
-		left:0px;
-		animation-name: spin;
-		animation-duration: 10s;
-		animation-iteration-count: infinite;
-		transform-origin: 50% 50%;
 	
-		
-
-	}
 
 
-	@keyframes spin {
-		from { transform: rotate(0deg); }
-  	to { transform: rotate(360deg); }
-	}
-
-
-	@keyframes roll{
-		0%   { left: -100px; top:250px;}
-		50%   { left: -100px; top:200px;}
-  	100% { left: 100%; top:150px; }
-	}
+	

@@ -39,11 +39,11 @@ class Listadmin::UsersController < ApplicationController
     def permit_user
       params.require(:user).permit(:last_name, :role, :email, :fb_uid, :fb_token, :introduction)
 
-		end
+    end
 
-		def find_user
-			@user = User.find(params[:id])
-		end
+    def find_user
+	   @user = User.find(params[:id])
+    end
 
 
 end

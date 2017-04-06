@@ -29,4 +29,9 @@ class Listadmin::TagCategoriesController < ApplicationController
 		params.require(:tag_category).permit(:name)
 	end
 
+	def check_admin
+    	unless current_user.role == "admin"
+    		raise ActiveRecord::RecordNotFound
+    	end      
+   end
 end

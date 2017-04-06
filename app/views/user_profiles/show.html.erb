@@ -4,53 +4,23 @@
 </div>
 <div class="container">
 	<div class="profile">
-		<p><i class="fa fa-files-o" aria-hidden="true">願望數:</i></p>
-		<p><%= @user.plans.count %>個</p>
-		<p><i class="fa fa-user-o" aria-hidden="true">個人簡介:</i></p>
+		<h4><i class="fa fa-files-o" aria-hidden="true">願望數:</i></h4>
+		<p><%= @plan_count %>個</p>
+
+
+		<h4><i class="fa fa-user-o" aria-hidden="true">個人簡介:</i></h4>
 		<%= @user.introduction%>
 
 
 	
 
 	</div>
-	<%= link_to "回上ㄧ頁", "javascript:history.go(-1);",class:"btn" %>
-</div>
-
-
-
-<div class="container">
-	<div class="row">
-		<% @plans.each do |p| %>
-			<div class="col-md-4">
-				<table class="table table-bordered">
-				<tr>
-				  <th class="table-info"><%= p.title%></th>
-				</tr>
-				
-				<tr>
-					<td>預計完成日: <%= p.duedate%></td>
-				</tr>
-				<tr>
-					<td colspan="2"><%= image_tag p.file_location ,class:"resize-latest"%></td>
-				</tr>
-				<tr>
-					<td colspan="2">是否公開: <%= p.is_public %></td>
-				</tr>
-				<tr>
-					<td>
-						<% p.tag_categories.each do |t| %>
-		   			<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
-						<% end %>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><%= link_to 'Detail', plan_path(p) %> </td>
-				</tr>
-				</table>
-			</div>			 	
-		<% end %>
+	<div class="text-center">
+		<%= link_to "回上ㄧ頁", "javascript:history.go(-1);",class:"btn" %>
 	</div>
 </div>
+
+
 
 
 

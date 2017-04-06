@@ -1,5 +1,6 @@
-<div class="container">
-	<h1 class="tc">你的plans</h1>
+<div class="container text-center">
+	<h1 class="tc">你的願望清單</h1>
+	<h4>您擁有<%= @num %>個人生願望，目前已完成<%= @success %>個了喔，加油！！！</h4>	
 	
 </div>
  
@@ -35,7 +36,7 @@
 				</tr>
 				
 				<tr>
-					<td>預計完成日: <%= p.duedate%></td>
+					<td><p>預計完成日: <%= p.duedate%></p><p>進度：<%= p.progress %></p></td>
 				</tr>
 				<tr>
 					<td colspan="2"><%= image_tag p.file_location ,class:"resize-latest"%></td>

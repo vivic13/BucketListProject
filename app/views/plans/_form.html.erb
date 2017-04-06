@@ -10,21 +10,19 @@
  		<div class="container" >
  			<div class="row">
  				<div class="col-md-6">
-			 		<div class="form_group" >
+		<div class="form_group" >
 		<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :file_location, "上傳封面圖片" %><br>
-
-		<%= f.file_field :file_location ,class:"file"  %>
-		
 		<div class="upload-preview">
 			
 			<%= image_tag @plan.file_location.url,class:"resize" %>
 		</div>
 
+		<%= f.file_field :file_location ,class:"file"  %>
 		
 	</div>
 			  </div>
 
-				<div class="col-md-6">
+	<div class="col-md-6">
 
 
 					<div class="form_group">	
@@ -44,7 +42,7 @@
 						<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
 						<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
 						<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
-						<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%>
+						<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%><br>
 						<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
 						<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
 						<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>

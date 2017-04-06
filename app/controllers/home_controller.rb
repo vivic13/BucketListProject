@@ -6,6 +6,6 @@ class HomeController < ApplicationController
 		@page_title = "關於Bucket Lists"
 	end
 	def works
-		@page_title = "How it works?"
+		@page_title = "Q&A"
 	end
 end
