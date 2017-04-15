@@ -6,7 +6,7 @@ set :application, "bucketlist"
 set :repo_url, "git@github.com:vivic13/bucketlist.git"
 set :deploy_to, '/home/deploy/bucketlist'
 set :keep_releases, 5
-append :linked_files, 'config/database.yml', 'config/secrets.yml', 'confing/facebook.yml','confing/email.yml'
+append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/facebook.yml','config/email.yml'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 
 set :passenger_restart_with_touch, true
