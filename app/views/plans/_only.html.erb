@@ -1,10 +1,10 @@
-
-<% if @plan.donation %>
-	<%= link_to '查看押金', plan_donation_path(@plan),class:"btn"%>
-<% else %>
-	<%= link_to '設定決心押金', new_plan_donation_path(@plan) ,class:"btn"%>
+<% if Time.now < @plan.duedate %>
+	<% if @plan.donation %>
+		<%= link_to '查看押金', plan_donation_path(@plan),class:"btn"%>
+	<% else %>
+		<%= link_to '設定決心押金', new_plan_donation_path(@plan) ,class:"btn"%>
+	<% end %>
 <% end %>
-
 
 <%= link_to '修改', edit_plan_path(@plan),class:"btn" %>
 <%= link_to '刪除', plan_path(@plan),method: :delete, data:{ confirm: "確定要刪除願望嗎?"},class:"btn" %>

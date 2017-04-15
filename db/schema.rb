@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405063646) do
+ActiveRecord::Schema.define(version: 20170407092508) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -28,15 +28,14 @@ ActiveRecord::Schema.define(version: 20170405063646) do
   create_table "donations", force: :cascade do |t|
     t.string   "cc_name"
     t.integer  "amount"
-    t.integer  "cc_num"
-    t.integer  "cc_last"
-    t.date     "cc_duedate"
     t.integer  "plan_id"
     t.integer  "npo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
     t.index ["npo_id"], name: "index_donations_on_npo_id"
     t.index ["plan_id"], name: "index_donations_on_plan_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

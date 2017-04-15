@@ -1,32 +1,27 @@
 class Listadmin::UsersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :check_admin
-	before_action :find_user, only:[:show, :edit, :update, :destroy]
-  layout "admin"
+	before_action :find_user, only:[:show, :edit, :update]
+    layout "admin"
 
     def index 
       @users = User.all
-
     end
 
     
 
-    def show
-    	
+    def show  	
     end
 
     def edit
     end
 
     def update
-    	@user.update(permit_user)
+      @user.update(permit_user)
       redirect_to listadmin_user_path(@user)
     end
 
-    def destroy
-    	
-    	
-    end
+   
 
     protected
 

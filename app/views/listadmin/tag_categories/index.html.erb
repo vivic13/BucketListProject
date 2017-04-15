@@ -2,6 +2,7 @@
 
 
 <div class="container text-center">
+
 	<%= form_for ([:listadmin,TagCategory.new])  do |f| %> 
 		<%= f.label :name, "Tag名稱" %>
 		 <%= f.text_field :name ,:required => 'required'%>

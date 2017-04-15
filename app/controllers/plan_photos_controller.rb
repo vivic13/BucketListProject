@@ -1,6 +1,6 @@
 class PlanPhotosController < ApplicationController
 	before_action :find_plan
-
+	before_action :authenticate_user!
 	def create 
 		if @plan.host == current_user.nickname ||current_user.role == "admin"
 			@photo = @plan.photos.new(photo_params)

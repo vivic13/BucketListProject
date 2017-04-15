@@ -3,14 +3,19 @@
 <h2>
 <%= @plan.title %> <br>
 </h2>
-
 <h4> 預計完成日: <%= @plan.duedate %> 作者: <%=@plan.host%> </h4>
 
 	<% @plan.tag_categories.each do |t| %>
 		<i class="fa fa-tag" aria-hidden="true"><%= t.name %></i>
 	<% end %>
 
+	<% if Time.now > @plan.duedate %>
+		<h4>已到期！</h4>
+
+	<% end %>
+
 </div>
+
 
 <div class= "follow_like">
 	<% if current_user %>

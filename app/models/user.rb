@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :likes
   has_many :plans, :through => :likes
-
+  has_many :donations
   before_validation :set_nickname_default
   
 

@@ -4,7 +4,11 @@
 
 	<h1><%= @plan.title%> </h1>
 	<h4> 預計完成日: <%=  @plan.duedate %></h4>
-	<h4>更新進度</h4>
+	<% if Time.now > @plan.duedate %>
+		<h4>您的預計完成日已經超過了喔！還要更新嗎?</h4>
+	<% else %>
+		<h4>更新進度</h4>
+	<% end %>
 </div>
  
  		<div class="container" >
@@ -34,20 +38,24 @@
 					</div>
 
 					<div class="form_group">
-				  	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
-				   	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
-				    <%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
-						<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
-						<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
-						<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
-						<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
-						<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
-						<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%><br>
-						<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
-						<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
-						<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
-						<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
-
+						<% if Time.now > @plan.duedate %>
+							<i class="fa fa-cog fa-2x" aria-hidden="true"></i>進度：<%= @plan.progress %><br>
+							<p> 您預計的完成日為：<%= @plan.duedate  %>，完成日後，就不能再更新進度了喔！</p>
+						<% else %>
+					  	<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :progress, "進度" %><br>
+					   	<%= f.radio_button :progress,"剛決定願望",:value=>"剛決定願望"%>
+					    <%= f.label :progress, "剛決定願望",:value=>"剛決定願望"%>
+							<%= f.radio_button :progress,"Plan計畫階段",:value=>"Plan計畫階段"%>
+							<%= f.label :progress, "Plan計畫階段",:value=>"Plan計畫階段"%>
+							<%= f.radio_button :progress,"Do行動階段",:value=>"Do行動階段"%>
+							<%= f.label :progress, "Do行動階段",:value=>"Do行動階段"%>
+							<%= f.radio_button :progress,"Check檢視階段",:value=>"Check檢視階段"%>
+							<%= f.label :progress, "Check檢視階段",:value=>"Check檢視階段"%><br>
+							<%= f.radio_button :progress,"Action行動階段",:value=>"Action行動階段"%>
+							<%= f.label :progress, "Action行動階段",:value=>"Action行動階段"%>
+							<%= f.radio_button :progress,"完成計畫",:value=>"完成計畫"%>
+							<%= f.label :progress, "完成計畫",:value=>"完成計畫"%>
+						<% end %>
 					</div>
 					<div class="form_group">
 						<i class="fa fa-cog fa-2x" aria-hidden="true"></i><%= f.label :tag_category_ids, "願望分類:" %><strong>(限制選取3項)</strong><br>

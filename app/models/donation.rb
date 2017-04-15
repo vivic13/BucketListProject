@@ -1,5 +1,5 @@
 class Donation < ApplicationRecord
-	validates_presence_of :cc_name, :amount, :cc_num, :cc_last, :cc_duedate
-	belongs_to :plan
+	validates_presence_of :cc_name, :amount
 	belongs_to :npo
+	belongs_to :user
 end

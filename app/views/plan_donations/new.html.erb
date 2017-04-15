@@ -20,18 +20,7 @@
 	    <%= f.label :amount,"押金金額:" %>
 	    <%= f.text_field :amount %>
 	  </p>
-    <p>
-		<%= f.label :cc_num,"信用卡卡號:" %>
-	    <%= f.text_field :cc_num %>
-    </p>
-    <p>
-    	<%= f.label :cc_last,"信用卡後三碼:" %>
-	    <%= f.text_field :cc_last %>
-    </p>
-    <p>
-    	<%= f.label :cc_duedate,"信用卡到期日:" %>
-	    <%= f.text_field :cc_duedate %>
-    </p>
+    
     <p>
         <%= f.label :npo_id,"押金機構:"%>
         <% Npo.all.each do |s| %>

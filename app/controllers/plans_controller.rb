@@ -81,7 +81,7 @@ class PlansController < ApplicationController
 		@page_title = "編輯願望"
 		unless @plan.host == current_user.nickname || current_user.role == "admin"
 			render :latest
-			flash[:alert]="something went wrong!"
+			flash[:alert] = "something went wrong!"
 		end
 
 	end

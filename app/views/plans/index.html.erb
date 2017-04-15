@@ -17,7 +17,9 @@
 				<li><%= link_to '預設排序', plans_path %></li>
 				<li><%= link_to '查看你Follow的plans', follow_plan_plans_path %></li>
 				<li><%= link_to '查看你like的plans', like_plan_plans_path %></li>
-				<li><%= link_to '查看你的公開profile', user_path(@current_user.id) %></li>
+				<li><%= link_to '查看個人公開profile', user_path(@current_user.id) %></li>
+				<li><%= link_to '查看個人的押金記錄', donations_path %></li>
+
 				<% unless current_user.role == "user" %>
      			<li><%= link_to '前往後台', listadmin_users_path ,class:"btn btn default"%></li>
  				<% end %>

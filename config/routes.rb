@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   
   resources :users, only:[:show], :controller => 'user_profiles'
 
+  resources :donations, only:[:index], :controller => 'donations'
+
   resources :plans do 
-  	resources :comments, :controller => 'plan_comments'
-    resources :donations, :controller => 'plan_donations'
-    resources :photos, :controller => 'plan_photos'
+  	resources :comments, only:[:create,:destroy], :controller => 'plan_comments'
+    resources :donations, only:[:new, :create, :show], :controller => 'plan_donations'
+    resources :photos, only:[:create, :destroy], :controller => 'plan_photos'
   	collection do
       get :latest
       get :follow_plan

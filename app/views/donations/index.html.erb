@@ -1,0 +1,57 @@
+<div class="container">
+	<h1>您的押金記錄</h1>
+	<h2>您共有<%= @donations.count%>個願望設立押金 </h2>
+	<%= link_to '回個人頁面', plans_path , class:"btn"%>
+
+</div>
+
+
+<div class="container">
+	<% @donations.each do |d| %>
+		<table>
+			<tr>
+				<td>願望: <%= d.plan.title %></td>
+			</tr>
+			<tr>
+				<td>設立押金日期: <%= d.created_at %></td>
+			</tr>
+			<tr>
+				<td>預計完成日: <%= d.plan.duedate %></td>
+			</tr>
+			<tr>
+				<td>押金金額: <%= d.amount %></td>
+			</tr>
+			<tr>
+				<td>設立捐款單位: <%= d.npo.name %></td>
+			</tr>
+			<tr>
+				<% if d.duedate > Time.now %>
+				  <% if d.plan.progress == '完成計劃' %>
+						<td>恭喜您完成計劃，我們會在<%= d.plan.duedate %>後的五個工作日內，將您的押金退回，請確認！</td>
+				  <% else %>
+						<td>很可惜，您未於預計完成日內完成計劃，我們將於<%= d.plan.duedate %>的季底將您的押金捐贈給<%= d.npo.name%>，捐贈後會email收據給您，請確認！</td>
+				  <% end %>
+	
+				<% else %>
+					<% if d.plan.progress == '完成計劃' %>
+						<td>恭喜您完成計劃，我們會在<%= d.plan.duedate %>後的五個工作日內，將您的押金退回，請確認！</td>
+				  <% else %>
+						<td>繼續加油!!!，不然我們會將您的押金代為捐贈給<%= d.npo.name%>喔！</td>
+				  <% end %>
+
+
+				<% end %>
+			</tr>
+
+
+
+
+
+		</table>
+	<% end %>
+
+</div>
+
+
+
+
