@@ -1,8 +1,39 @@
-<h1>決心計畫</h1>
 
-<p>計畫到期日：<%= @donation.plan.duedate %></p>
+<div class="container">
+	<h1>決心計畫</h1>
+	<p>計畫到期日：<%= @donation.plan.duedate %></p>
 
-<p>押金金額：<%= @donation.amount %></p>
+	<p>押金金額：<%= @donation.amount %></p>
 
+	<p>付款狀態：<%= @donation.payment_status %></p>
 
-<%= link_to '回到計畫頁面', plan_path(@plan) ,class:"btn"%>
+	<% if @donation.paid? %>
+		<%= link_to '回到計畫頁面', plan_path(@plan) ,class:"btn"%>
+	<% else %>
+		<p>付款方式:</p>
+		<% Payment::PAYMENT_METHODS.each do |pm| %>
+			<%= link_to t(pm, :scope => "PaymentPay2go"), checkout_pay2go_plan_donation_path(@donation, :payment_method => pm), :class => "btn", :method => :post %>
+		<% end %>
+	<% end %>
+</div>
+<hr>
+<% if @donation.payments.count > 0 %>
+	<div class="container">
+		<h2>付款紀錄</h2>
+		<ul>
+		
+			<% @donation.payments.each do |p| %>
+				<li>
+					<% if p.paid_at %>
+						<p>付款成功</p>
+					<% else %>
+						<p>付款失敗</p>
+					<% end %>
+					<p><%= p.created_at %></p> 
+				</li>
+
+			<% end %>
+
+		</ul>
+	</div>
+<% end %>

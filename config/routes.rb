@@ -2,13 +2,20 @@ Rails.application.routes.draw do
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
+  post 'pay2go/return'
+  post 'pay2go/notify'
+
   resources :users, only:[:show], :controller => 'user_profiles'
 
   resources :donations, only:[:index], :controller => 'donations'
 
   resources :plans do 
   	resources :comments, only:[:create,:destroy], :controller => 'plan_comments'
-    resources :donations, only:[:new, :create, :show], :controller => 'plan_donations'
+    resources :donations, only:[:new, :create, :show], :controller => 'plan_donations' do 
+      member do
+        post :checkout_pay2go
+      end
+    end
     resources :photos, only:[:create, :destroy], :controller => 'plan_photos'
   	collection do
       get :latest

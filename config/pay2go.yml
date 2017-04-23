@@ -1,0 +1,18 @@
+default: &default
+  merchant_id: MS31504832
+  hash_key: j4qtPDBHzCdh7E2yPWQbrIxwhj3EOI08
+  hash_iv: MqCC3dkDQyUXcWw2
+  url: https://ccore.spgateway.com/MPG/mpg_gateway
+  #notify_url: 'http://localhost:3000'
+
+development:
+  <<: *default
+
+staging:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
