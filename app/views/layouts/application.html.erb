@@ -13,21 +13,11 @@
 
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
-    	<p class="login"> 哈囉! 
-        <% if current_user %> 
-        	<%= current_user.nickname %>
-          <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
-          <%= link_to('更改資料', edit_registration_path(:user)) %>
-      	<% else %>
-          <%= link_to('註冊', new_registration_path(:user)) %> |
-          <%= link_to('登入', new_session_path(:user)) %>
-          <%= link_to "Facebook登入", user_facebook_omniauth_authorize_path %>
-      	<% end %>
-      </p>
-      <div class="logo-banner">
-            <h1 class="title"><%= image_tag "brand_logo.png" %> Bucket Lists 願望清單 </h1>        
+    	
+     <div class="navbar-header">
+            <h3><%= image_tag "brand_logo.png" %>願望清單 </h3>        
       </div>
-      <nav class="nav navbar-default">
+      <nav class="nav ">
         <div class="container-fluid">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -35,7 +25,7 @@
                     <span class="icon-bar"></span> 
                 </button>
           <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav">
           <li> <%= link_to '首頁', home_path%></li>
           <li> <%= link_to '關於我們', about_path %></li>
           <li><%= link_to 'Q&A', how_it_works_path %></li>
@@ -43,6 +33,17 @@
           <li><%= link_to '前往個人頁面', plans_path %></li>
          
         </ul>
+        <p class="login"> 哈囉! 
+        <% if current_user %> 
+          <%= current_user.nickname %>
+          <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
+          <%= link_to('更改資料', edit_registration_path(:user)) %>
+        <% else %>
+          <%= link_to('註冊', new_registration_path(:user)) %> |
+          <%= link_to('登入', new_session_path(:user)) %>
+          <%= link_to "Facebook登入", user_facebook_omniauth_authorize_path %>
+        <% end %>
+      </p>
         </div>
         </div>
 
