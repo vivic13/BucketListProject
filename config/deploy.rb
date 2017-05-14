@@ -3,7 +3,7 @@
 lock "3.8.0"
 
 set :application, "bucketlist"
-set :repo_url, "git@github.com:vivic13/bucketlist.git"
+set :repo_url, "git@github.com:vivic13/BucketListProject.git"
 set :deploy_to, '/home/deploy/bucketlist'
 set :keep_releases, 5
 append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/facebook.yml','config/email.yml'
