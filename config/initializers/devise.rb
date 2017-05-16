@@ -272,5 +272,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   fb_config = YAML.load(File.read("#{Rails.root}/config/facebook.yml"))[Rails.env]
-  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"], :scope => 'public_profile,email', :info_fields => 'email,name', callback_url: "http://localhost:3000/users/auth/facebook/callback"
+  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"], :scope => 'public_profile,email', :info_fields => 'email,name', callback_url: "https://bucket-list.website/users/auth/facebook/callback"
 end
