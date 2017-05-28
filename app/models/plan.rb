@@ -1,5 +1,6 @@
 class Plan < ApplicationRecord
-	mount_uploader :file_location, PhotoImageUploader
+	has_attached_file :file_location, styles: { med: "100x100"},:default_url => 'default.png'
+	validates_attachment_content_type :file_location, content_type: /\Aimage\/.*\z/
 	validates_presence_of :title, :message => "願望主題不能空白"
 	validates :title, length: { maximum: 20 ,too_long: "不能超過20字"}
 	validates_presence_of :duedate, :message => "預計完成日不能空白"
